@@ -18,6 +18,12 @@ namespace MusicGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        GameObject object1;
+        List<Texture2D> tex;
+        Texture2D t1;
+        Texture2D t2;
+        Texture2D t3;
+
 
         public Game1()
         {
@@ -46,6 +52,13 @@ namespace MusicGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            t1 = Content.Load<Texture2D>("t1");
+            t2 = Content.Load<Texture2D>("t2");
+            t3 = Content.Load<Texture2D>("t3");
+            tex.Add(t1);
+            tex.Add(t2);
+            tex.Add(t3);
+            object1 = new GameObject(tex, new Vector2(20, 20));
 
             // TODO: use this.Content to load your game content here
         }
@@ -70,8 +83,6 @@ namespace MusicGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
@@ -83,7 +94,11 @@ namespace MusicGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            object1.Draw(spriteBatch);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

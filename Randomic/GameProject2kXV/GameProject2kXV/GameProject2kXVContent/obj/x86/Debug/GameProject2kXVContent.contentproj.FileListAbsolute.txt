@@ -1,1 +1,2 @@
 c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXVContent\obj\x86\Debug\GameProject2kXVContent.contentprojResolveAssemblyReference.cache
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXVContent\obj\x86\Debug\GameProject2kXVContent.contentprojResolveAssemblyReference.cache
