@@ -1,0 +1,15 @@
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\GameProject2kXV.exe
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\GameProject2kXV.pdb
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\GameProject2kXV.csprojResolveAssemblyReference.cache
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\GameProject2kXV.exe
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\GameProject2kXV.pdb
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\sprFont.xnb
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile1.xnb
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile2.xnb
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile3.xnb
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room1.xnb
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room2.xnb
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room3.xnb
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room4.xnb
+c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room5.xnb
