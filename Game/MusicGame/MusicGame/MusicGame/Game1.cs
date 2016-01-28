@@ -20,9 +20,6 @@ namespace MusicGame
         SpriteBatch spriteBatch;
         GameObject object1;
         List<Texture2D> tex;
-        Texture2D t1;
-        Texture2D t2;
-        Texture2D t3;
 
 
         public Game1()
@@ -52,13 +49,8 @@ namespace MusicGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            t1 = Content.Load<Texture2D>("t1");
-            t2 = Content.Load<Texture2D>("t2");
-            t3 = Content.Load<Texture2D>("t3");
-            tex.Add(t1);
-            tex.Add(t2);
-            tex.Add(t3);
-            object1 = new GameObject(tex, new Vector2(20, 20));
+            object1 = new GameObject(Content.Load<Texture2D>("skeleton"), new Vector2(20, 20), 3, 5, 12);
+
 
             // TODO: use this.Content to load your game content here
         }
@@ -83,6 +75,13 @@ namespace MusicGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                object1.ChangeTexture(Content.Load<Texture2D>("skeleton2"), 5, 10, 45);
+            }
+
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            object1.Update(elapsed);
             base.Update(gameTime);
         }
 

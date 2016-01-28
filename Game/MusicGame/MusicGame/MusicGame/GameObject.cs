@@ -14,34 +14,70 @@ namespace MusicGame
 {
     class GameObject
     {
-        public List<Texture2D> Textures { get; }
+        public Texture2D Texture { get; protected set; }
         public Vector2 Position { get; }
         public Vector2 Velocity { get; }
+       
+        public int Rows { get; protected set; }
+        public int Columns { get; protected set; }
 
-        protected int currentTexture;
+        protected int currentFrame;
+        protected int totalFrames;
         protected float totalElapsed;
 
-        public GameObject(List<Texture2D> textures, Vector2 position)
+        public GameObject(Texture2D texture, Vector2 position, int rows, int columns)
         {
-            Textures = textures;
+            Texture = texture;
             Position = position;
             totalElapsed = 0;
+
+            Rows = rows;
+            Columns = columns;
+            currentFrame = 0;
+            totalFrames = Rows * Columns;
         }
-        public void Update(GameTime gameTime)
+        public GameObject(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames)
         {
-            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Texture = texture;
+            Position = position;
+            totalElapsed = 0;
+
+            Rows = rows;
+            Columns = columns;
+            currentFrame = 0;
+            this.totalFrames = totalFrames;
+        }
+        public void Update(float elapsed)
+        {
             totalElapsed += elapsed;
-            if (totalElapsed > 2)
+            if (totalElapsed > 50)
             {
-                currentTexture++;
-                if (currentTexture > Textures.Count)
-                    currentTexture = 0;
-                totalElapsed -= 2;
+                currentFrame++;
+                if (currentFrame == totalFrames)
+                    currentFrame = 0;
+                totalElapsed -= 50;
             }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Textures[currentTexture], Position, Color.White);
+            int width = Texture.Width / Columns;
+            int height = Texture.Height / Rows;
+            int row = (int)((float)currentFrame / (float)Columns);
+            int column = currentFrame % Columns;
+
+            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)Position.X, (int)Position.Y, width, height);
+
+            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
+        }
+        public void ChangeTexture(Texture2D texture, int rows, int columns, int totalFrames)
+        {
+            Texture = texture;
+
+            Rows = rows;
+            Columns = columns;
+            currentFrame = 0;
+            this.totalFrames = totalFrames;
         }
 
     }
