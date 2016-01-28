@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameProject2kXV", "GameProject2kXV\GameProject2kXV\GameProject2kXV.csproj", "{3A91AFEC-FB93-4841-ABA2-42812C4905A2}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "GameProject2kXVContent", "GameProject2kXV\GameProject2kXVContent\GameProject2kXVContent.contentproj", "{31D38FE8-4EAD-4F1F-BC63-A37BE4CACB6B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A91AFEC-FB93-4841-ABA2-42812C4905A2}.Debug|x86.ActiveCfg = Debug|x86
+		{3A91AFEC-FB93-4841-ABA2-42812C4905A2}.Debug|x86.Build.0 = Debug|x86
+		{3A91AFEC-FB93-4841-ABA2-42812C4905A2}.Release|x86.ActiveCfg = Release|x86
+		{3A91AFEC-FB93-4841-ABA2-42812C4905A2}.Release|x86.Build.0 = Release|x86
+		{31D38FE8-4EAD-4F1F-BC63-A37BE4CACB6B}.Debug|x86.ActiveCfg = Debug|x86
+		{31D38FE8-4EAD-4F1F-BC63-A37BE4CACB6B}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
