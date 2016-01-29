@@ -79,6 +79,10 @@ namespace MusicGame
             {
                 object1.ChangeTexture(Content.Load<Texture2D>("skeleton2"), 5, 10, 45);
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.Q))
+            {
+                object1.ChangeTexture(Content.Load<Texture2D>("skeleton"), 3, 5, 12);
+            }
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             object1.Update(elapsed);
