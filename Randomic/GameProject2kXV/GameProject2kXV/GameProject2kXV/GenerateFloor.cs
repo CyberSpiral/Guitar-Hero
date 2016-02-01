@@ -23,12 +23,24 @@ namespace GameProject2kXV
         private int numOfRooms;
         private int tmpNumOfRooms;
 
+        private int startRoom;
+        private int endRoom;
+        private int itemRoom;
+        private int specialRoom;
+        private int differentRoom;
+
 
         public GenerateNewFloor()
         {
             roomsOnFloor = new Rooms[25, 25];
             positionOnFloor = new int[2];
             empty = new int[4] { 0, 0, 0, 0 };
+
+            startRoom = 1;
+            endRoom = 1;
+            itemRoom = 1;
+            specialRoom = 4;
+            differentRoom = 8;
         }
 
         public Rooms[,] GenerateRooms()
@@ -72,11 +84,12 @@ namespace GameProject2kXV
 
                     if (roomsOnFloor[positionOnFloor[0], positionOnFloor[1]].roomVersion == 0)
                     {
-                        int roomVersion = random.Next(2, 12);
+                        /*int roomVersion = random.Next(2, 12);
                         if (roomVersion > 10)
                             roomVersion = 3;
                         else if (roomVersion > 5)
-                            roomVersion = 2;
+                            roomVersion = 2;*/
+                        int roomVersion = 2;
 
                         roomsOnFloor[positionOnFloor[0], positionOnFloor[1]] = new Rooms(roomVersion, empty);
                         tmpNumOfRooms += 1;
@@ -85,7 +98,7 @@ namespace GameProject2kXV
                     if (tmpNumOfRooms > numOfRooms)
                     {
                         tmpNumOfRooms = 0;
-                        numOfRooms = random.Next(6, 8);
+                        numOfRooms = random.Next(4, 10);
                         break;
                     }
                 }
@@ -144,6 +157,15 @@ namespace GameProject2kXV
                                     roomsOnFloor[x, y].roomVersionDoors[3] = 1;
                                 }
                             }
+                        }
+                        int numberOfDoors = 0;
+                        for (int i = 0; i < 4; i++)
+                        {
+                            numberOfDoors += roomsOnFloor[x, y].roomVersionDoors[0];
+                        }
+                        if (numberOfDoors == 4)
+                        {
+
                         }
                     }
                 }

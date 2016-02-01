@@ -21,7 +21,6 @@ namespace GameProject2kXV
 
         int screenWidth;
         int screenHeight;
-        SpriteFont sprFont;
 
         public Game1()
         {
@@ -43,7 +42,6 @@ namespace GameProject2kXV
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            //sprFont = Content.Load<SpriteFont>("sprFont");
 
 
             screenWidth = GraphicsDevice.Viewport.Width;

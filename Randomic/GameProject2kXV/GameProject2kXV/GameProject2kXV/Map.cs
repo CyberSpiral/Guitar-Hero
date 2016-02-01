@@ -23,7 +23,6 @@ namespace GameProject2kXV
 
 
         public void Generate(Rooms[,] map)
-            //, int textureWidth, int textureHeight)
         {
             for (int x = 0; x < map.GetLength(0); x++)
                 for (int y = 0; y < map.GetLength(1); y++)
