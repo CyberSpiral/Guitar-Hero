@@ -52,7 +52,7 @@ namespace GameProject2kXV
 
             Rooms.Content = Content;
 
-            map.Generate(genFloor.GenerateRooms(), 16,16);
+            map.Generate(genFloor.GenerateRooms(), 32);
         }
 
         protected override void UnloadContent()
@@ -67,7 +67,7 @@ namespace GameProject2kXV
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
             {
                 map = new Map();
-                map.Generate(genFloor.GenerateRooms(), 16,16);
+                map.Generate(genFloor.GenerateRooms(), 32);
             }
 
             base.Update(gameTime);

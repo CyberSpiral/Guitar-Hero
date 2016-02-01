@@ -16,13 +16,24 @@ namespace GameProject2kXV
             get { return rooms; }
         }
 
+        private int width, height;
+        public int Width
+        {
+            get { return width; }
+        }
+
+        public int Height
+        {
+            get { return height; }
+        }
+
         public Map() 
         {
             rooms = new List<Rooms>();
         }
 
 
-        public void Generate(Rooms[,] map, int textureWidth, int textureHeight)
+        public void Generate(Rooms[,] map, int size)
         {
             for (int x = 0; x < map.GetLength(0); x++)
                 for (int y = 0; y < map.GetLength(1); y++)
@@ -32,8 +43,10 @@ namespace GameProject2kXV
                     if (number > 0)
                     {
                         rooms.Add(map[x, y]);
-                        rooms[rooms.Count - 1].RoomCreate(number, new Rectangle(x * textureWidth, y * textureHeight, textureWidth, textureHeight));
+                        rooms[rooms.Count - 1].RoomCreate(number, new Rectangle(x * 16, y * 16, 16, 16));
                     }
+                    width = (x + 1) * size;
+                    height = (y + 1) * size;
                 }
         }
 
@@ -43,6 +56,8 @@ namespace GameProject2kXV
             {
                 rooms[i].Draw(spriteBatch);
             }
+            //(CollisionTiles tile in collisionTiles)
+            //tile.Draw(spriteBatch);
         }
     }
 }
