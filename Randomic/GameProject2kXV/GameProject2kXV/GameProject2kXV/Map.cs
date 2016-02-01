@@ -28,7 +28,7 @@ namespace GameProject2kXV
                 for (int y = 0; y < map.GetLength(1); y++)
                 {
                     int number = map[x, y].roomVersion;
-
+                    int se;
                     if (number > 0)
                     {
                         rooms.Add(map[x, y]);
