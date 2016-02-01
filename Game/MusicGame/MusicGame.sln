@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicGame", "MusicGame\MusicGame\MusicGame.csproj", "{D9C67E44-6734-4FF2-B112-59A5945C1193}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "MusicGameContent", "MusicGame\MusicGameContent\MusicGameContent.contentproj", "{6F4A5D9B-8D70-40BE-BCC2-EAA07B633B81}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9C67E44-6734-4FF2-B112-59A5945C1193}.Debug|x86.ActiveCfg = Debug|x86
+		{D9C67E44-6734-4FF2-B112-59A5945C1193}.Debug|x86.Build.0 = Debug|x86
+		{D9C67E44-6734-4FF2-B112-59A5945C1193}.Release|x86.ActiveCfg = Release|x86
+		{D9C67E44-6734-4FF2-B112-59A5945C1193}.Release|x86.Build.0 = Release|x86
+		{6F4A5D9B-8D70-40BE-BCC2-EAA07B633B81}.Debug|x86.ActiveCfg = Debug|x86
+		{6F4A5D9B-8D70-40BE-BCC2-EAA07B633B81}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

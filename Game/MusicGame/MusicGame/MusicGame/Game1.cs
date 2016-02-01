@@ -18,10 +18,15 @@ namespace MusicGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        GameObject object1;
+        List<Texture2D> tex;
+
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = Room.height;
+            graphics.PreferredBackBufferWidth = Room.width;
             Content.RootDirectory = "Content";
         }
 
@@ -46,6 +51,8 @@ namespace MusicGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            object1 = new GameObject(Content.Load<Texture2D>("skeleton"), new Vector2(20, 20), 3, 5, 12);
+            
 
             // TODO: use this.Content to load your game content here
         }
@@ -70,8 +77,17 @@ namespace MusicGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                object1.ChangeTexture(Content.Load<Texture2D>("skeleton2"), 5, 10, 45);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Q))
+            {
+                object1.ChangeTexture(Content.Load<Texture2D>("skeleton"), 3, 5, 12);
+            }
 
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            object1.Update(elapsed);
             base.Update(gameTime);
         }
 
@@ -83,7 +99,11 @@ namespace MusicGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            object1.Draw(spriteBatch);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

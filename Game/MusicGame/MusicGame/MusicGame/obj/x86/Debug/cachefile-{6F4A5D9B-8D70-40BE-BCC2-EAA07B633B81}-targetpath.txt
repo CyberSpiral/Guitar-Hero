@@ -1,0 +1,3 @@
+Content\EX.xnb
+Content\Skeleton.xnb
+Content\Skeleton2.xnb
