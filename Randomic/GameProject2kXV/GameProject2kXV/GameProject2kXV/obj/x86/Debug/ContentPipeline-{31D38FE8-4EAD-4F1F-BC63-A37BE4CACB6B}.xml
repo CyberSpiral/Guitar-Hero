@@ -7,8 +7,13 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\sprFont.xnb</Output>
+      <Time>2016-01-17T02:07:29.9593418+01:00</Time>
+=======
       <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\sprFont.xnb</Output>
       <Time>2016-01-28T09:27:58.6963396+01:00</Time>
+>>>>>>> origin/master
     </Item>
     <Item>
       <Source>Tile1.png</Source>
@@ -16,8 +21,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile1.xnb</Output>
+      <Time>2016-01-17T13:50:05.5846032+01:00</Time>
+=======
       <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile1.xnb</Output>
       <Time>2016-01-28T09:27:58.6973396+01:00</Time>
+>>>>>>> origin/master
     </Item>
     <Item>
       <Source>Tile2.png</Source>
@@ -25,8 +35,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile2.xnb</Output>
+      <Time>2016-01-17T13:50:05.5876034+01:00</Time>
+=======
       <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile2.xnb</Output>
       <Time>2016-01-28T09:27:58.6983396+01:00</Time>
+>>>>>>> origin/master
     </Item>
     <Item>
       <Source>Tile3.png</Source>
@@ -34,8 +49,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile3.xnb</Output>
+      <Time>2016-01-17T13:50:05.6146049+01:00</Time>
+=======
       <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile3.xnb</Output>
       <Time>2016-01-28T09:27:58.7003396+01:00</Time>
+>>>>>>> origin/master
     </Item>
     <Item>
       <Source>room1.png</Source>
@@ -43,8 +63,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room1.xnb</Output>
+      <Time>2016-01-18T09:21:42.5168048+01:00</Time>
+=======
       <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room1.xnb</Output>
       <Time>2016-01-28T09:27:58.6883396+01:00</Time>
+>>>>>>> origin/master
     </Item>
     <Item>
       <Source>room2.png</Source>
@@ -52,8 +77,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room2.xnb</Output>
+      <Time>2016-01-18T09:21:42.519805+01:00</Time>
+=======
       <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room2.xnb</Output>
       <Time>2016-01-28T09:27:58.6893396+01:00</Time>
+>>>>>>> origin/master
     </Item>
     <Item>
       <Source>room3.png</Source>
@@ -61,8 +91,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room3.xnb</Output>
+      <Time>2016-01-18T09:21:42.5228052+01:00</Time>
+=======
       <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room3.xnb</Output>
       <Time>2016-01-28T09:27:58.6903396+01:00</Time>
+>>>>>>> origin/master
     </Item>
     <Item>
       <Source>room4.png</Source>
@@ -70,8 +105,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room4.xnb</Output>
+      <Time>2016-01-18T09:21:42.5258054+01:00</Time>
+=======
       <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room4.xnb</Output>
       <Time>2016-01-28T09:27:58.6913396+01:00</Time>
+>>>>>>> origin/master
     </Item>
     <Item>
       <Source>room5.png</Source>
@@ -79,8 +119,13 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
+<<<<<<< HEAD
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room5.xnb</Output>
+      <Time>2016-01-18T09:21:42.5278055+01:00</Time>
+=======
       <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room5.xnb</Output>
       <Time>2016-01-28T09:27:58.6923396+01:00</Time>
+>>>>>>> origin/master
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -89,10 +134,17 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
+<<<<<<< HEAD
+      <RootDirectory>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXVContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\</OutputDirectory>
+=======
       <RootDirectory>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXVContent\</RootDirectory>
       <LoggerRootDirectory>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\</LoggerRootDirectory>
       <IntermediateDirectory>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\</IntermediateDirectory>
       <OutputDirectory>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\</OutputDirectory>
+>>>>>>> origin/master
     </Settings>
     <Assemblies>
       <Assembly>

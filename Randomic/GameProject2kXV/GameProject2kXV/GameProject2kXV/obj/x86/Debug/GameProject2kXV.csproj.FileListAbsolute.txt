@@ -13,6 +13,23 @@ c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GamePro
 c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room3.xnb
 c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room4.xnb
 c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room5.xnb
+<<<<<<< HEAD
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\sprFont.xnb
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile1.xnb
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile2.xnb
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile3.xnb
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room1.xnb
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room2.xnb
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room3.xnb
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room4.xnb
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room5.xnb
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\GameProject2kXV.exe
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\GameProject2kXV.pdb
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\GameProject2kXV.csprojResolveAssemblyReference.cache
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\GameProject2kXV.exe
+C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\GameProject2kXV.pdb
+=======
 C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\sprFont.xnb
 C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile1.xnb
 C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile2.xnb
@@ -38,3 +55,4 @@ C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\
 C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\GameProject2kXV.exe
 C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\GameProject2kXV.pdb
+>>>>>>> origin/master
