@@ -25,6 +25,8 @@ namespace MusicGame
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = Room.height;
+            graphics.PreferredBackBufferWidth = Room.width;
             Content.RootDirectory = "Content";
         }
 
@@ -50,7 +52,7 @@ namespace MusicGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             object1 = new GameObject(Content.Load<Texture2D>("skeleton"), new Vector2(20, 20), 3, 5, 12);
-
+            
 
             // TODO: use this.Content to load your game content here
         }
