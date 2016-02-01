@@ -9,24 +9,22 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace MusicGame
-{
+namespace MusicGame {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
-    {
+    public class Game1 : Microsoft.Xna.Framework.Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        GameObject object1;
+        Player p;
         List<Texture2D> tex;
 
 
-        public Game1()
-        {
+        public Game1() {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = Room.height;
             graphics.PreferredBackBufferWidth = Room.width;
+            IsMouseVisible = true;
             Content.RootDirectory = "Content";
         }
 
@@ -36,8 +34,7 @@ namespace MusicGame
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        protected override void Initialize()
-        {
+        protected override void Initialize() {
             // TODO: Add your initialization logic here
 
             base.Initialize();
@@ -47,12 +44,10 @@ namespace MusicGame
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
         /// </summary>
-        protected override void LoadContent()
-        {
+        protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            object1 = new GameObject(Content.Load<Texture2D>("skeleton"), new Vector2(20, 20), 3, 5, 12);
-            
+            p = new Player(Content.Load<Texture2D>("skeleton"),new Vector2(200,200),3,3,5,12);
 
             // TODO: use this.Content to load your game content here
         }
@@ -61,8 +56,7 @@ namespace MusicGame
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
         /// </summary>
-        protected override void UnloadContent()
-        {
+        protected override void UnloadContent() {
             // TODO: Unload any non ContentManager content here
         }
 
@@ -71,23 +65,21 @@ namespace MusicGame
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Update(GameTime gameTime)
-        {
+        protected override void Update(GameTime gameTime) {
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                object1.ChangeTexture(Content.Load<Texture2D>("skeleton2"), 5, 10, 45);
+            if (Keyboard.GetState().IsKeyDown(Keys.Space)) {
+                p.ChangeTexture(Content.Load<Texture2D>("skeleton2"),5,10,45);
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Q))
-            {
-                object1.ChangeTexture(Content.Load<Texture2D>("skeleton"), 3, 5, 12);
+            if (Keyboard.GetState().IsKeyDown(Keys.Q)) {
+                p.ChangeTexture(Content.Load<Texture2D>("skeleton"),3,5,12);
             }
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            object1.Update(elapsed);
+
+            p.Update(elapsed,Keyboard.GetState(),Keyboard.GetState(),Mouse.GetState());
             base.Update(gameTime);
         }
 
@@ -95,13 +87,12 @@ namespace MusicGame
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
-        {
+        protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
 
-            object1.Draw(spriteBatch);
+            p.Draw(spriteBatch);
 
             spriteBatch.End();
 
