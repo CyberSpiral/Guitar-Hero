@@ -10,44 +10,18 @@ namespace GameProject2kXV
 
         private enum Direction : int
         {
-            Up, Left, Down, Right, Last
+            Up, Left, Down, Right
         }
 
-        Direction direction;
-        Direction lastDirection;
-        Random random = new Random();
-
-        /*int[,] originalRoomsOnFloor = 
-        {
-            {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-            {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-        };*/
+        private Direction direction;
+        private Random random = new Random();
 
         Rooms[,] roomsOnFloor;
 
-        int[] positionOnFloor;
-        int[] empty;
-        int numOfRooms;
-        int tmpNumOfRooms;
+        private int[] positionOnFloor;
+        private int[] empty;
+        private int numOfRooms;
+        private int tmpNumOfRooms;
 
 
         public GenerateNewFloor()
@@ -59,7 +33,6 @@ namespace GameProject2kXV
 
         public Rooms[,] GenerateRooms()
         {
-            //Array.Copy(originalRoomsOnFloor, roomsOnFloor, originalRoomsOnFloor.Length);
             for (int i = 0; i < roomsOnFloor.GetLength(0); i++)
             {
                 for (int j = 0; j < roomsOnFloor.GetLength(1); j++)
@@ -80,10 +53,6 @@ namespace GameProject2kXV
                 {
                     direction = (Direction)random.Next(4);
 
-                    /*if (direction == Direction.Last)
-                    {
-                        direction = lastDirection;
-                    }*/
                     if (direction == Direction.Up)
                     {
                         positionOnFloor[1] -= 1;
@@ -100,7 +69,6 @@ namespace GameProject2kXV
                     {
                         positionOnFloor[0] += 1;
                     }
-                    //lastDirection = direction;
 
                     if (roomsOnFloor[positionOnFloor[0], positionOnFloor[1]].roomVersion == 0)
                     {
@@ -140,10 +108,6 @@ namespace GameProject2kXV
 
                             direction = (Direction)i;
 
-                            /*if (direction == Direction.Last)
-                            {
-                                direction = lastDirection;
-                            }*/
                             if (direction == Direction.Up)
                             {
                                 positionOnFloor[1] -= 1;
@@ -160,7 +124,6 @@ namespace GameProject2kXV
                             {
                                 positionOnFloor[0] += 1;
                             }
-                            //lastDirection = direction;
 
                             if (roomsOnFloor[positionOnFloor[0],positionOnFloor[1]].roomVersion != 0)
                             {

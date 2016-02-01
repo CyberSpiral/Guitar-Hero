@@ -43,7 +43,7 @@ namespace GameProject2kXV
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            sprFont = Content.Load<SpriteFont>("sprFont");
+            //sprFont = Content.Load<SpriteFont>("sprFont");
 
 
             screenWidth = GraphicsDevice.Viewport.Width;
@@ -52,7 +52,7 @@ namespace GameProject2kXV
 
             Rooms.Content = Content;
 
-            map.Generate(genFloor.GenerateRooms(), 16,16);
+            map.Generate(genFloor.GenerateRooms());
         }
 
         protected override void UnloadContent()
@@ -67,7 +67,7 @@ namespace GameProject2kXV
             if (Keyboard.GetState().IsKeyDown(Keys.Q))
             {
                 map = new Map();
-                map.Generate(genFloor.GenerateRooms(), 16,16);
+                map.Generate(genFloor.GenerateRooms());
             }
 
             base.Update(gameTime);
