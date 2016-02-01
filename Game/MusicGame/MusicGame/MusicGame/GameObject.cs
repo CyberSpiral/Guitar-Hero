@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,14 +21,14 @@ namespace MusicGame
         protected int totalFrames;
         protected float totalElapsed;
 
-        public GameObject(Texture2D texture, Vector2 position, int rows, int columns)
+        public GameObject(Texture2D texture, Vector2 position, int textureRows, int textureColumns)
         {
             Texture = texture;
             Position = position;
             totalElapsed = 0;
 
-            Rows = rows;
-            Columns = columns;
+            Rows = textureRows;
+            Columns = textureColumns;
             currentFrame = 0;
             totalFrames = Rows * Columns;
         }
