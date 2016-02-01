@@ -7,7 +7,7 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\sprFont.xnb</Output>
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\sprFont.xnb</Output>
       <Time>2016-01-17T02:07:29.9593418+01:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile1.xnb</Output>
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile1.xnb</Output>
       <Time>2016-01-17T13:50:05.5846032+01:00</Time>
     </Item>
     <Item>
@@ -25,7 +25,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile2.xnb</Output>
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile2.xnb</Output>
       <Time>2016-01-17T13:50:05.5876034+01:00</Time>
     </Item>
     <Item>
@@ -34,7 +34,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile3.xnb</Output>
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\Tile3.xnb</Output>
       <Time>2016-01-17T13:50:05.6146049+01:00</Time>
     </Item>
     <Item>
@@ -43,7 +43,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room1.xnb</Output>
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room1.xnb</Output>
       <Time>2016-01-18T09:21:42.5168048+01:00</Time>
     </Item>
     <Item>
@@ -52,7 +52,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room2.xnb</Output>
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room2.xnb</Output>
       <Time>2016-01-18T09:21:42.519805+01:00</Time>
     </Item>
     <Item>
@@ -61,7 +61,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room3.xnb</Output>
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room3.xnb</Output>
       <Time>2016-01-18T09:21:42.5228052+01:00</Time>
     </Item>
     <Item>
@@ -70,7 +70,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room4.xnb</Output>
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room4.xnb</Output>
       <Time>2016-01-18T09:21:42.5258054+01:00</Time>
     </Item>
     <Item>
@@ -79,7 +79,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room5.xnb</Output>
+      <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\room5.xnb</Output>
       <Time>2016-01-18T09:21:42.5278055+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -89,10 +89,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXVContent\</RootDirectory>
-      <LoggerRootDirectory>c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\</LoggerRootDirectory>
-      <IntermediateDirectory>c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>c:\users\su14erikh\documents\visual studio 2013\Projects\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXVContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Randomic\GameProject2kXV\GameProject2kXV\GameProject2kXV\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

@@ -52,7 +52,7 @@ namespace GameProject2kXV
 
         public GenerateNewFloor()
         {
-            roomsOnFloor = new Rooms[21, 21];
+            roomsOnFloor = new Rooms[25, 25];
             positionOnFloor = new int[2];
             empty = new int[4] { 0, 0, 0, 0 };
         }
@@ -74,8 +74,8 @@ namespace GameProject2kXV
             //place rooms
             for (int i = 0; i < 3; i++)
             {
-                positionOnFloor[0] = 10;
-                positionOnFloor[1] = 10;
+                positionOnFloor[0] = 13;
+                positionOnFloor[1] = 13;
                 while (true)
                 {
                     direction = (Direction)random.Next(4);
@@ -104,7 +104,12 @@ namespace GameProject2kXV
 
                     if (roomsOnFloor[positionOnFloor[0], positionOnFloor[1]].roomVersion == 0)
                     {
-                        int roomVersion = random.Next(2, 6);
+                        int roomVersion = random.Next(2, 12);
+                        if (roomVersion > 10)
+                            roomVersion = 3;
+                        else if (roomVersion > 5)
+                            roomVersion = 2;
+
                         roomsOnFloor[positionOnFloor[0], positionOnFloor[1]] = new Rooms(roomVersion, empty);
                         tmpNumOfRooms += 1;
                     }
@@ -117,9 +122,9 @@ namespace GameProject2kXV
                     }
                 }
             }
-            roomsOnFloor[10, 10] = new Rooms(1,empty);
+            roomsOnFloor[13, 13] = new Rooms(1,empty);
 
-            //checking number of entrances for each room
+            //checking number of entrances for each room and where they are
             for (int x = 0; x < roomsOnFloor.GetLength(0); x++)
             {
                 for (int y = 0; y < roomsOnFloor.GetLength(1); y++)
