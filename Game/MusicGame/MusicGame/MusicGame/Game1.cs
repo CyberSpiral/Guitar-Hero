@@ -49,7 +49,7 @@ namespace MusicGame {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            p = new Player(Content.Load<Texture2D>("skeleton"),new Vector2(200,200),3,3,5,12);
+            p = new Player(Content.Load<Texture2D>("box"),new Vector2(200,200),3,1,1,1);
             tex = Content.Load<Texture2D>("dot");
             objects = new List<Texture2D>();
             objects.Add(Content.Load<Texture2D>("box"));
@@ -76,13 +76,6 @@ namespace MusicGame {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space)) {
-                p.ChangeTexture(Content.Load<Texture2D>("skeleton2"),5,10,45);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Q)) {
-                p.ChangeTexture(Content.Load<Texture2D>("skeleton"),3,5,12);
-            }
-
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             p.Update(elapsed,Keyboard.GetState(),Keyboard.GetState(),Mouse.GetState());
@@ -94,20 +87,22 @@ namespace MusicGame {
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime) {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Red);
 
             spriteBatch.Begin();
 
             p.Draw(spriteBatch);
-            spriteBatch.Draw(tex,p.collisionBox,Color.Green);
+            spriteBatch.Draw(tex,p.collisionBox,Color.Blue);
             foreach (var pro in world.currentRoom.ProtectedSpace) {
-                spriteBatch.Draw(tex,pro,Color.Red);
+                spriteBatch.Draw(tex,pro,Color.White);
             }
             foreach (var obj in world.currentRoom.Props) {
                 obj.Draw(spriteBatch);
             }
-            foreach (var obj in world.currentRoom.Props) {
-                spriteBatch.Draw(tex,obj.collisionBox,Color.Green);
+            if (Keyboard.GetState().IsKeyDown(Keys.G)){
+                foreach (var obj in world.currentRoom.Props) {
+                    spriteBatch.Draw(tex, obj.collisionBox, Color.Blue);
+                }
             }
 
 
