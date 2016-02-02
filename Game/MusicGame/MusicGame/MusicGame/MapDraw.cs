@@ -9,20 +9,20 @@ namespace MusicGame
 {
     class MapDraw
     {
-        private List<RoomClass> rooms;
+        private List<FloorClass> rooms;
 
-        public List<RoomClass> Rooms
+        public List<FloorClass> Rooms
         {
             get { return rooms; }
         }
 
         public MapDraw()
         {
-            rooms = new List<RoomClass>();
+            rooms = new List<FloorClass>();
         }
 
 
-        public void Generate(RoomClass[,] map)
+        public void Generate(FloorClass[,] map)
         {
             for (int x = 0; x < map.GetLength(0); x++)
                 for (int y = 0; y < map.GetLength(1); y++)
