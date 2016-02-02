@@ -95,7 +95,6 @@ namespace MusicGame {
             spriteBatch.Draw(back, Vector2.Zero, Color.White);
 
             p.Draw(spriteBatch);
-            spriteBatch.Draw(tex,p.collisionBox,Color.Blue);
             foreach (var pro in world.currentRoom.ProtectedSpace) {
                 spriteBatch.Draw(tex,pro,Color.White);
             }
@@ -106,6 +105,7 @@ namespace MusicGame {
                 foreach (var obj in world.currentRoom.Props) {
                     spriteBatch.Draw(tex, obj.collisionBox, Color.Blue);
                 }
+                spriteBatch.Draw(tex, p.collisionBox, Color.Blue);
             }
 
 
