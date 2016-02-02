@@ -45,11 +45,6 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-*.pdb
-*.exe
-*.xml
-*.xml
-*.exe
 Game/MusicGame/MusicGame/MusicGame/bin/x86/Debug/MusicGame.exe
 Game/MusicGame/MusicGame/MusicGame/bin/x86/Debug/MusicGame.pdb
 Game/MusicGame/MusicGame/MusicGame/obj/x86/Debug/MusicGame.exe
