@@ -17,9 +17,11 @@ namespace MusicGame {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player p;
-        List<Texture2D> tex;
+        List<Texture2D> objects;
+        Texture2D tex;
+        World world;
 
-
+        
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = Room.height;
@@ -48,6 +50,10 @@ namespace MusicGame {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             p = new Player(Content.Load<Texture2D>("skeleton"),new Vector2(200,200),3,3,5,12);
+            tex = Content.Load<Texture2D>("dot");
+            objects = new List<Texture2D>();
+            objects.Add(Content.Load<Texture2D>("box"));
+            world = new World(objects);
 
             // TODO: use this.Content to load your game content here
         }
@@ -93,6 +99,17 @@ namespace MusicGame {
             spriteBatch.Begin();
 
             p.Draw(spriteBatch);
+            spriteBatch.Draw(tex,p.collisionBox,Color.Green);
+            foreach (var pro in world.currentRoom.ProtectedSpace) {
+                spriteBatch.Draw(tex,pro,Color.Red);
+            }
+            foreach (var obj in world.currentRoom.Props) {
+                obj.Draw(spriteBatch);
+            }
+            foreach (var obj in world.currentRoom.Props) {
+                spriteBatch.Draw(tex,obj.collisionBox,Color.Green);
+            }
+
 
             spriteBatch.End();
 

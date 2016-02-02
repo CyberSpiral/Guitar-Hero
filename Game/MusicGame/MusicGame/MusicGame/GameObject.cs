@@ -11,6 +11,10 @@ namespace MusicGame {
         public Texture2D Texture { get; protected set; }
         public Vector2 Position { get; protected set; }
         public Vector2 Velocity { get; protected set; }
+        public Rectangle collisionBox {
+            get { return new Rectangle((int)Position.X - (Texture.Width / 2), (int)Position.Y - (Texture.Height / 2), Texture.Width / Columns, Texture.Height / Rows); }
+            private set { value = collisionBox; }
+        }
 
         public int Rows { get; protected set; }
         public int Columns { get; protected set; }
@@ -22,7 +26,7 @@ namespace MusicGame {
         protected float rotation;
         protected float speed;
 
-        public GameObject(Texture2D texture,Vector2 position,int textureRows,int textureColumns) {
+        public GameObject(Texture2D texture, Vector2 position, int textureRows, int textureColumns) {
             Texture = texture;
             Position = position;
             totalElapsed = 0;
@@ -32,7 +36,7 @@ namespace MusicGame {
             currentFrame = 0;
             totalFrames = Rows * Columns;
         }
-        public GameObject(Texture2D texture,Vector2 position,int rows,int columns,int totalFrames) {
+        public GameObject(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames) {
             Texture = texture;
             Position = position;
             totalElapsed = 0;
@@ -56,12 +60,12 @@ namespace MusicGame {
             int row = (int)((float)currentFrame / (float)Columns);
             int column = currentFrame % Columns;
 
-            Rectangle sourceRectangle = new Rectangle(width * column,height * row,width,height);
-            Rectangle destinationRectangle = new Rectangle((int)Position.X,(int)Position.Y,width,height);
+            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)Position.X, (int)Position.Y, width, height);
 
-            spriteBatch.Draw(Texture,destinationRectangle,sourceRectangle,Color.White,rotation - (float)(Math.PI * 0.5f),new Vector2((width / 2),(height / 2)),SpriteEffects.None,0);
+            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White, rotation - (float)(Math.PI * 0.5f), new Vector2((width / 2), (height / 2)), SpriteEffects.None, 0);
         }
-        public virtual void ChangeTexture(Texture2D texture,int rows,int columns,int totalFrames) {
+        public virtual void ChangeTexture(Texture2D texture, int rows, int columns, int totalFrames) {
             Texture = texture;
 
             Rows = rows;
