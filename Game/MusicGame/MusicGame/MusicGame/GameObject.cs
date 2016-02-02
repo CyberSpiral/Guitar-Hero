@@ -12,7 +12,7 @@ namespace MusicGame {
         public Vector2 Position { get; protected set; }
         public Vector2 Velocity { get; protected set; }
         public Rectangle collisionBox {
-            get { return new Rectangle((int)Position.X - (Texture.Width / Columns), (int)Position.Y - (Texture.Height / Rows), Texture.Width / Columns, Texture.Height / Rows); }
+            get { return new Rectangle((int)Position.X - (Texture.Width / Columns / 2), (int)Position.Y - (Texture.Height / Rows / 2), Texture.Width / Columns, Texture.Height / Rows); }
             private set { value = collisionBox; }
         }
 
