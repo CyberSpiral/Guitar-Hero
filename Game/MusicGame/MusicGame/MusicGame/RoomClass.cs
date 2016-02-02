@@ -11,20 +11,10 @@ namespace MusicGame
     class RoomClass
     {
         protected Texture2D texture;
-
-        private Rectangle rectangle;
-        public Rectangle Rectangle
-        {
-            get { return rectangle; }
-            protected set { rectangle = value; }
-        }
-
-        private static ContentManager content;
-        public static ContentManager Content
-        {
-            protected get { return content; }
-            set { content = value; }
-        }
+        
+        public Rectangle Rectangle { get; set; }
+        
+        public static ContentManager Content { get; set;}
 
         public int roomVersion;
         public int[] roomVersionDoors;
@@ -43,8 +33,8 @@ namespace MusicGame
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            rectangle = new Rectangle(rectangle.X, rectangle.Y, 16, 16);
-            spriteBatch.Draw(texture, rectangle, Color.White);
+            Rectangle = new Rectangle(Rectangle.X, Rectangle.Y, 16, 16);
+            spriteBatch.Draw(texture, Rectangle, Color.White);
         }
     }
 }
