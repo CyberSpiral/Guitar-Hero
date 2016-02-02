@@ -19,6 +19,7 @@ namespace MusicGame {
         Player p;
         List<Texture2D> objects;
         Texture2D tex;
+        Texture2D back;
         World world;
 
         
@@ -49,12 +50,13 @@ namespace MusicGame {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            p = new Player(Content.Load<Texture2D>("box"),new Vector2(200,200),3,1,1,1);
+            p = new Player(Content.Load<Texture2D>("character"),new Vector2(200,200),3,1,9,9);
             tex = Content.Load<Texture2D>("dot");
+            back = Content.Load<Texture2D>("back2");
             objects = new List<Texture2D>();
             objects.Add(Content.Load<Texture2D>("box"));
             world = new World(objects);
-
+    
             // TODO: use this.Content to load your game content here
         }
 
@@ -73,7 +75,7 @@ namespace MusicGame {
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime) {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -90,6 +92,7 @@ namespace MusicGame {
             GraphicsDevice.Clear(Color.Red);
 
             spriteBatch.Begin();
+            spriteBatch.Draw(back, Vector2.Zero, Color.White);
 
             p.Draw(spriteBatch);
             spriteBatch.Draw(tex,p.collisionBox,Color.Blue);

@@ -30,3 +30,5 @@ C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGa
 C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\obj\x86\Debug\MusicGame.exe
 C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\obj\x86\Debug\MusicGame.pdb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\Back2.xnb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\character.xnb

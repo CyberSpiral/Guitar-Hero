@@ -46,6 +46,24 @@
       <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\box.xnb</Output>
       <Time>2016-02-02T09:36:42.0137249+01:00</Time>
     </Item>
+    <Item>
+      <Source>Back2.png</Source>
+      <Name>Back2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\Back2.xnb</Output>
+      <Time>2016-02-02T13:47:58.1153212+01:00</Time>
+    </Item>
+    <Item>
+      <Source>character.png</Source>
+      <Name>character</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\character.xnb</Output>
+      <Time>2016-02-02T13:54:28.9708399+01:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{6F4A5D9B-8D70-40BE-BCC2-EAA07B633B81}</ContentProjectGUID>

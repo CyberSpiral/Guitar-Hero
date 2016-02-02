@@ -37,7 +37,7 @@ namespace MusicGame {
 
             for (int i = 0; i < 50; i++) {
                 Texture2D tempTex = gameObjects[r.Next(gameObjects.Count)];
-                GameObject temp = new GameObject(tempTex,new Vector2(r.Next(Room.width - tempTex.Width),r.Next(Room.height - tempTex.Height)),1,1,1);
+                GameObject temp = new GameObject(tempTex,new Vector2(r.Next(15) * 68 + 34, r.Next(9) * 68 + 34),1,1,1);
                 bool tempBool = false;
                 foreach (var rec in protectedSpace) {
                     if (rec.Intersects(temp.collisionBox)) {
