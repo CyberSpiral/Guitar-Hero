@@ -109,7 +109,7 @@ namespace GameProject2kXV
                     }
                 }
             }
-            roomsOnFloor[13, 13] = new Rooms(2,empty);
+            roomsOnFloor[13, 13] = new Rooms(2, empty);
 
             //checking number of entrances for each room and where they are
             for (int x = 0; x < roomsOnFloor.GetLength(0); x++)
@@ -182,7 +182,7 @@ namespace GameProject2kXV
                             {
                                 numberOfDoors += roomsOnFloor[x, y].roomVersionDoors[i];
                             }
-                            int chance = random.Next(8*3);
+                            int chance = random.Next(8 * 3);
 
                             if (numberOfDoors == 1)
                             {
@@ -233,7 +233,7 @@ namespace GameProject2kXV
                     }
                 }
 
-                
+
             }
             return roomsOnFloor;
         }
