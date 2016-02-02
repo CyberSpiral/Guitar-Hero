@@ -90,14 +90,7 @@ namespace MusicGame
 
                     if (roomsOnFloor[positionOnFloor[0], positionOnFloor[1]].roomVersion == 0)
                     {
-                        /*int roomVersion = random.Next(2, 12);
-                        if (roomVersion > 10)
-                            roomVersion = 3;
-                        else if (roomVersion > 5)
-                            roomVersion = 2;*/
-                        int roomVersion = 2;
-
-                        roomsOnFloor[positionOnFloor[0], positionOnFloor[1]] = new RoomClass(roomVersion, empty);
+                        roomsOnFloor[positionOnFloor[0], positionOnFloor[1]] = new RoomClass(2, empty);
                         tmpNumOfRooms += 1;
                     }
 
