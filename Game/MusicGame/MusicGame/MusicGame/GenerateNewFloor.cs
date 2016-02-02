@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GameProject2kXV
+namespace MusicGame
 {
     class GenerateNewFloor
     {
@@ -16,7 +16,7 @@ namespace GameProject2kXV
         private Direction direction;
         private Random random = new Random();
 
-        Rooms[,] roomsOnFloor;
+        RoomClass[,] roomsOnFloor;
 
         private int[] positionOnFloor;
         private int[] empty;
@@ -32,7 +32,7 @@ namespace GameProject2kXV
 
         public GenerateNewFloor()
         {
-            roomsOnFloor = new Rooms[25, 25];
+            roomsOnFloor = new RoomClass[25, 25];
             positionOnFloor = new int[2];
             empty = new int[4] { 0, 0, 0, 0 };
 
@@ -43,7 +43,7 @@ namespace GameProject2kXV
             differentRoom = 8;
         }
 
-        public Rooms[,] GenerateRooms()
+        public RoomClass[,] GenerateRooms()
         {
             startRoom = 1;
             endRoom = 1;
@@ -55,7 +55,7 @@ namespace GameProject2kXV
             {
                 for (int j = 0; j < roomsOnFloor.GetLength(1); j++)
                 {
-                    roomsOnFloor[i, j] = new Rooms(0, empty);
+                    roomsOnFloor[i, j] = new RoomClass(0, empty);
                 }
             }
 
@@ -97,7 +97,7 @@ namespace GameProject2kXV
                             roomVersion = 2;*/
                         int roomVersion = 2;
 
-                        roomsOnFloor[positionOnFloor[0], positionOnFloor[1]] = new Rooms(roomVersion, empty);
+                        roomsOnFloor[positionOnFloor[0], positionOnFloor[1]] = new RoomClass(roomVersion, empty);
                         tmpNumOfRooms += 1;
                     }
 
@@ -109,7 +109,7 @@ namespace GameProject2kXV
                     }
                 }
             }
-            roomsOnFloor[13, 13] = new Rooms(2, empty);
+            roomsOnFloor[13, 13] = new RoomClass(2, empty);
 
             //checking number of entrances for each room and where they are
             for (int x = 0; x < roomsOnFloor.GetLength(0); x++)
