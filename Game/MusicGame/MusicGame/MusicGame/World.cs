@@ -7,5 +7,14 @@ namespace MusicGame {
     class World {
         public List<Room> rooms { get; private set; }
 
+        public World() {
+
+        }
+
+        public Room GenerateRoom () {
+            Random r = new Random();
+
+            return new Room();
+        }
     }
 }
