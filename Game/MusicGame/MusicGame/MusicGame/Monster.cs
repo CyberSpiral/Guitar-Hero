@@ -8,16 +8,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MusicGame {
     class Monster : GameObject {
-        public Monster(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns, int totalFrames) : base(texture, position, textureRows, textureColumns, totalFrames) {
-            Texture = texture;
-            Position = position;
-            totalElapsed = 0;
-
-            Rows = textureRows;
-            Columns = textureColumns;
-            currentFrame = 0;
-            this.totalFrames = totalFrames;
-
+        public Monster(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns, int totalFrames)
+            : base(texture, position, textureRows, textureColumns, totalFrames) {
             this.speed = speed;
         }
 

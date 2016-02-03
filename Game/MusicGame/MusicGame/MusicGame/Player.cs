@@ -8,16 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MusicGame {
     class Player : GameObject {
-        public Player(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns, int totalFrames) : base(texture, position, textureRows, textureColumns, totalFrames) {
-            Texture = texture;
-            Position = position;
-            totalElapsed = 0;
-
-            Rows = textureRows;
-            Columns = textureColumns;
-            currentFrame = 0;
-            this.totalFrames = totalFrames;
-
+        public Weapon weapon { get; protected set; }
+        public Player(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns, int totalFrames) 
+            : base(texture, position, textureRows, textureColumns, totalFrames) {
             this.speed = speed;
         }
         public void Update(float elapsed, KeyboardState currentKey, KeyboardState oldKey, MouseState mouse) {
@@ -26,8 +19,7 @@ namespace MusicGame {
             if (direction != Vector2.Zero)
                 direction.Normalize();
             rotation = (float)Math.Atan2(direction.Y, direction.X);
-
-
+            
             #region CurrentMovement
             //Can be changed
             if (currentKey.IsKeyDown(Keys.W))
