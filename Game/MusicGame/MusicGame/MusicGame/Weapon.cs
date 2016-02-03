@@ -22,5 +22,14 @@ namespace MusicGame {
             : base(texture, position, rows, columns, totalFrames) {
             ContainedWeapon = containedWeapon;
         }
+
+        public void Update(Vector2 playerPosition) {
+
+        }
+        public void Draw(SpriteBatch spriteBatch, SpriteFont spriteFont, Vector2 playerPosition) {
+            if (Vector2.Distance(playerPosition,Position) < 70) {
+                spriteBatch.DrawString(spriteFont, "X", new Vector2(0, 0), Color.White);
+            }
+        }
     }
 }
