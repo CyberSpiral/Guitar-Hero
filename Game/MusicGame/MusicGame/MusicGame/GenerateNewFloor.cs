@@ -28,7 +28,6 @@ namespace MusicGame
         private int endRoom;
         private int itemRoom;
         private int specialRoom;
-        private int differentRoom;
 
 
         public GenerateNewFloor()
@@ -41,7 +40,6 @@ namespace MusicGame
             endRoom = 1;
             itemRoom = 1;
             specialRoom = 4;
-            differentRoom = 8;
         }
 
         public Room[,] GenerateRooms()
@@ -50,7 +48,6 @@ namespace MusicGame
             endRoom = 1;
             itemRoom = 1;
             specialRoom = 4;
-            differentRoom = 8;
 
             for (int i = 0; i < roomsOnFloor.GetLength(0); i++)
             {

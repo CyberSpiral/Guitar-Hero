@@ -18,8 +18,9 @@ namespace MusicGame {
     }
     class WeaponOnGround : GameObject {
         public Weapon ContainedWeapon { get; protected set; }
-        public WeaponOnGround(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames, Weapon containedWeapon)
-            : base(texture, position, rows, columns, totalFrames) {
+        public WeaponOnGround(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames
+            , Weapon containedWeapon, int animationSpeed)
+            : base(texture, position, rows, columns, totalFrames, animationSpeed) {
             ContainedWeapon = containedWeapon;
         }
 
