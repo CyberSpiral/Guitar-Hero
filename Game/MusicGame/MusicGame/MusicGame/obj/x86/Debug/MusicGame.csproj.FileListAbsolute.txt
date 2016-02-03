@@ -44,3 +44,15 @@ C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\
 C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\room3.xnb
 C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\room4.xnb
 C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\room5.xnb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\EX.xnb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Skeleton.xnb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Skeleton2.xnb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\dot.xnb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\box.xnb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Back2.xnb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\character.xnb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\room1.xnb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\room2.xnb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\room3.xnb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\room4.xnb
+C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\room5.xnb
