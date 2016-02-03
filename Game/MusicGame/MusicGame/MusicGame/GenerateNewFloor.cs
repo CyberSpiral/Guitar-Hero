@@ -6,13 +6,15 @@ using System.Text;
 
 namespace MusicGame
 {
-    class GenerateNewFloor
-    {
-
-        private enum Direction : int
+    
+    public enum Direction : int
         {
             Up, Left, Down, Right
         }
+    class GenerateNewFloor
+    {
+
+        
 
         private Direction direction;
         private Random random = new Random();
