@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MusicGame {
     class Player : GameObject {
-        public Weapon weapon { get; protected set; }
+        public Weapon Weapon { get; set; }
         public Player(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns
             , int totalFrames, int animationSpeed) 
             : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {

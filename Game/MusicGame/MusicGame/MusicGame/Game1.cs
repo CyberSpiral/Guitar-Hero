@@ -101,7 +101,7 @@ namespace MusicGame {
                 p.Position = p.OldPos;
                 t.Position = t.OldPos;
             }
-
+                
 
             base.Update(gameTime);
         }
