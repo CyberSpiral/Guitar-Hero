@@ -84,6 +84,14 @@ namespace MusicGame {
 
             p.Update(elapsed, Keyboard.GetState(), Keyboard.GetState(), Mouse.GetState());
             t.Update(elapsed, p.Position);
+
+
+            if (p.CollisionBox.Intersects(t.CollisionBox)) {
+                p.Position = p.OldPos;
+                t.Position = t.OldPos;
+            }
+
+
             base.Update(gameTime);
         }
 
@@ -101,10 +109,10 @@ namespace MusicGame {
             t.Draw(spriteBatch);
             if (Keyboard.GetState().IsKeyDown(Keys.G)) {
                 foreach (var obj in world.currentRoom.Props) {
-                    spriteBatch.Draw(tex, obj.collisionBox, Color.Blue);
+                    spriteBatch.Draw(tex, obj.CollisionBox, Color.Blue);
                 }
-                spriteBatch.Draw(tex, p.collisionBox, Color.Blue);
-                spriteBatch.Draw(tex, t.collisionBox, Color.Blue);
+                spriteBatch.Draw(tex, p.CollisionBox, Color.Blue);
+                spriteBatch.Draw(tex, t.CollisionBox, Color.Blue);
             }
 
 

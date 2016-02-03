@@ -27,6 +27,8 @@ namespace MusicGame {
             if (direction != Vector2.Zero)
                 direction.Normalize();
             rotation = (float)Math.Atan2(direction.Y, direction.X);
+
+            OldPos = Position;
             Position += direction * speed;
 
         }

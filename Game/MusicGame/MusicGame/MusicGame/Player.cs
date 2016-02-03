@@ -55,7 +55,7 @@ namespace MusicGame {
             if (Velocity != null)
                 Velocity.Normalize();
 
-
+            OldPos = Position;
             Position += Velocity * speed;
             #endregion
         }

@@ -40,7 +40,7 @@ namespace MusicGame {
                 GameObject temp = new GameObject(tempTex,new Vector2(r.Next(15) * 68 + 34, r.Next(9) * 68 + 34),1,1,1);
                 bool tempBool = false;
                 foreach (var rec in protectedSpace) {
-                    if (rec.Intersects(temp.collisionBox)) {
+                    if (rec.Intersects(temp.CollisionBox)) {
                         tempBool = true;
                     }
                 }
