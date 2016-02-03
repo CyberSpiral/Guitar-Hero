@@ -5,3 +5,8 @@ Content\dot.xnb
 Content\box.xnb
 Content\Back2.xnb
 Content\character.xnb
+Content\room1.xnb
+Content\room2.xnb
+Content\room3.xnb
+Content\room4.xnb
+Content\room5.xnb

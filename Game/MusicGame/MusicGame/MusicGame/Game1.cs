@@ -22,6 +22,7 @@ namespace MusicGame {
         Texture2D tex;
         Texture2D back;
         World world;
+        MapDraw drawMap;
 
 
         public Game1() {
@@ -59,6 +60,10 @@ namespace MusicGame {
             objects.Add(Content.Load<Texture2D>("box"));
             world = new World(objects);
 
+            FloorClass.Content = Content;
+            drawMap = new MapDraw();
+            drawMap.Generate();
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -79,6 +84,10 @@ namespace MusicGame {
             // Allows the game to exit
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+            if (Keyboard.GetState().IsKeyDown(Keys.M))
+            {
+                drawMap.Generate();
+            }
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
@@ -107,6 +116,7 @@ namespace MusicGame {
                 spriteBatch.Draw(tex, t.collisionBox, Color.Blue);
             }
 
+            drawMap.Draw(spriteBatch);
 
             spriteBatch.End();
 
