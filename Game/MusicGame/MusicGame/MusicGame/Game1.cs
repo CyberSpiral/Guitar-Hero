@@ -22,7 +22,9 @@ namespace MusicGame {
         Texture2D tex;
         Texture2D back;
         World world;
+
         MapDraw drawMap;
+
 
 
         public Game1() {
@@ -60,7 +62,7 @@ namespace MusicGame {
             objects.Add(Content.Load<Texture2D>("box"));
             world = new World(objects);
 
-            FloorClass.Content = Content;
+            Room.Content = Content;
             drawMap = new MapDraw();
             drawMap.Generate();
 

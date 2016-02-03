@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,10 +17,10 @@ namespace MusicGame
         private Direction direction;
         private Random random = new Random();
 
-        FloorClass[,] roomsOnFloor;
+        Room[,] roomsOnFloor;
 
         private int[] positionOnFloor;
-        private int[] empty;
+        private int[] emptyDoorArray;
         private int numOfRooms;
         private int tmpNumOfRooms;
 
@@ -32,9 +33,9 @@ namespace MusicGame
 
         public GenerateNewFloor()
         {
-            roomsOnFloor = new FloorClass[25, 25];
+            roomsOnFloor = new Room[25, 25];
             positionOnFloor = new int[2];
-            empty = new int[4] { 0, 0, 0, 0 };
+            emptyDoorArray = new int[4] { 0, 0, 0, 0 };
 
             startRoom = 1;
             endRoom = 1;
@@ -43,7 +44,7 @@ namespace MusicGame
             differentRoom = 8;
         }
 
-        public FloorClass[,] GenerateRooms()
+        public Room[,] GenerateRooms()
         {
             startRoom = 1;
             endRoom = 1;
@@ -55,7 +56,7 @@ namespace MusicGame
             {
                 for (int j = 0; j < roomsOnFloor.GetLength(1); j++)
                 {
-                    roomsOnFloor[i, j] = new FloorClass(0, empty);
+                    roomsOnFloor[i, j] = new Room(new List<GameObject>(), new List<Rectangle>(), 0, emptyDoorArray);
                 }
             }
 
@@ -90,7 +91,7 @@ namespace MusicGame
 
                     if (roomsOnFloor[positionOnFloor[0], positionOnFloor[1]].roomVersion == 0)
                     {
-                        roomsOnFloor[positionOnFloor[0], positionOnFloor[1]] = new FloorClass(2, empty);
+                        roomsOnFloor[positionOnFloor[0], positionOnFloor[1]] = new Room(new List<GameObject>() ,new List<Rectangle>(), 2, emptyDoorArray);
                         tmpNumOfRooms += 1;
                     }
 
@@ -102,7 +103,7 @@ namespace MusicGame
                     }
                 }
             }
-            roomsOnFloor[13, 13] = new FloorClass(2, empty);
+            roomsOnFloor[13, 13] = new Room(new List<GameObject>(), new List<Rectangle>(), 2, emptyDoorArray);
 
             //checking number of entrances for each room and where they are
             for (int x = 0; x < roomsOnFloor.GetLength(0); x++)

@@ -9,27 +9,27 @@ namespace MusicGame
 {
     class MapDraw
     {
-        private List<FloorClass> rooms;
+        private List<Room> rooms;
 
-        public List<FloorClass> Rooms
+        public List<Room> Rooms
         {
             get { return rooms; }
         }
 
-        public FloorClass[,] mapTileSet;
+        public Room[,] mapTileSet;
         private GenerateNewFloor generateFloor;
 
         public MapDraw()
         {
-            rooms = new List<FloorClass>();
-            mapTileSet = new FloorClass[25, 25];
+            rooms = new List<Room>();
+            mapTileSet = new Room[25, 25];
             generateFloor = new GenerateNewFloor();
         }
 
 
         public void Generate()
         {
-            rooms = new List<FloorClass>();
+            rooms = new List<Room>();
             mapTileSet = generateFloor.GenerateRooms();
             for (int x = 0; x < mapTileSet.GetLength(0); x++)
                 for (int y = 0; y < mapTileSet.GetLength(1); y++)
@@ -48,7 +48,7 @@ namespace MusicGame
         {
             for (int i = 0; i < rooms.Count; i++)
             {
-                rooms[i].Draw(spriteBatch);
+                rooms[i].DrawForMap(spriteBatch);
             }
         }
     }

@@ -12,11 +12,11 @@ namespace MusicGame {
 
         public World(List<Texture2D> gameObjects) {
             rooms = new List<Room>();
-            rooms.Add(GenerateRoom(gameObjects));
+            rooms.Add(GenerateRoom(gameObjects,2,new int[] {1,1,1,1}));
             currentRoom = rooms[0];
         }
 
-        public Room GenerateRoom(List<Texture2D> gameObjects) {
+        public Room GenerateRoom(List<Texture2D> gameObjects, int roomVersion, int[] roomDoors) {
             Random r = new Random();
             List<GameObject> objects = new List<GameObject>();
             List<Rectangle> protectedSpace = new List<Rectangle>();
@@ -50,7 +50,7 @@ namespace MusicGame {
             }
 
 
-            return new Room(objects,protectedSpace);
+            return new Room(objects,protectedSpace, roomVersion, roomDoors);
         }
     }
 }
