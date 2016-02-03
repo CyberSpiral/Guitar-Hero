@@ -27,16 +27,6 @@ namespace MusicGame {
         protected float rotation;
         protected float speed;
 
-        public GameObject(Texture2D texture, Vector2 position, int textureRows, int textureColumns) {
-            Texture = texture;
-            Position = position;
-            totalElapsed = 0;
-
-            Rows = textureRows;
-            Columns = textureColumns;
-            currentFrame = 0;
-            totalFrames = Rows * Columns;
-        }
         public GameObject(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames) {
             Texture = texture;
             Position = position;
