@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace MusicGame {
     class World {
         public List<Room> rooms { get; private set; }
-        public Room currentRoom { get; private set; }
+        public Room currentRoom { get; set; }
 
         public World(List<Texture2D> gameObjects) {
             rooms = new List<Room>();
