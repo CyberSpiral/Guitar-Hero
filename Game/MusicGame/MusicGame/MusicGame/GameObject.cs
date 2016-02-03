@@ -9,11 +9,12 @@ using Microsoft.Xna.Framework.Graphics;
 namespace MusicGame {
     class GameObject {
         public Texture2D Texture { get; protected set; }
-        public Vector2 Position { get; protected set; }
+        public Vector2 Position { get; set; }
         public Vector2 Velocity { get; protected set; }
-        public Rectangle collisionBox {
+        public Vector2 OldPos { get; set; }
+        public Rectangle CollisionBox {
             get { return new Rectangle((int)Position.X - (Texture.Width / Columns / 2), (int)Position.Y - (Texture.Height / Rows / 2), Texture.Width / Columns, Texture.Height / Rows); }
-            private set { value = collisionBox; }
+            private set { value = CollisionBox; }
         }
 
         public int Rows { get; protected set; }
