@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MusicGame
 {
-    class MapDraw
+    class Map
     {
         private List<Room> rooms;
 
@@ -19,10 +19,11 @@ namespace MusicGame
         public Room[,] mapTileSet;
         private GenerateNewFloor generateFloor;
 
-        public MapDraw()
+        public Map()
         {
             rooms = new List<Room>();
             mapTileSet = new Room[25, 25];
+
             generateFloor = new GenerateNewFloor();
         }
 

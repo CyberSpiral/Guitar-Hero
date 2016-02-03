@@ -23,7 +23,7 @@ namespace MusicGame {
         Texture2D back;
         World world;
 
-        MapDraw drawMap;
+        Map drawMap;
 
 
 
@@ -63,7 +63,7 @@ namespace MusicGame {
             world = new World(objects);
 
             Room.Content = Content;
-            drawMap = new MapDraw();
+            drawMap = new Map();
             drawMap.Generate();
 
             // TODO: use this.Content to load your game content here
@@ -89,6 +89,10 @@ namespace MusicGame {
             if (Keyboard.GetState().IsKeyDown(Keys.M))
             {
                 drawMap.Generate();
+            }
+            foreach (Room room in drawMap.Rooms)
+            {
+                world.GenerateRoom(objects, room.roomVersion, room.roomVersionDoors);
             }
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
