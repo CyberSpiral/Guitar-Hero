@@ -61,6 +61,7 @@
     <Compile Include="GameObject.cs" />
     <Compile Include="GenerateNewFloor.cs" />
     <Compile Include="MapDraw.cs" />
+    <Compile Include="Monster.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

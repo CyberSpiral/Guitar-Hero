@@ -17,12 +17,13 @@ namespace MusicGame {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player p;
+        Monster t;
         List<Texture2D> objects;
         Texture2D tex;
         Texture2D back;
         World world;
 
-        
+
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = Room.height;
@@ -39,7 +40,7 @@ namespace MusicGame {
         /// </summary>
         protected override void Initialize() {
             // TODO: Add your initialization logic here
-            
+
             base.Initialize();
         }
 
@@ -50,13 +51,14 @@ namespace MusicGame {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            p = new Player(Content.Load<Texture2D>("character"),new Vector2(200,200),3,1,9,9);
+            p = new Player(Content.Load<Texture2D>("character"), new Vector2(200, 200), 3, 1, 9, 9);
+            t = new Monster(Content.Load<Texture2D>("character"), new Vector2(400, 400), 1, 1, 9, 9);
             tex = Content.Load<Texture2D>("dot");
             back = Content.Load<Texture2D>("back2");
             objects = new List<Texture2D>();
             objects.Add(Content.Load<Texture2D>("box"));
             world = new World(objects);
-    
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -80,7 +82,8 @@ namespace MusicGame {
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-            p.Update(elapsed,Keyboard.GetState(),Keyboard.GetState(),Mouse.GetState());
+            p.Update(elapsed, Keyboard.GetState(), Keyboard.GetState(), Mouse.GetState());
+            t.Update(elapsed, p.Position);
             base.Update(gameTime);
         }
 
@@ -95,17 +98,13 @@ namespace MusicGame {
             spriteBatch.Draw(back, Vector2.Zero, Color.White);
 
             p.Draw(spriteBatch);
-            foreach (var pro in world.currentRoom.ProtectedSpace) {
-                spriteBatch.Draw(tex,pro,Color.White);
-            }
-            foreach (var obj in world.currentRoom.Props) {
-                obj.Draw(spriteBatch);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.G)){
+            t.Draw(spriteBatch);
+            if (Keyboard.GetState().IsKeyDown(Keys.G)) {
                 foreach (var obj in world.currentRoom.Props) {
                     spriteBatch.Draw(tex, obj.collisionBox, Color.Blue);
                 }
                 spriteBatch.Draw(tex, p.collisionBox, Color.Blue);
+                spriteBatch.Draw(tex, t.collisionBox, Color.Blue);
             }
 
 
