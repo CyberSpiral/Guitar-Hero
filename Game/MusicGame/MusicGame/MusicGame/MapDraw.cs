@@ -16,22 +16,28 @@ namespace MusicGame
             get { return rooms; }
         }
 
+        public FloorClass[,] mapTileSet;
+        private GenerateNewFloor generateFloor;
+
         public MapDraw()
         {
             rooms = new List<FloorClass>();
+            mapTileSet = new FloorClass[25, 25];
+            generateFloor = new GenerateNewFloor();
         }
 
 
-        public void Generate(FloorClass[,] map)
+        public void Generate()
         {
-            for (int x = 0; x < map.GetLength(0); x++)
-                for (int y = 0; y < map.GetLength(1); y++)
+            mapTileSet = generateFloor.GenerateRooms();
+            for (int x = 0; x < mapTileSet.GetLength(0); x++)
+                for (int y = 0; y < mapTileSet.GetLength(1); y++)
                 {
-                    int number = map[x, y].roomVersion;
+                    int number = mapTileSet[x, y].roomVersion;
 
                     if (number > 0)
                     {
-                        rooms.Add(map[x, y]);
+                        rooms.Add(mapTileSet[x, y]);
                         rooms[rooms.Count - 1].RoomCreate(number, new Rectangle(x * 16, y * 16, 16, 16));
                     }
                 }
