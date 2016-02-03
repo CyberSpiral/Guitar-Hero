@@ -29,6 +29,7 @@ namespace MusicGame
 
         public void Generate()
         {
+            rooms = new List<FloorClass>();
             mapTileSet = generateFloor.GenerateRooms();
             for (int x = 0; x < mapTileSet.GetLength(0); x++)
                 for (int y = 0; y < mapTileSet.GetLength(1); y++)
