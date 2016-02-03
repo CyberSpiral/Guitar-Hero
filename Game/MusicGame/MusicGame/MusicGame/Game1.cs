@@ -89,11 +89,14 @@ namespace MusicGame {
             if (Keyboard.GetState().IsKeyDown(Keys.M))
             {
                 drawMap.Generate();
+                world.NewFloor(drawMap.mapTileSet);
+
+                foreach (Room room in drawMap.Rooms)
+                {
+                    world.GenerateRoom(objects, room.roomVersion, room.roomVersionDoors);
+                }
             }
-            foreach (Room room in drawMap.Rooms)
-            {
-                world.GenerateRoom(objects, room.roomVersion, room.roomVersionDoors);
-            }
+            
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
