@@ -109,51 +109,6 @@
       <Output>C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\room5.xnb</Output>
       <Time>2016-02-03T12:53:44.1374594+01:00</Time>
     </Item>
-    <Item>
-      <Source>room1.png</Source>
-      <Name>room1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\room1.xnb</Output>
-      <Time>2016-02-03T12:59:00.6181036+01:00</Time>
-    </Item>
-    <Item>
-      <Source>room2.png</Source>
-      <Name>room2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\room2.xnb</Output>
-      <Time>2016-02-03T12:59:00.6191037+01:00</Time>
-    </Item>
-    <Item>
-      <Source>room3.png</Source>
-      <Name>room3</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\room3.xnb</Output>
-      <Time>2016-02-03T12:59:00.6201038+01:00</Time>
-    </Item>
-    <Item>
-      <Source>room4.png</Source>
-      <Name>room4</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\room4.xnb</Output>
-      <Time>2016-02-03T12:59:00.6211039+01:00</Time>
-    </Item>
-    <Item>
-      <Source>room5.png</Source>
-      <Name>room5</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\Content\room5.xnb</Output>
-      <Time>2016-02-03T12:59:00.622104+01:00</Time>
-    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{6F4A5D9B-8D70-40BE-BCC2-EAA07B633B81}</ContentProjectGUID>

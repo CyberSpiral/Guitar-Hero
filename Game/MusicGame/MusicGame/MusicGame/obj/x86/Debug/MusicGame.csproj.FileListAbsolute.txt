@@ -56,8 +56,3 @@ C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\
 C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\room3.xnb
 C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\room4.xnb
 C:\Users\kasper.boyefrick\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\room5.xnb
-C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\room1.xnb
-C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\room2.xnb
-C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\room3.xnb
-C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\room4.xnb
-C:\Users\su14erikh\Documents\GitHub\Guitar-Hero\Game\MusicGame\MusicGame\MusicGame\bin\x86\Debug\room5.xnb

@@ -57,7 +57,6 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FloorClass.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GenerateNewFloor.cs" />
     <Compile Include="MapDraw.cs" />
