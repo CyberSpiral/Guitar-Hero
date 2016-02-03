@@ -8,8 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MusicGame {
     class Monster : GameObject {
-        public Monster(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns, int totalFrames)
-            : base(texture, position, textureRows, textureColumns, totalFrames) {
+        public Monster(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns,
+            int totalFrames, int animationSpeed)
+            : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {
             this.speed = speed;
         }
 

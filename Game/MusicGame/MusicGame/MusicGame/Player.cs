@@ -9,8 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 namespace MusicGame {
     class Player : GameObject {
         public Weapon weapon { get; protected set; }
-        public Player(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns, int totalFrames) 
-            : base(texture, position, textureRows, textureColumns, totalFrames) {
+        public Player(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns
+            , int totalFrames, int animationSpeed) 
+            : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {
             this.speed = speed;
         }
         public void Update(float elapsed, KeyboardState currentKey, KeyboardState oldKey, MouseState mouse) {

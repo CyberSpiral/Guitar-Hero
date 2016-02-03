@@ -23,11 +23,12 @@ namespace MusicGame {
         protected int currentFrame;
         protected int totalFrames;
         protected float totalElapsed;
+        protected int animationSpeed;
 
         protected float rotation;
         protected float speed;
 
-        public GameObject(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames) {
+        public GameObject(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames, int animationSpeed) {
             Texture = texture;
             Position = position;
             totalElapsed = 0;
@@ -35,14 +36,15 @@ namespace MusicGame {
             Columns = columns;
             currentFrame = 0;
             this.totalFrames = totalFrames;
+            this.animationSpeed = animationSpeed;
         }
         public void Update(float elapsed) {
             totalElapsed += elapsed;
-            if (totalElapsed > 50) {
+            if (totalElapsed > animationSpeed) {
                 currentFrame++;
                 if (currentFrame == totalFrames)
                     currentFrame = 0;
-                totalElapsed -= 50;
+                totalElapsed -= animationSpeed;
             }
         }
         public virtual void Draw(SpriteBatch spriteBatch) {
