@@ -6,21 +6,16 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace MusicGame {
-    class World {
-        public List<Room> rooms { get; private set; }
-        public int[] currentRoomNumber;
-        public Room currentRoom { get; set; }
-        public Map currentMap { get; set; }
+    static class World {
+        static public int[] currentRoomNumber = new int[2] { 2, 4 };
+        static public Room CurrentRoom { get; set; } = new Room(new List<GameObject>(), new List<Rectangle>(), 0, new int[4] { 0, 0, 0, 0 });
+        static public Map CurrentMap { get; set; } = new Map();
+        static public List<Texture2D> ObjectTextures { get; set; } = new List<Texture2D>();
 
-        public World(List<Texture2D> gameObjects) {
-            rooms = new List<Room>();
-            currentMap = new Map();
-            rooms.Add(GenerateRoom(gameObjects,2,new int[] {1,1,1,1}));
-            currentRoom = rooms[0];
-            currentRoomNumber = new int[2];
+        static World() {
         }
 
-        public void NewFloor(Room[,] map)
+        public static void NewFloor(Room[,] map)
         {
             for (int x = 0; x < map.GetLength(0); x++)
             {
@@ -33,13 +28,13 @@ namespace MusicGame {
                         x = map.GetLength(0);
                         y = map.GetLength(1);
 
-                        currentRoom = map[currentRoomNumber[0], currentRoomNumber[1]];
+                        CurrentRoom = map[currentRoomNumber[0], currentRoomNumber[1]];
                     }
                 }
             }
         }
 
-        public void MoveBetweenRooms(Room[,] map, Direction direction)
+        public static void MoveBetweenRooms(Room[,] map, Direction direction)
         {
             if (direction == Direction.Up)
             {
@@ -57,10 +52,9 @@ namespace MusicGame {
             {
                 currentRoomNumber[0] += 1;
             }
-            currentRoom = map[currentRoomNumber[0], currentRoomNumber[1]];
         }
 
-        public Room GenerateRoom(List<Texture2D> gameObjects, int roomVersion, int[] roomDoors) {
+        public static Room GenerateRoom(List<Texture2D> gameObjects, int roomVersion, int[] roomDoors) {
             Random r = new Random();
             List<GameObject> objects = new List<GameObject>();
             List<Rectangle> protectedSpace = new List<Rectangle>();

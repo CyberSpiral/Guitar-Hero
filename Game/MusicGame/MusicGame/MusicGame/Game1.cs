@@ -21,7 +21,6 @@ namespace MusicGame {
         List<Texture2D> objects;
         Texture2D tex;
         Texture2D back;
-        World world;
 
 
 
@@ -58,11 +57,11 @@ namespace MusicGame {
             back = Content.Load<Texture2D>("back2");
             objects = new List<Texture2D>();
             objects.Add(Content.Load<Texture2D>("box"));
-            world = new World(objects);
 
             Room.Content = Content;
-            world.currentMap = new Map();
-            world.currentMap.Generate();
+            World.ObjectTextures = objects;
+            World.CurrentMap = new Map();
+            World.CurrentMap.Generate();
 
             // TODO: use this.Content to load your game content here
         }
@@ -86,21 +85,21 @@ namespace MusicGame {
                 this.Exit();
             if (Keyboard.GetState().IsKeyDown(Keys.M))
             {
-                world.currentMap.Generate();
-                world.NewFloor(world.currentMap.mapTileSet);
+                World.CurrentMap.Generate();
+                World.NewFloor(World.CurrentMap.mapTileSet);
 
-                foreach (Room room in world.currentMap.Rooms)
+                foreach (Room room in World.CurrentMap.Rooms)
                 {
-                    world.GenerateRoom(objects, room.roomVersion, room.roomVersionDoors);
+                    World.GenerateRoom(objects, room.roomVersion, room.roomVersionDoors);
                 }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.O))
             {
-                world.MoveBetweenRooms(world.currentMap.mapTileSet, Direction.Up);
+                World.MoveBetweenRooms(World.CurrentMap.mapTileSet, Direction.Up);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.L))
             {
-                world.MoveBetweenRooms(world.currentMap.mapTileSet, Direction.Down);
+                World.MoveBetweenRooms(World.CurrentMap.mapTileSet, Direction.Down);
             }
             
 
@@ -132,15 +131,15 @@ namespace MusicGame {
             p.Draw(spriteBatch);
             t.Draw(spriteBatch);
             if (Keyboard.GetState().IsKeyDown(Keys.G)) {
-                foreach (var obj in world.currentMap
-                    .mapTileSet[world.currentRoomNumber[0], world.currentRoomNumber[1]].Props) {
+                foreach (var obj in World.CurrentMap
+                    .mapTileSet[World.currentRoomNumber[0], World.currentRoomNumber[1]].Props) {
                     spriteBatch.Draw(tex, obj.CollisionBox, Color.Blue);
                 }
                 spriteBatch.Draw(tex, p.CollisionBox, Color.Blue);
                 spriteBatch.Draw(tex, t.CollisionBox, Color.Blue);
             }
 
-            world.currentMap.Draw(spriteBatch);
+            World.CurrentMap.Draw(spriteBatch);
 
             spriteBatch.End();
 

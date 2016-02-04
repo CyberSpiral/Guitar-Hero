@@ -53,9 +53,8 @@ namespace MusicGame
 
             for (int i = 0; i < roomsOnFloor.GetLength(0); i++)
             {
-                for (int j = 0; j < roomsOnFloor.GetLength(1); j++)
-                {
-                    roomsOnFloor[i, j] = new Room(new List<GameObject>(), new List<Rectangle>(), 0, emptyDoorArray);
+                for (int j = 0; j < roomsOnFloor.GetLength(1); j++) {
+                    roomsOnFloor[i, j] = World.GenerateRoom(World.ObjectTextures, 0, emptyDoorArray);
                 }
             }
 
@@ -90,7 +89,7 @@ namespace MusicGame
 
                     if (roomsOnFloor[positionOnFloor[0], positionOnFloor[1]].roomVersion == 0)
                     {
-                        roomsOnFloor[positionOnFloor[0], positionOnFloor[1]] = new Room(new List<GameObject>() ,new List<Rectangle>(), 2, emptyDoorArray);
+                        roomsOnFloor[positionOnFloor[0], positionOnFloor[1]] = World.GenerateRoom(World.ObjectTextures, 2, emptyDoorArray);
                         tmpNumOfRooms += 1;
                     }
 
@@ -102,7 +101,7 @@ namespace MusicGame
                     }
                 }
             }
-            roomsOnFloor[13, 13] = new Room(new List<GameObject>(), new List<Rectangle>(), 2, emptyDoorArray);
+            roomsOnFloor[13, 13] = World.GenerateRoom(World.ObjectTextures, 2, emptyDoorArray);
 
             //checking number of entrances for each room and where they are
             for (int x = 0; x < roomsOnFloor.GetLength(0); x++)
