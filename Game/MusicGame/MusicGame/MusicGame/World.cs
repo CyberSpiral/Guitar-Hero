@@ -10,9 +10,11 @@ namespace MusicGame {
         public List<Room> rooms { get; private set; }
         public int[] currentRoomNumber;
         public Room currentRoom { get; set; }
+        public Map currentMap { get; set; }
 
         public World(List<Texture2D> gameObjects) {
             rooms = new List<Room>();
+            currentMap = new Map();
             rooms.Add(GenerateRoom(gameObjects,2,new int[] {1,1,1,1}));
             currentRoom = rooms[0];
             currentRoomNumber = new int[2];

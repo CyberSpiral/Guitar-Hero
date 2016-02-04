@@ -23,8 +23,6 @@ namespace MusicGame {
         Texture2D back;
         World world;
 
-        Map drawMap;
-
 
 
         public Game1() {
@@ -63,8 +61,8 @@ namespace MusicGame {
             world = new World(objects);
 
             Room.Content = Content;
-            drawMap = new Map();
-            drawMap.Generate();
+            world.currentMap = new Map();
+            world.currentMap.Generate();
 
             // TODO: use this.Content to load your game content here
         }
@@ -88,21 +86,21 @@ namespace MusicGame {
                 this.Exit();
             if (Keyboard.GetState().IsKeyDown(Keys.M))
             {
-                drawMap.Generate();
-                world.NewFloor(drawMap.mapTileSet);
+                world.currentMap.Generate();
+                world.NewFloor(world.currentMap.mapTileSet);
 
-                foreach (Room room in drawMap.Rooms)
+                foreach (Room room in world.currentMap.Rooms)
                 {
                     world.GenerateRoom(objects, room.roomVersion, room.roomVersionDoors);
                 }
             }
             if (Keyboard.GetState().IsKeyDown(Keys.O))
             {
-                world.MoveBetweenRooms(drawMap.mapTileSet, Direction.Up);
+                world.MoveBetweenRooms(world.currentMap.mapTileSet, Direction.Up);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.L))
             {
-                world.MoveBetweenRooms(drawMap.mapTileSet, Direction.Down);
+                world.MoveBetweenRooms(world.currentMap.mapTileSet, Direction.Down);
             }
             
 
@@ -134,14 +132,15 @@ namespace MusicGame {
             p.Draw(spriteBatch);
             t.Draw(spriteBatch);
             if (Keyboard.GetState().IsKeyDown(Keys.G)) {
-                foreach (var obj in world.currentRoom.Props) {
+                foreach (var obj in world.currentMap
+                    .mapTileSet[world.currentRoomNumber[0], world.currentRoomNumber[1]].Props) {
                     spriteBatch.Draw(tex, obj.CollisionBox, Color.Blue);
                 }
                 spriteBatch.Draw(tex, p.CollisionBox, Color.Blue);
                 spriteBatch.Draw(tex, t.CollisionBox, Color.Blue);
             }
 
-            drawMap.Draw(spriteBatch);
+            world.currentMap.Draw(spriteBatch);
 
             spriteBatch.End();
 
