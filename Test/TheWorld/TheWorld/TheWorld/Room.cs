@@ -7,7 +7,7 @@ using System.Text;
 
 namespace TheWorld {
     class Room {
-        public Texture2D Background { get; set; }
+        public RoomGraphic RoomGraphic { get; set; }
 
         public List<GameObject> Props { get; protected set; }
         public List<Rectangle> ProtectedSpace { get; protected set; }
@@ -16,8 +16,8 @@ namespace TheWorld {
         public int YCoordinate { get; set; }
 
 
-        public Room(Texture2D background, List<Rectangle> protectedSpace, List<GameObject> objects) {
-            Background = background;
+        public Room(RoomGraphic roomGraphic, List<Rectangle> protectedSpace, List<GameObject> objects) {
+            RoomGraphic = roomGraphic;
             ProtectedSpace = protectedSpace;
             Props = objects;
         }
