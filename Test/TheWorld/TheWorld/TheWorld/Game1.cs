@@ -17,6 +17,11 @@ namespace TheWorld {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         List<Texture2D> background;
+        List<Texture2D> objects;
+        KeyboardState oldState;
+        Room CurrentRoom {
+            get { return World.Rooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1]]; }
+        }
 
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -46,10 +51,12 @@ namespace TheWorld {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             background = new List<Texture2D>();
+            objects = new List<Texture2D>();
             background.Add(Content.Load<Texture2D>("back1"));
             background.Add(Content.Load<Texture2D>("back2"));
+            objects.Add(Content.Load<Texture2D>("dot"));
             World.GenerateFloor();
-            World.GenerateRooms(background);
+            World.GenerateRooms(background, objects);
 
 
             // TODO: use this.Content to load your game content here
@@ -74,9 +81,22 @@ namespace TheWorld {
                 this.Exit();
             if(Keyboard.GetState().IsKeyDown(Keys.Q)) {
                 World.GenerateFloor();
-                World.GenerateRooms(background);
+                World.GenerateRooms(background,objects);
+            }
+            if(Keyboard.GetState().IsKeyDown(Keys.W) && oldState.IsKeyUp(Keys.W)) {
+                World.CurrentRoomLocationCode[1] -= 1;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.S) && oldState.IsKeyUp(Keys.S)) {
+                World.CurrentRoomLocationCode[1] += 1;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && oldState.IsKeyUp(Keys.D)) {
+                World.CurrentRoomLocationCode[0] += 1;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && oldState.IsKeyUp(Keys.A)) {
+                World.CurrentRoomLocationCode[0] -= 1;
             }
 
+            oldState = Keyboard.GetState();
             base.Update(gameTime);
         }
 
@@ -89,8 +109,19 @@ namespace TheWorld {
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(World.Rooms[World.CurrentRoom[0], World.CurrentRoom[1]].Background, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(CurrentRoom.Background, new Vector2(0, 0), Color.White);
+            for (int i = 0; i < 25; i++) {
+                for (int q = 0; q < 25; q++) {
+                    if (World.ActiveRooms[i,q] == true) {
+                        spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * i, 20 + 10 * q, 9, 9),Color.White);
+                    }
+                }
+            }
+            foreach (GameObject item in CurrentRoom.Props) {
+                item.Draw(spriteBatch);
+            }
 
+            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * CurrentRoom.XCoordinate, 20 + 10 * CurrentRoom.YCoordinate, 9, 9), Color.Red);
 
             spriteBatch.End();
 

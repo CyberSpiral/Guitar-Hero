@@ -9,11 +9,17 @@ namespace TheWorld {
     class Room {
         public Texture2D Background { get; set; }
 
-        public List<Object> Props { get; private set; }
-        public List<Rectangle> ProtectedSpace { get; private set; }
+        public List<GameObject> Props { get; protected set; }
+        public List<Rectangle> ProtectedSpace { get; protected set; }
 
-        public Room(Texture2D background) {
+        public int XCoordinate { get; set; }
+        public int YCoordinate { get; set; }
+
+
+        public Room(Texture2D background, List<Rectangle> protectedSpace, List<GameObject> objects) {
             Background = background;
+            ProtectedSpace = protectedSpace;
+            Props = objects;
         }
 
     }
