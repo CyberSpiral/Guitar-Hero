@@ -24,6 +24,7 @@ namespace TheWorld {
         }
 
         Player p;
+        Monster t;
 
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -61,6 +62,7 @@ namespace TheWorld {
             World.GenerateRooms(roomGraphic, objects);
 
             p = new Player(Content.Load<Texture2D>("character"), new Vector2(200, 200), 3, 1, 9, 9, 100);
+            t = new Monster(Content.Load<Texture2D>("zombiesheet2"), new Vector2(400, 400), 1, 1, 4, 4, 500);
 
             // TODO: use this.Content to load your game content here
         }
@@ -105,6 +107,7 @@ namespace TheWorld {
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             p.Update(elapsed, Keyboard.GetState(), Keyboard.GetState(), Mouse.GetState());
+            t.Update(elapsed, p.Position);
 
             base.Update(gameTime);
         }
@@ -131,6 +134,7 @@ namespace TheWorld {
             }
 
             p.Draw(spriteBatch);
+            t.Draw(spriteBatch);
 
 
             spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * CurrentRoom.XCoordinate, 20 + 10 * CurrentRoom.YCoordinate, 9, 9), Color.Red);
