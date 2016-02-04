@@ -45,7 +45,7 @@ namespace TheWorld {
                 }
             }
         }
-        public static void GenerateRooms(List<Texture2D> background, List<Texture2D> objectTextures) {
+        public static void GenerateRooms(List<RoomGraphic> graphic, List<Texture2D> objectTextures) {
             Rooms = new Room[25, 25];
             Random r = new Random();
             for (int i = 0; i < Rooms.GetLength(0); i++) {
@@ -80,7 +80,7 @@ namespace TheWorld {
                             objects.Add(temp);
                         }
                     }
-                    Rooms[i, q] = new Room(background[r.Next(background.Count)], protectedSpace, objects);
+                    Rooms[i, q] = new Room(graphic[r.Next(graphic.Count)], protectedSpace, objects);
                     Rooms[i, q].XCoordinate = i;
                     Rooms[i, q].YCoordinate = q;
 

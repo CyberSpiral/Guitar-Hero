@@ -16,7 +16,7 @@ namespace TheWorld {
     public class Game1 : Microsoft.Xna.Framework.Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        List<Texture2D> background;
+        List<RoomGraphic> roomGraphic;
         List<Texture2D> objects;
         KeyboardState oldState;
         Room CurrentRoom {
@@ -52,13 +52,13 @@ namespace TheWorld {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = new List<Texture2D>();
+            roomGraphic = new List<RoomGraphic>();
             objects = new List<Texture2D>();
-            background.Add(Content.Load<Texture2D>("back1"));
-            background.Add(Content.Load<Texture2D>("back2"));
             objects.Add(Content.Load<Texture2D>("dot"));
+            roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back1"), Content.Load<Texture2D>("background_overlay_number_1"), Content.Load<Texture2D>("door")));
+            roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back2"), Content.Load<Texture2D>("background_overlay_number_2"), Content.Load<Texture2D>("door2")));
             World.GenerateFloor();
-            World.GenerateRooms(background, objects);
+            World.GenerateRooms(roomGraphic, objects);
 
             p = new Player(Content.Load<Texture2D>("character"), new Vector2(200, 200), 3, 1, 9, 9, 100);
 
@@ -86,7 +86,7 @@ namespace TheWorld {
             }
             if(Keyboard.GetState().IsKeyDown(Keys.Q)) {
                 World.GenerateFloor();
-                World.GenerateRooms(background,objects);
+                World.GenerateRooms(roomGraphic,objects);
             }
             if(Keyboard.GetState().IsKeyDown(Keys.W) && oldState.IsKeyUp(Keys.W)) {
                 World.CurrentRoomLocationCode[1] -= 1;
@@ -118,7 +118,7 @@ namespace TheWorld {
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(CurrentRoom.Background, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(CurrentRoom.RoomGraphic.Background, new Vector2(0, 0), Color.White);
             for (int i = 0; i < 25; i++) {
                 for (int q = 0; q < 25; q++) {
                     if (World.ActiveRooms[i,q] == true) {
