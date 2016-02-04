@@ -68,4 +68,9 @@ namespace MusicGame {
         }
 
     }
+    class Door : GameObject {
+        public Door(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames, int animationSpeed) : base(texture, position, rows, columns, totalFrames, animationSpeed) {
+
+        }
+    }
 }
