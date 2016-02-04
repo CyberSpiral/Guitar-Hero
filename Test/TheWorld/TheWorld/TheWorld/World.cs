@@ -12,9 +12,11 @@ namespace TheWorld {
 
         public static Room[,] Rooms { get; set; }
         public static bool[,] ActiveRooms { get; set; }
+        public static int[] CurrentRoom { get; set; }
         
         public static void GenerateFloor() {
             ActiveRooms = new bool[25, 25];
+            CurrentRoom = new int[2];
             Random r = new Random();
             for (int i = 0; i < ActiveRooms.GetLength(0); i++) {
                 for (int q = 0; q < ActiveRooms.GetLength(1); q++) {
@@ -22,6 +24,8 @@ namespace TheWorld {
                         try {
                             if (ActiveRooms[i, q - 1] || ActiveRooms[i, q + 1] || ActiveRooms[i - 1, q] || ActiveRooms[i + 1, q]) {
                                 ActiveRooms[i, q] = true;
+                                CurrentRoom[0] = i;
+                                CurrentRoom[1] = q;
                                 break;
                             }
                         }

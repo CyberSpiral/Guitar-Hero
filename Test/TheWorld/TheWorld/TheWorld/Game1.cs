@@ -48,6 +48,8 @@ namespace TheWorld {
             background = new List<Texture2D>();
             background.Add(Content.Load<Texture2D>("back1"));
             background.Add(Content.Load<Texture2D>("back2"));
+            World.GenerateFloor();
+            World.GenerateRooms(background);
 
 
             // TODO: use this.Content to load your game content here
@@ -85,7 +87,12 @@ namespace TheWorld {
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            spriteBatch.Draw(World.Rooms[World.CurrentRoom[0], World.CurrentRoom[1]].Background, new Vector2(0, 0), Color.White);
+
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
