@@ -30,6 +30,8 @@ namespace MusicGame {
                         currentRoomNumber[1] = y;
                         x = map.GetLength(0);
                         y = map.GetLength(1);
+
+                        currentRoom = map[currentRoomNumber[0], currentRoomNumber[1]];
                     }
                 }
             }
@@ -53,6 +55,7 @@ namespace MusicGame {
             {
                 currentRoomNumber[0] += 1;
             }
+            currentRoom = map[currentRoomNumber[0], currentRoomNumber[1]];
         }
 
         public Room GenerateRoom(List<Texture2D> gameObjects, int roomVersion, int[] roomDoors) {
