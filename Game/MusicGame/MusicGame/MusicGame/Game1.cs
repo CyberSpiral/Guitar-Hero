@@ -96,6 +96,14 @@ namespace MusicGame {
                     world.GenerateRoom(objects, room.roomVersion, room.roomVersionDoors);
                 }
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.O))
+            {
+                world.MoveBetweenRooms(drawMap.mapTileSet, Direction.Up);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.L))
+            {
+                world.MoveBetweenRooms(drawMap.mapTileSet, Direction.Down);
+            }
             
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
