@@ -80,8 +80,10 @@ namespace TheWorld {
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime) {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 this.Exit();
+            }
             if(Keyboard.GetState().IsKeyDown(Keys.Q)) {
                 World.GenerateFloor();
                 World.GenerateRooms(background,objects);
