@@ -12,11 +12,11 @@ namespace TheWorld {
 
         public static Room[,] Rooms { get; set; }
         public static bool[,] ActiveRooms { get; set; }
-        public static int[] CurrentRoom { get; set; }
+        public static int[] CurrentRoomLocationCode { get; set; }
         
         public static void GenerateFloor() {
             ActiveRooms = new bool[25, 25];
-            CurrentRoom = new int[2];
+            CurrentRoomLocationCode = new int[2];
             Random r = new Random();
             for (int i = 0; i < 25; i++) {
                 for (int q = 0; q < 25; q++) {
@@ -32,8 +32,8 @@ namespace TheWorld {
                             try {
                                 if (ActiveRooms[i, q - 1] || ActiveRooms[i, q + 1] || ActiveRooms[i - 1, q] || ActiveRooms[i + 1, q]) {
                                     ActiveRooms[i, q] = true;
-                                    CurrentRoom[0] = i;
-                                    CurrentRoom[1] = q;
+                                    CurrentRoomLocationCode[0] = i;
+                                    CurrentRoomLocationCode[1] = q;
                                     break;
                                 }
                             }
@@ -45,12 +45,12 @@ namespace TheWorld {
                 }
             }
         }
-        public static void GenerateRooms(List<Texture2D> background) {
+        public static void GenerateRooms(List<Texture2D> background, List<Texture2D> objectTextures) {
             Rooms = new Room[25, 25];
             Random r = new Random();
             for (int i = 0; i < Rooms.GetLength(0); i++) {
                 for (int q = 0; q < Rooms.GetLength(1); q++) {
-                    List<Object> objects = new List<Object>();
+                    List<GameObject> objects = new List<GameObject>();
                     List<Rectangle> protectedSpace = new List<Rectangle>();
                     switch (r.Next(3)) {
                         case 0:
@@ -66,7 +66,24 @@ namespace TheWorld {
                             protectedSpace.Add(new Rectangle(476, 0, 136, 612));
                             break;
                     }
-                    Rooms[i, q] = new Room(background[r.Next(background.Count)]);
+
+                    for (int o = 0; o < 50; o++) {
+                        Texture2D tempTex = objectTextures[r.Next(objectTextures.Count)];
+                        GameObject temp = new GameObject(tempTex, new Vector2(r.Next(15) * 68 + 34, r.Next(9) * 68 + 34), 1, 1, 1, 10000);
+                        bool tempBool = false;
+                        foreach (var rec in protectedSpace) {
+                            if (rec.Intersects(temp.CollisionBox)) {
+                                tempBool = true;
+                            }
+                        }
+                        if (!tempBool) {
+                            objects.Add(temp);
+                        }
+                    }
+                    Rooms[i, q] = new Room(background[r.Next(background.Count)], protectedSpace, objects);
+                    Rooms[i, q].XCoordinate = i;
+                    Rooms[i, q].YCoordinate = q;
+
                 }
             }
         }
