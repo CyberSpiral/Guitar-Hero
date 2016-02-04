@@ -9,10 +9,12 @@ using Microsoft.Xna.Framework.Graphics;
 namespace MusicGame {
     class Player : GameObject {
         public Weapon Weapon { get; set; }
+        protected int storedAnimationSpeed;
         public Player(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns
             , int totalFrames, int animationSpeed) 
             : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {
             this.speed = speed;
+            storedAnimationSpeed = animationSpeed;
         }
         public void Update(float elapsed, KeyboardState currentKey, KeyboardState oldKey, MouseState mouse) {
             base.Update(elapsed);
@@ -42,8 +44,13 @@ namespace MusicGame {
             if (currentKey.IsKeyDown(Keys.S) && currentKey.IsKeyDown(Keys.A))
                 Velocity = new Vector2((float)Math.Cos(rotation + MathHelper.ToRadians(-135)), (float)Math.Sin(rotation + MathHelper.ToRadians(-135)));
 
-            if (currentKey.IsKeyUp(Keys.W) && currentKey.IsKeyUp(Keys.A) && currentKey.IsKeyUp(Keys.S) && currentKey.IsKeyUp(Keys.D))
+            if (currentKey.IsKeyUp(Keys.W) && currentKey.IsKeyUp(Keys.A) && currentKey.IsKeyUp(Keys.S) && currentKey.IsKeyUp(Keys.D)) {
+                animationSpeed = int.MaxValue;
                 Velocity = Vector2.Zero;
+            }
+            else {
+                animationSpeed = storedAnimationSpeed;
+            }
 
             if (Velocity != null)
                 Velocity.Normalize();
