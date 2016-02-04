@@ -88,16 +88,16 @@ namespace TheWorld {
                 World.GenerateFloor();
                 World.GenerateRooms(background,objects);
             }
-            if(Keyboard.GetState().IsKeyDown(Keys.W) && oldState.IsKeyUp(Keys.W)) {
+            if(Keyboard.GetState().IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I)) {
                 World.CurrentRoomLocationCode[1] -= 1;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.S) && oldState.IsKeyUp(Keys.S)) {
+            if (Keyboard.GetState().IsKeyDown(Keys.K) && oldState.IsKeyUp(Keys.K)) {
                 World.CurrentRoomLocationCode[1] += 1;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && oldState.IsKeyUp(Keys.D)) {
+            if (Keyboard.GetState().IsKeyDown(Keys.L) && oldState.IsKeyUp(Keys.L)) {
                 World.CurrentRoomLocationCode[0] += 1;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.A) && oldState.IsKeyUp(Keys.A)) {
+            if (Keyboard.GetState().IsKeyDown(Keys.J) && oldState.IsKeyUp(Keys.J)) {
                 World.CurrentRoomLocationCode[0] -= 1;
             }
 
@@ -126,8 +126,12 @@ namespace TheWorld {
                     }
                 }
             }
-            foreach (GameObject item in CurrentRoom.Props) {
-                item.Draw(spriteBatch);
+            if (Keyboard.GetState().IsKeyDown(Keys.E))
+            {
+                foreach (GameObject item in CurrentRoom.Props)
+                {
+                    item.Draw(spriteBatch);
+                }
             }
 
             p.Draw(spriteBatch);
