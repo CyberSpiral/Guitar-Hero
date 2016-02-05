@@ -18,13 +18,13 @@ namespace TheWorld {
         SpriteBatch spriteBatch;
         List<RoomGraphic> roomGraphic;
         List<Texture2D> objects;
+        List<Texture2D> monsters;
         KeyboardState oldState;
         Room CurrentRoom {
             get { return World.Rooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1]]; }
         }
 
         Player p;
-        SpitZombie t;
 
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -53,17 +53,20 @@ namespace TheWorld {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Static.s = Content.Load<SpriteFont>("text");
+            monsters = new List<Texture2D>();
+            monsters.Add(Content.Load<Texture2D>("zombiesheet2"));
+            monsters.Add(Content.Load<Texture2D>("zombiesheet2"));
             roomGraphic = new List<RoomGraphic>();
             objects = new List<Texture2D>();
             objects.Add(Content.Load<Texture2D>("dot"));
             roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back1"), Content.Load<Texture2D>("background_overlay_number_1"), Content.Load<Texture2D>("door")));
             roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back2"), Content.Load<Texture2D>("background_overlay_number_2"), Content.Load<Texture2D>("door2")));
             World.GenerateFloor();
-            World.GenerateRooms(roomGraphic, objects);
+            World.GenerateRooms(roomGraphic, objects, monsters);
 
             p = new Player(Content.Load<Texture2D>("character"), new Vector2(200, 200), 5, 1, 9, 9, 100);
-            t = new SpitZombie(Content.Load<Texture2D>("zombiesheet2"), new Vector2(400, 400), 5, 1, 4, 4, 500);
-
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -88,7 +91,7 @@ namespace TheWorld {
             }
             if(Keyboard.GetState().IsKeyDown(Keys.Q)) {
                 World.GenerateFloor();
-                World.GenerateRooms(roomGraphic,objects);
+                World.GenerateRooms(roomGraphic,objects, monsters);
             }
             if(Keyboard.GetState().IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I)) {
                 World.CurrentRoomLocationCode[1] -= 1;
@@ -107,7 +110,8 @@ namespace TheWorld {
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             p.Update(elapsed, Keyboard.GetState(), Keyboard.GetState(), Mouse.GetState());
-            t.Update(elapsed, p.Position);
+            CurrentRoom.Zombies.ForEach(m => m.Update(elapsed, p.Position));
+            CurrentRoom.SpitZombies.ForEach(m => m.Update(elapsed, p.Position));
 
             base.Update(gameTime);
         }
@@ -138,8 +142,8 @@ namespace TheWorld {
             }
 
             p.Draw(spriteBatch);
-            t.Draw(spriteBatch);
-
+            CurrentRoom.Zombies.ForEach(m => m.Draw(spriteBatch));
+            CurrentRoom.SpitZombies.ForEach(m => m.Draw(spriteBatch));
 
             spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * CurrentRoom.XCoordinate, 20 + 10 * CurrentRoom.YCoordinate, 9, 9), Color.Red);
 

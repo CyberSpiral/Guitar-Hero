@@ -7,14 +7,24 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace TheWorld {
-    class Zombie : GameObject {
+    class Monster : GameObject {
+        public Monster(Texture2D texture, Vector2 position, int textureRows, int textureColumns,
+            int totalFrames, int animationSpeed)
+            : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {
+        }
+        public void Update(float elapsed, Vector2 playerPos) {
+            base.Update(elapsed);
+        }
+    }
+
+    class Zombie : Monster {
         public Zombie(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns,
             int totalFrames, int animationSpeed)
             : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {
             this.speed = speed;
         }
 
-        public void Update(float elapsed, Vector2 playerPos) {
+        new public void Update(float elapsed, Vector2 playerPos) {
             base.Update(elapsed);
             Vector2 direction = playerPos - Position;
             if (direction != Vector2.Zero)
@@ -28,7 +38,8 @@ namespace TheWorld {
 
 
     }
-    class SpitZombie : GameObject {
+
+    class SpitZombie : Monster {
 
         protected Vector2 direction;
         protected Vector2 randomPos;
@@ -39,16 +50,15 @@ namespace TheWorld {
             int totalFrames, int animationSpeed)
             : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {
             this.speed = speed;
-
-            Random r = new Random();
-            direction = new Vector2(r.Next(World.RoomWidth), r.Next(World.RoomHeight));
+            
+            direction = new Vector2(Static.GetNumber(World.RoomWidth), Static.GetNumber(World.RoomHeight));
             if (direction != Vector2.Zero)
                 direction.Normalize();
             rotation = (float)Math.Atan2(direction.Y, direction.X);
 
         }
 
-        public void Update(float elapsed, Vector2 playerPos) {
+        new public void Update(float elapsed, Vector2 playerPos) {
             base.Update(elapsed);
             spitElapsed += elapsed;
             if (spitElapsed > 1000) {
@@ -60,9 +70,8 @@ namespace TheWorld {
                     facingTowards = true;
                 }
                 else if (facingTowards) {
-                    Random r = new Random();
                     do {
-                        randomPos = new Vector2(r.Next(World.RoomWidth), r.Next(World.RoomHeight));
+                        randomPos = new Vector2(Static.GetNumber(World.RoomWidth), Static.GetNumber(World.RoomHeight));
                     } while (Vector2.Distance(randomPos, playerPos) < 400);
                     direction = randomPos - Position;
                     if (direction != Vector2.Zero)
