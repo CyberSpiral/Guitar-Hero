@@ -10,6 +10,7 @@ namespace TheWorld {
         public const int RoomWidth = 1088;
         public const int RoomHeight = 612;
 
+
         public static Room[,] Rooms { get; set; }
         public static bool[,] ActiveRooms { get; set; }
         public static int[] CurrentRoomLocationCode { get; set; }

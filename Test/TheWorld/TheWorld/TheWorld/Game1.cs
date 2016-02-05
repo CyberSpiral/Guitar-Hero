@@ -24,6 +24,7 @@ namespace TheWorld {
             get { return World.Rooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1]]; }
         }
 
+        List<Door> doors;
         Player p;
 
         public Game1() {
@@ -65,8 +66,15 @@ namespace TheWorld {
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects, monsters);
 
+            doors = new List<Door>();
+
+            doors.Add(new Door(roomGraphic[1].Door, new Vector2(38/2, World.RoomHeight / 2), 1, 1, 1, 0));
+            doors.Add(new Door(roomGraphic[1].Door, new Vector2(World.RoomWidth - (38 / 2), World.RoomHeight / 2), 1, 1, 1, 0));
+            doors.Add(new Door(roomGraphic[1].Door, new Vector2((World.RoomWidth) / 2, 38 / 2), 1, 1, 1, 0));
+            doors.Add(new Door(roomGraphic[1].Door, new Vector2((World.RoomWidth) / 2, World.RoomHeight - (38 / 2)), 1, 1, 1, 0));
+
             p = new Player(Content.Load<Texture2D>("character"), new Vector2(200, 200), 5, 1, 9, 9, 100);
-            
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -112,6 +120,10 @@ namespace TheWorld {
             p.Update(elapsed, Keyboard.GetState(), Keyboard.GetState(), Mouse.GetState());
             CurrentRoom.Zombies.ForEach(m => m.Update(elapsed, p.Position));
             CurrentRoom.SpitZombies.ForEach(m => m.Update(elapsed, p.Position));
+            foreach (Door d in doors)
+            {
+                p.Position = d.Update(elapsed,p.CollisionBox, p.Position);
+            }
 
             base.Update(gameTime);
         }
@@ -133,6 +145,14 @@ namespace TheWorld {
                     }
                 }
             }
+            for (int i = 0; i < 4; i++)
+            {
+                if (doors[i].active)
+                {
+                    doors[i].Draw(spriteBatch);
+                }
+            }
+
             if (Keyboard.GetState().IsKeyDown(Keys.E))
             {
                 foreach (GameObject item in CurrentRoom.Props)
