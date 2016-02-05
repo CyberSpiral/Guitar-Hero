@@ -52,7 +52,7 @@ namespace MusicGame {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             p = new Player(Content.Load<Texture2D>("character"), new Vector2(200, 200), 3, 1, 9, 9, 100);
-            t = new Monster(Content.Load<Texture2D>("zombiesheet2"), new Vector2(400, 400), 1, 1, 4, 4, 500);
+            t = new Monster(Content.Load<Texture2D>("zombiesheet2"), new Vector2(400, 400), 5, 1, 4, 4, 500);
             tex = Content.Load<Texture2D>("dot");
             back = Content.Load<Texture2D>("back2");
             objects = new List<Texture2D>();

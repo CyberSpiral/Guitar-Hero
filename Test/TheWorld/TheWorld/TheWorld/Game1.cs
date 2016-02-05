@@ -24,7 +24,7 @@ namespace TheWorld {
         }
 
         Player p;
-        Zombie t;
+        SpitZombie t;
 
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -61,8 +61,8 @@ namespace TheWorld {
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects);
 
-            p = new Player(Content.Load<Texture2D>("character"), new Vector2(200, 200), 3, 1, 9, 9, 100);
-            t = new Zombie(Content.Load<Texture2D>("zombiesheet2"), new Vector2(400, 400), 1, 1, 4, 4, 500);
+            p = new Player(Content.Load<Texture2D>("character"), new Vector2(200, 200), 5, 1, 9, 9, 100);
+            t = new SpitZombie(Content.Load<Texture2D>("zombiesheet2"), new Vector2(400, 400), 5, 1, 4, 4, 500);
 
             // TODO: use this.Content to load your game content here
         }
