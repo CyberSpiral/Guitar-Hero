@@ -23,6 +23,7 @@ namespace TheWorld {
             get { return World.Rooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1]]; }
         }
 
+        List<Door> doors;
         Player p;
         SpitZombie t;
 
@@ -60,6 +61,12 @@ namespace TheWorld {
             roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back2"), Content.Load<Texture2D>("background_overlay_number_2"), Content.Load<Texture2D>("door2")));
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects);
+
+
+            doors.Add(new Door(roomGraphic[1].Door, new Vector2(38, (World.RoomHeight - 72) / 2), 1, 1, 1, 0));
+            doors.Add(new Door(roomGraphic[1].Door, new Vector2(World.RoomWidth - 38 * 2, (World.RoomHeight - 72) / 2), 1, 1, 1, 0));
+            doors.Add(new Door(roomGraphic[1].Door, new Vector2((World.RoomWidth - 38) / 2, 72), 1, 1, 1, 0));
+            doors.Add(new Door(roomGraphic[1].Door, new Vector2((World.RoomWidth - 38) / 2, World.RoomHeight - 72 * 2), 1, 1, 1, 0));
 
             p = new Player(Content.Load<Texture2D>("character"), new Vector2(200, 200), 5, 1, 9, 9, 100);
             t = new SpitZombie(Content.Load<Texture2D>("zombiesheet2"), new Vector2(400, 400), 5, 1, 4, 4, 500);
@@ -108,6 +115,10 @@ namespace TheWorld {
 
             p.Update(elapsed, Keyboard.GetState(), Keyboard.GetState(), Mouse.GetState());
             t.Update(elapsed, p.Position);
+            foreach (Door d in doors)
+            {
+                d.Update(elapsed,p.Position);
+            }
 
             base.Update(gameTime);
         }
@@ -129,6 +140,11 @@ namespace TheWorld {
                     }
                 }
             }
+            foreach (Door d in doors)
+            {
+                d.Draw(spriteBatch);
+            }
+
             if (Keyboard.GetState().IsKeyDown(Keys.E))
             {
                 foreach (GameObject item in CurrentRoom.Props)
