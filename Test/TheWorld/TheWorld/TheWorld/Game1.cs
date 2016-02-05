@@ -63,16 +63,11 @@ namespace TheWorld {
             World.GenerateRooms(roomGraphic, objects);
 
             doors = new List<Door>();
-            /*
-            doors.Add(new Door(roomGraphic[1].Door, new Vector2(38/2, (World.RoomHeight - 72) / 2), 1, 1, 1, 0));
-            doors.Add(new Door(roomGraphic[1].Door, new Vector2(World.RoomWidth - (38 / 2), (World.RoomHeight - 72) / 2), 1, 1, 1, 0));
-            doors.Add(new Door(roomGraphic[1].Door, new Vector2((World.RoomWidth - (38 / 2)) / 2, 38/2), 1, 1, 1, 0));
-            doors.Add(new Door(roomGraphic[1].Door, new Vector2((World.RoomWidth - (38 / 2)) / 2, World.RoomHeight - (38/2)), 1, 1, 1, 0));
-            */
-            doors.Add(new Door(roomGraphic[1].Door, new Vector2(68 / 2, World.RoomHeight / 2), 1, 1, 1, 0));
-            doors.Add(new Door(roomGraphic[1].Door, new Vector2(World.RoomWidth - (68 / 2), World.RoomHeight / 2), 1, 1, 1, 0));
-            doors.Add(new Door(roomGraphic[1].Door, new Vector2((World.RoomWidth) / 2, 68 / 2), 1, 1, 1, 0));
-            doors.Add(new Door(roomGraphic[1].Door, new Vector2((World.RoomWidth) / 2, World.RoomHeight - (68 / 2)), 1, 1, 1, 0));
+
+            doors.Add(new Door(roomGraphic[1].Door, new Vector2(38/2, World.RoomHeight / 2), 1, 1, 1, 0));
+            doors.Add(new Door(roomGraphic[1].Door, new Vector2(World.RoomWidth - (38 / 2), World.RoomHeight / 2), 1, 1, 1, 0));
+            doors.Add(new Door(roomGraphic[1].Door, new Vector2((World.RoomWidth) / 2, 38 / 2), 1, 1, 1, 0));
+            doors.Add(new Door(roomGraphic[1].Door, new Vector2((World.RoomWidth) / 2, World.RoomHeight - (38 / 2)), 1, 1, 1, 0));
 
             p = new Player(Content.Load<Texture2D>("character"), new Vector2(200, 200), 5, 1, 9, 9, 100);
             t = new SpitZombie(Content.Load<Texture2D>("zombiesheet2"), new Vector2(400, 400), 5, 1, 4, 4, 500);

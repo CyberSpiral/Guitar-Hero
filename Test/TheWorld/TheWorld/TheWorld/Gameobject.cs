@@ -78,7 +78,6 @@ namespace TheWorld
     }
     class Door : GameObject
     {
-
         private enum Direction : int
         {
             Up, Left, Down, Right
