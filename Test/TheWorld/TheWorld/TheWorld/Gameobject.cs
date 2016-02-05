@@ -69,7 +69,36 @@ namespace TheWorld {
 
     }
     class Door : GameObject {
-        public Door(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames, int animationSpeed) : base(texture, position, rows, columns, totalFrames, animationSpeed) {
+
+        private enum Direction : int
+        {
+            Up, Left, Down, Right
+        }
+        private Direction direction;
+
+        public Door(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames, int animationSpeed) 
+            : base(texture, position, rows, columns, totalFrames, animationSpeed) {
+
+            if (position.X < World.RoomWidth / 16)
+            {
+                direction = Direction.Left;
+                rotation = (float)Math.PI;
+            }
+            else if (position.X > World.RoomWidth - World.RoomWidth / 16)
+            {
+                direction = Direction.Right;
+                rotation = (float)Math.PI * 0;
+            }
+            else if (position.Y < World.RoomHeight / 9)
+            {
+                direction = Direction.Up;
+                rotation = (float)Math.PI / 2;
+            }
+            else if (position.Y > World.RoomHeight - World.RoomHeight / 9)
+            {
+                direction = Direction.Down;
+                rotation = (float)Math.PI * 1.5f;
+            }
 
         }
     }
