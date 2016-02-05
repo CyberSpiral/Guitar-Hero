@@ -62,7 +62,7 @@ namespace TheWorld {
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects);
 
-
+            doors = new List<Door>();
             doors.Add(new Door(roomGraphic[1].Door, new Vector2(38, (World.RoomHeight - 72) / 2), 1, 1, 1, 0));
             doors.Add(new Door(roomGraphic[1].Door, new Vector2(World.RoomWidth - 38 * 2, (World.RoomHeight - 72) / 2), 1, 1, 1, 0));
             doors.Add(new Door(roomGraphic[1].Door, new Vector2((World.RoomWidth - 38) / 2, 72), 1, 1, 1, 0));
@@ -117,7 +117,7 @@ namespace TheWorld {
             t.Update(elapsed, p.Position);
             foreach (Door d in doors)
             {
-                d.Update(elapsed,p.Position);
+                p.Position = d.Update(elapsed,p.CollisionBox, p.Position);
             }
 
             base.Update(gameTime);
@@ -140,9 +140,12 @@ namespace TheWorld {
                     }
                 }
             }
-            foreach (Door d in doors)
+            for (int i = 0; i < 4; i++)
             {
-                d.Draw(spriteBatch);
+                if (doors[i].active)
+                {
+                    doors[i].Draw(spriteBatch);
+                }
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.E))

@@ -84,38 +84,38 @@ namespace TheWorld
             Up, Left, Down, Right
         }
         private Direction direction;
-        private bool active;
+        public bool active;
 
         public Door(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames, int animationSpeed)
             : base(texture, position, rows, columns, totalFrames, animationSpeed)
         {
 
-            if (position.X < World.RoomWidth / 16)
+            if (position.X < World.RoomWidth / 3)
             {
                 direction = Direction.Left;
-                rotation = (float)Math.PI;
-            }
-            else if (position.X > World.RoomWidth - World.RoomWidth / 16)
-            {
-                direction = Direction.Right;
-                rotation = (float)Math.PI * 0;
-            }
-            else if (position.Y < World.RoomHeight / 9)
-            {
-                direction = Direction.Up;
                 rotation = (float)Math.PI / 2;
             }
-            else if (position.Y > World.RoomHeight - World.RoomHeight / 9)
+            else if (position.X > World.RoomWidth - (World.RoomWidth / 3))
+            {
+                direction = Direction.Right;
+                rotation = (float)Math.PI * 1.5f;
+            }
+            else if (position.Y < World.RoomHeight / 3)
+            {
+                direction = Direction.Up;
+                rotation = (float)Math.PI;
+            }
+            else if (position.Y > World.RoomHeight - (World.RoomHeight / 3))
             {
                 direction = Direction.Down;
-                rotation = (float)Math.PI * 1.5f;
+                rotation = (float)Math.PI * 0;
             }
             ActivateDoors(position);
         }
 
         public void ActivateDoors(Vector2 position)
         {
-            if (position.X < World.RoomWidth / 16)
+            if (position.X < World.RoomWidth / 3)
             {
                 if (World.ActiveRooms[World.CurrentRoomLocationCode[0]-1,World.CurrentRoomLocationCode[1]])
                 {
@@ -126,7 +126,7 @@ namespace TheWorld
                     active = false;
                 }
             }
-            else if (position.X > World.RoomWidth - World.RoomWidth / 16)
+            else if (position.X > World.RoomWidth - (World.RoomWidth / 3))
             {
                 if (World.ActiveRooms[World.CurrentRoomLocationCode[0]+1, World.CurrentRoomLocationCode[1]])
                 {
@@ -137,7 +137,7 @@ namespace TheWorld
                     active = false;
                 }
             }
-            else if (position.Y < World.RoomHeight / 9)
+            else if (position.Y < World.RoomHeight / 2)
             {
                 if (World.ActiveRooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1]-1])
                 {
@@ -148,7 +148,7 @@ namespace TheWorld
                     active = false;
                 }
             }
-            else if (position.Y > World.RoomHeight - World.RoomHeight / 9)
+            else if (position.Y > World.RoomHeight - (World.RoomHeight / 2))
             {
                 if (World.ActiveRooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1]+1])
                 {
@@ -161,13 +161,12 @@ namespace TheWorld
             }
         }
 
-        public void Update(float elapsed, Vector2 playerPos)
+        public Vector2 Update(float elapsed, Rectangle playerCollisionBox, Vector2 playerPosition)
         {
             base.Update(elapsed);
             if (active)
             {
-                if (playerPos.X < World.RoomWidth / 16 || playerPos.X > World.RoomWidth - World.RoomWidth / 16
-                    || playerPos.Y < World.RoomHeight / 9 || playerPos.Y > World.RoomHeight - World.RoomHeight / 9)
+                if (CollisionBox.Intersects(playerCollisionBox))
                 {
                     if (direction == Direction.Up)
                     {
@@ -185,9 +184,12 @@ namespace TheWorld
                     {
                         World.CurrentRoomLocationCode[0] += 1;
                     }
-                    ActivateDoors(Position);
+                    
+                    playerPosition = new Vector2(350, 350);
                 }
             }
+            ActivateDoors(Position);
+            return playerPosition;
         }
     }
 }
