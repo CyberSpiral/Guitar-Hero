@@ -54,8 +54,9 @@ namespace TheWorld {
                     }
                 }
             }
-
-            for (int i = 0; i < ActiveRooms.GetLength(0); i++)
+            while (0 == LastRoom[0] || 0 == LastRoom[1])
+            {
+                for (int i = 0; i < ActiveRooms.GetLength(0); i++)
                 {
                     for (int j = 0; j < ActiveRooms.GetLength(1); j++)
                     {
@@ -69,6 +70,7 @@ namespace TheWorld {
                         }
                     }
                 }
+            }
         }
         public static void GenerateRooms(List<RoomGraphic> graphic, List<Texture2D> objectTextures, List<Texture2D> monsterTextures) {
             Rooms = new Room[25, 25];
