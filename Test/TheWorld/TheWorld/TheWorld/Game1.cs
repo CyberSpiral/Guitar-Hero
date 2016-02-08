@@ -120,6 +120,7 @@ namespace TheWorld {
                 {
                     World.GenerateFloor();
                     World.GenerateRooms(roomGraphic, objects, monsters);
+                    World.CurrentLevel += 1;
                 }
             }
 
