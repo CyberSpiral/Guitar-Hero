@@ -118,6 +118,11 @@ namespace TheWorld {
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             p.Update(elapsed, Keyboard.GetState(), oldState, Mouse.GetState());
+            p.Position = p.Position.X < 60 ? p.OldPos : p.Position;
+            p.Position = p.Position.X > World.RoomWidth - 60 ? p.OldPos : p.Position;
+            p.Position = p.Position.Y < 60 ? p.OldPos : p.Position;
+            p.Position = p.Position.Y > World.RoomHeight - 60 ? p.OldPos : p.Position;
+
             CurrentRoom.Zombies.ForEach(m => m.Update(elapsed, p.Position));
             CurrentRoom.SpitZombies.ForEach(m => m.Update(elapsed, p.Position));
             CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position));

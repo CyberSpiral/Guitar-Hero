@@ -132,47 +132,19 @@ namespace TheWorld
         {
             if (position.X < World.RoomWidth / 3)
             {
-                if (World.ActiveRooms[World.CurrentRoomLocationCode[0]-1,World.CurrentRoomLocationCode[1]])
-                {
-                    active = true;
-                }
-                else
-                {
-                    active = false;
-                }
+                active = World.ActiveRooms[World.CurrentRoomLocationCode[0] - 1, World.CurrentRoomLocationCode[1]] ? true : false;
             }
             else if (position.X > World.RoomWidth - (World.RoomWidth / 3))
             {
-                if (World.ActiveRooms[World.CurrentRoomLocationCode[0]+1, World.CurrentRoomLocationCode[1]])
-                {
-                    active = true;
-                }
-                else
-                {
-                    active = false;
-                }
+                active = World.ActiveRooms[World.CurrentRoomLocationCode[0] + 1, World.CurrentRoomLocationCode[1]] ? true : false;
             }
             else if (position.Y < World.RoomHeight / 2)
             {
-                if (World.ActiveRooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1]-1])
-                {
-                    active = true;
-                }
-                else
-                {
-                    active = false;
-                }
+                active = World.ActiveRooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1] - 1] ? true : false;
             }
             else if (position.Y > World.RoomHeight - (World.RoomHeight / 2))
             {
-                if (World.ActiveRooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1]+1])
-                {
-                    active = true;
-                }
-                else
-                {
-                    active = false;
-                }
+                active = World.ActiveRooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1] + 1] ? true : false;
             }
         }
 

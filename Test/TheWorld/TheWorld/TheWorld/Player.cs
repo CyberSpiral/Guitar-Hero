@@ -55,13 +55,9 @@ namespace TheWorld
                 Velocity = new Vector2((float)Math.Cos(rotation + MathHelper.ToRadians(-135)), (float)Math.Sin(rotation + MathHelper.ToRadians(-135)));
 
             if (currentKey.IsKeyUp(Keys.W) && currentKey.IsKeyUp(Keys.A) && currentKey.IsKeyUp(Keys.S) && currentKey.IsKeyUp(Keys.D))
-            {
-                animationSpeed = int.MaxValue;
                 Velocity = Vector2.Zero;
-            }
-            else {
-                animationSpeed = storedAnimationSpeed;
-            }
+            animationSpeed = currentKey.IsKeyUp(Keys.W) && currentKey.IsKeyUp(Keys.A) && currentKey.IsKeyUp(Keys.S) && currentKey.IsKeyUp(Keys.D)
+                ? int.MaxValue : storedAnimationSpeed;
 
             if (Velocity != null)
                 Velocity.Normalize();

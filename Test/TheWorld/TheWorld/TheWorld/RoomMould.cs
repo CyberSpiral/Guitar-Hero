@@ -25,11 +25,7 @@ namespace TheWorld {
                             Texture2D tempTex = objectTextures[Static.GetNumber(objectTextures.Count)];
                             GameObject temp = new GameObject(tempTex, new Vector2(Static.GetNumber(14) * 68 + 102, Static.GetNumber(8) * 68 + 102));
                             bool tempBool = false;
-                            foreach (var rec in ProtectedSpace) {
-                                if (rec.Intersects(temp.CollisionBox)) {
-                                    tempBool = true;
-                                }
-                            }
+                            ProtectedSpace.ForEach(x => tempBool = x.Intersects(temp.CollisionBox));
                             if (!tempBool) {
                                 Props.Add(temp);
                             }
@@ -67,11 +63,7 @@ namespace TheWorld {
                             Texture2D tempTex = objectTextures[Static.GetNumber(objectTextures.Count)];
                             GameObject temp = new GameObject(tempTex, new Vector2(Static.GetNumber(14) * 68 + 102, Static.GetNumber(8) * 68 + 102));
                             bool tempBool = false;
-                            foreach (var rec in ProtectedSpace) {
-                                if (rec.Intersects(temp.CollisionBox)) {
-                                    tempBool = true;
-                                }
-                            }
+                            ProtectedSpace.ForEach(x => tempBool = x.Intersects(temp.CollisionBox));
                             if (!tempBool) {
                                 Props.Add(temp);
                             }
@@ -109,11 +101,7 @@ namespace TheWorld {
                             Texture2D tempTex = objectTextures[Static.GetNumber(objectTextures.Count)];
                             GameObject temp = new GameObject(tempTex, new Vector2(Static.GetNumber(14) * 68 + 102, Static.GetNumber(8) * 68 + 102));
                             bool tempBool = false;
-                            foreach (var rec in ProtectedSpace) {
-                                if (rec.Intersects(temp.CollisionBox)) {
-                                    tempBool = true;
-                                }
-                            }
+                            ProtectedSpace.ForEach(x => tempBool = x.Intersects(temp.CollisionBox));
                             if (!tempBool) {
                                 Props.Add(temp);
                             }
