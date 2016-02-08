@@ -105,6 +105,17 @@ namespace TheWorld {
                 World.CurrentRoomLocationCode[0] -= 1;
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                if (World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1])
+                {
+                    World.GenerateFloor();
+                    World.GenerateRooms(roomGraphic, objects, monsters);
+                    World.CurrentLevel += 1;
+                }
+            }
+
+            oldState = Keyboard.GetState();
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             p.Update(elapsed, Keyboard.GetState(), oldState, Mouse.GetState());
@@ -139,7 +150,7 @@ namespace TheWorld {
                 for (int q = 0; q < 25; q++) {
                     if (World.ActiveRooms[i, q] == true) {
                         spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * i, 20 + 10 * q, 9, 9), Color.White);
-                    }
+            }
                 }
             }
             CurrentRoom.Doors.Where(x => x.active).ToList().ForEach(x => x.Draw(spriteBatch));
@@ -151,6 +162,7 @@ namespace TheWorld {
             p.Draw(spriteBatch);
             p.Weapon.hit.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle((int)x.Position.X, (int)x.Position.Y, (int)x.Size.X, (int)x.Size.Y), Color.Green));
 
+            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * World.LastRoom[0], 20 + 10 * World.LastRoom[1], 9, 9), Color.BlueViolet);
             spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * CurrentRoom.XCoordinate, 20 + 10 * CurrentRoom.YCoordinate, 9, 9), Color.Red);
 
             spriteBatch.End();

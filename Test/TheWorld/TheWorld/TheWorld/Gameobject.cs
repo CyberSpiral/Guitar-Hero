@@ -203,8 +203,6 @@ namespace TheWorld
                         World.CurrentRoomLocationCode[0] += 1;
                         playerPosition -= new Vector2(World.RoomWidth - (World.RoomWidth - playerPosition.X) - 100, 0);
                     }
-                    
-                    //playerPosition = new Vector2(World.RoomWidth/2, World.RoomHeight/2);
                 }
             }
             ActivateDoors(Position);
