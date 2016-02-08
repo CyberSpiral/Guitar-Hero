@@ -7,13 +7,13 @@ using System.Text;
 namespace TheWorld {
     class RoomGraphic {
         public Texture2D Background { get; set; }
-        public Texture2D Edge { get; set; }
         public Texture2D Door { get; set; }
+        public Texture2D OverLay { get; set; }
 
-        public RoomGraphic(Texture2D background, Texture2D edge, Texture2D door) {
+        public RoomGraphic(Texture2D background, Texture2D door, Texture2D overlay) {
             Background = background;
-            Edge = edge;
             Door = door;
+            OverLay = overlay;
         }
     }
 }

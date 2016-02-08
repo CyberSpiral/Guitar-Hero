@@ -71,7 +71,7 @@ namespace TheWorld {
                 }
                 else if (facingTowards) {
                     do {
-                        randomPos = new Vector2(Static.GetNumber(World.RoomWidth), Static.GetNumber(World.RoomHeight));
+                        randomPos = new Vector2(Static.GetNumber(68, World.RoomWidth - 68), Static.GetNumber(68, World.RoomHeight - 68));
                     } while (Vector2.Distance(randomPos, playerPos) < 400);
                     direction = randomPos - Position;
                     if (direction != Vector2.Zero)
@@ -82,7 +82,7 @@ namespace TheWorld {
                 spitElapsed -= 1000;
             }
 
-            if (!facingTowards && !(Position.X > World.RoomWidth) && !(Position.Y > World.RoomHeight) && !(Position.X < 0) && !(Position.Y < 0)) {
+            if (!facingTowards && !(Position.X > World.RoomWidth - 68) && !(Position.Y > World.RoomHeight - 68) && !(Position.X < 68) && !(Position.Y < 68)) {
                 OldPos = Position;
                 Position += direction * speed;
             }

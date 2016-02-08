@@ -14,7 +14,7 @@ namespace TheWorld {
         public static Room[,] Rooms { get; set; }
         public static bool[,] ActiveRooms { get; set; }
         public static int[] CurrentRoomLocationCode { get; set; }
-        public static int CurrentLevel { get; set; } = 1;
+        public static int CurrentLevel { get; set; } = 10;
         
         public static void GenerateFloor() {
             ActiveRooms = new bool[25, 25];

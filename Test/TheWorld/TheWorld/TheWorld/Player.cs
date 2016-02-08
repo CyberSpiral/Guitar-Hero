@@ -18,6 +18,7 @@ namespace TheWorld
         {
             this.speed = speed;
             storedAnimationSpeed = animationSpeed;
+            Weapon = new Weapon();
         }
         public void Update(float elapsed, KeyboardState currentKey, KeyboardState oldKey, MouseState mouse)
         {
@@ -26,6 +27,11 @@ namespace TheWorld
             if (direction != Vector2.Zero)
                 direction.Normalize();
             rotation = (float)Math.Atan2(direction.Y, direction.X);
+
+            if (currentKey.IsKeyDown(Keys.Space) && oldKey.IsKeyUp(Keys.Space)) {
+                Weapon.Execute(new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation)), Position);
+            }   
+            Weapon.Update(elapsed);
 
             #region CurrentMovement
             //Can be changed

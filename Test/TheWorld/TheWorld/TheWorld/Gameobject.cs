@@ -16,7 +16,9 @@ namespace TheWorld
         public Vector2 OldPos { get; set; }
         public Rectangle CollisionBox
         {
-            get { return new Rectangle((int)Position.X - (Texture.Width / Columns / 2), (int)Position.Y - (Texture.Height / Rows / 2), Texture.Width / Columns, Texture.Height / Rows); }
+            get { return animated ? new Rectangle((int)Position.X - (Texture.Width / Columns / 2), (int)Position.Y - (Texture.Height / Rows / 2), Texture.Width / Columns, Texture.Height / Rows) 
+                    : new Rectangle((int)Position.X - (Texture.Width / 2), (int)Position.Y - (Texture.Height / 2), Texture.Width, Texture.Height);
+            }
             private set { value = CollisionBox; }
         }
 
@@ -27,6 +29,7 @@ namespace TheWorld
         protected int totalFrames;
         protected float totalElapsed;
         protected int animationSpeed;
+        protected bool animated;
 
         protected float rotation;
         protected float speed;
@@ -41,29 +44,42 @@ namespace TheWorld
             currentFrame = 0;
             this.totalFrames = totalFrames;
             this.animationSpeed = animationSpeed;
+            animated = true;
+        }
+        public GameObject(Texture2D texture, Vector2 position) {
+            Texture = texture;
+            Position = position;
+            totalElapsed = 0;
+            animated = false;
         }
         public void Update(float elapsed)
         {
             totalElapsed += elapsed;
-            if (totalElapsed > animationSpeed)
-            {
-                currentFrame++;
-                if (currentFrame == totalFrames)
-                    currentFrame = 0;
-                totalElapsed -= animationSpeed;
+            if (animated) {
+                if (totalElapsed > animationSpeed) {
+                    currentFrame++;
+                    if (currentFrame == totalFrames)
+                        currentFrame = 0;
+                    totalElapsed -= animationSpeed;
+                }
             }
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            int width = Texture.Width / Columns;
-            int height = Texture.Height / Rows;
-            int row = (int)((float)currentFrame / (float)Columns);
-            int column = currentFrame % Columns;
+            if (animated) {
+                int width = Texture.Width / Columns;
+                int height = Texture.Height / Rows;
+                int row = currentFrame / Columns;
+                int column = currentFrame % Columns;
 
-            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)Position.X, (int)Position.Y, width, height);
+                Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
+                Rectangle destinationRectangle = new Rectangle((int)Position.X, (int)Position.Y, width, height);
 
-            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White, rotation - (float)(Math.PI * 0.5f), new Vector2((width / 2), (height / 2)), SpriteEffects.None, 0);
+                spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White, rotation - (float)(Math.PI * 0.5f), new Vector2((width / 2), (height / 2)), SpriteEffects.None, 0);
+            }
+            else {
+                spriteBatch.Draw(Texture, Position, null, Color.White, rotation - (float)(Math.PI * 0.5f), new Vector2((Texture.Width / 2), (Texture.Height / 2)), 1, SpriteEffects.None, 0);
+            }
         }
         public virtual void ChangeTexture(Texture2D texture, int rows, int columns, int totalFrames)
         {

@@ -61,23 +61,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Background_Overlay_Number_1.png">
-      <Name>Background_Overlay_Number_1</Name>
+    <Compile Include="Overlay1.png">
+      <Name>Overlay1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Background_Overlay_Number_2.png">
-      <Name>Background_Overlay_Number_2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="door2.png">
-      <Name>door2</Name>
+    <Compile Include="Overlay2.png">
+      <Name>Overlay2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
     <Compile Include="door.png">
       <Name>door</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="door2.png">
+      <Name>door2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -106,6 +106,35 @@
   <ItemGroup>
     <Compile Include="testsprite.png">
       <Name>testsprite</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BottomEdge1.png">
+      <Name>BottomEdge1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Edge1Left.png">
+      <Name>Edge1Left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Edge1Right.png">
+      <Name>Edge1Right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="TopEdge1.png">
+      <Name>TopEdge1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackWithShadow1.png">
+      <Name>BackWithShadow1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

@@ -24,7 +24,6 @@ namespace TheWorld {
             get { return World.Rooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1]]; }
         }
 
-        List<Door> doors;
         Player p;
 
         public Game1() {
@@ -61,17 +60,10 @@ namespace TheWorld {
             roomGraphic = new List<RoomGraphic>();
             objects = new List<Texture2D>();
             objects.Add(Content.Load<Texture2D>("dot"));
-            roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back1"), Content.Load<Texture2D>("background_overlay_number_1"), Content.Load<Texture2D>("door")));
-            roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back2"), Content.Load<Texture2D>("background_overlay_number_2"), Content.Load<Texture2D>("door2")));
+            roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back1"), Content.Load<Texture2D>("door"), Content.Load<Texture2D>("Overlay1")));
+            roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back2"), Content.Load<Texture2D>("door2"), Content.Load<Texture2D>("Overlay2")));
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects, monsters);
-
-            doors = new List<Door>();
-
-            doors.Add(new Door(roomGraphic[1].Door, new Vector2(38/2, World.RoomHeight / 2), 1, 1, 1, 0));
-            doors.Add(new Door(roomGraphic[1].Door, new Vector2(World.RoomWidth - (38 / 2), World.RoomHeight / 2), 1, 1, 1, 0));
-            doors.Add(new Door(roomGraphic[1].Door, new Vector2((World.RoomWidth) / 2, 38 / 2), 1, 1, 1, 0));
-            doors.Add(new Door(roomGraphic[1].Door, new Vector2((World.RoomWidth) / 2, World.RoomHeight - (38 / 2)), 1, 1, 1, 0));
 
             p = new Player(Content.Load<Texture2D>("character"), new Vector2(200, 200), 5, 1, 9, 9, 200);
 
@@ -93,15 +85,14 @@ namespace TheWorld {
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime) {
             // Allows the game to exit
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape)) {
                 this.Exit();
             }
-            if(Keyboard.GetState().IsKeyDown(Keys.Q)) {
+            if (Keyboard.GetState().IsKeyDown(Keys.Q)) {
                 World.GenerateFloor();
-                World.GenerateRooms(roomGraphic,objects, monsters);
+                World.GenerateRooms(roomGraphic, objects, monsters);
             }
-            if(Keyboard.GetState().IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I)) {
+            if (Keyboard.GetState().IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I)) {
                 World.CurrentRoomLocationCode[1] -= 1;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.K) && oldState.IsKeyUp(Keys.K)) {
@@ -114,14 +105,23 @@ namespace TheWorld {
                 World.CurrentRoomLocationCode[0] -= 1;
             }
 
-            oldState = Keyboard.GetState();
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-            p.Update(elapsed, Keyboard.GetState(), Keyboard.GetState(), Mouse.GetState());
+            p.Update(elapsed, Keyboard.GetState(), oldState, Mouse.GetState());
             CurrentRoom.Zombies.ForEach(m => m.Update(elapsed, p.Position));
             CurrentRoom.SpitZombies.ForEach(m => m.Update(elapsed, p.Position));
-            doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position));
+            CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position));
 
+            for (int i = 0; i < CurrentRoom.Zombies.Count; i++) {
+                for (int q = 0; q < p.Weapon.hit.Count; q++) {
+                    if (CurrentRoom.Zombies[i].CollisionBox.Intersects(p.Weapon.hit[q].HitCollisionBox)) {
+                        CurrentRoom.Zombies.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+
+            oldState = Keyboard.GetState();
             base.Update(gameTime);
         }
 
@@ -133,35 +133,23 @@ namespace TheWorld {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+            CurrentRoom.Draw(spriteBatch);
 
-            spriteBatch.Draw(CurrentRoom.RoomGraphic.Background, new Vector2(0, 0), Color.White);
             for (int i = 0; i < 25; i++) {
                 for (int q = 0; q < 25; q++) {
-                    if (World.ActiveRooms[i,q] == true) {
-                        spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * i, 20 + 10 * q, 9, 9),Color.White);
+                    if (World.ActiveRooms[i, q] == true) {
+                        spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * i, 20 + 10 * q, 9, 9), Color.White);
                     }
                 }
             }
-            for (int i = 0; i < 4; i++)
-            {
-                if (doors[i].active)
-                {
-                    doors[i].Draw(spriteBatch);
-                }
-            }
-            doors.Where(x => x.active).ToList().ForEach(x => x.Draw(spriteBatch));
+            CurrentRoom.Doors.Where(x => x.active).ToList().ForEach(x => x.Draw(spriteBatch));
 
-            if (Keyboard.GetState().IsKeyDown(Keys.E))
-            {
-                foreach (GameObject item in CurrentRoom.Props)
-                {
-                    item.Draw(spriteBatch);
-                }
+            if (Keyboard.GetState().IsKeyDown(Keys.E)) {
+                CurrentRoom.Props.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), x.CollisionBox, Color.Red));
             }
 
             p.Draw(spriteBatch);
-            CurrentRoom.Zombies.ForEach(m => m.Draw(spriteBatch));
-            CurrentRoom.SpitZombies.ForEach(m => m.Draw(spriteBatch));
+            p.Weapon.hit.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle((int)x.Position.X, (int)x.Position.Y, (int)x.Size.X, (int)x.Size.Y), Color.Green));
 
             spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * CurrentRoom.XCoordinate, 20 + 10 * CurrentRoom.YCoordinate, 9, 9), Color.Red);
 
