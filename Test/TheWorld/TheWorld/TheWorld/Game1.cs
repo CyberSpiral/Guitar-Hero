@@ -105,7 +105,7 @@ namespace TheWorld {
                 World.CurrentRoomLocationCode[0] -= 1;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (Keyboard.GetState().IsKeyDown(Keys.G))
             {
                 if (World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1])
                 {
