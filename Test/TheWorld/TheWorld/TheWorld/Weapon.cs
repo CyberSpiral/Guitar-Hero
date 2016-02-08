@@ -14,9 +14,9 @@ namespace TheWorld {
         }
         public void Update(float elapsed) {
             totalElapsed += elapsed;
-            if (totalElapsed > 100) {
+            if (totalElapsed > 1) {
                 hit.Clear();
-                totalElapsed -= 100;
+                totalElapsed -= 1;
             }
         }
 

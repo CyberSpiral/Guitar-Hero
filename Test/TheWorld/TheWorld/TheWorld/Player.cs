@@ -28,10 +28,10 @@ namespace TheWorld
                 direction.Normalize();
             rotation = (float)Math.Atan2(direction.Y, direction.X);
 
+            Weapon.Update(elapsed);
             if (currentKey.IsKeyDown(Keys.Space) && oldKey.IsKeyUp(Keys.Space)) {
                 Weapon.Execute(new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation)), Position);
             }   
-            Weapon.Update(elapsed);
 
             #region CurrentMovement
             //Can be changed
