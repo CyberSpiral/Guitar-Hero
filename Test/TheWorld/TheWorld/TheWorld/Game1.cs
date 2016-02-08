@@ -158,6 +158,7 @@ namespace TheWorld {
                     doors[i].Draw(spriteBatch);
                 }
             }
+            doors.Where(x => x.active).ToList().ForEach(x => x.Draw(spriteBatch));
 
             if (Keyboard.GetState().IsKeyDown(Keys.E))
             {
