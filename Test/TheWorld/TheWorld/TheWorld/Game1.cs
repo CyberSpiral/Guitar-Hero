@@ -114,8 +114,7 @@ namespace TheWorld {
                     World.CurrentLevel += 1;
                 }
             }
-
-            oldState = Keyboard.GetState();
+            
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             p.Update(elapsed, Keyboard.GetState(), oldState, Mouse.GetState());
@@ -157,8 +156,8 @@ namespace TheWorld {
 
             if (Keyboard.GetState().IsKeyDown(Keys.E)) {
                 CurrentRoom.Props.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), x.CollisionBox, Color.Red));
+                spriteBatch.Draw(Content.Load<Texture2D>("dot"), p.CollisionBox, Color.Red);
             }
-
             p.Draw(spriteBatch);
             p.Weapon.hit.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle((int)x.Position.X, (int)x.Position.Y, (int)x.Size.X, (int)x.Size.Y), Color.Green));
 
