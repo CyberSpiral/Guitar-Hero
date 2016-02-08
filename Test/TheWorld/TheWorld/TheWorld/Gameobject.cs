@@ -170,21 +170,25 @@ namespace TheWorld
                     if (direction == Direction.Up)
                     {
                         World.CurrentRoomLocationCode[1] -= 1;
+                        playerPosition -= new Vector2(0, (playerPosition.Y - World.RoomHeight) + 100);
                     }
                     else if (direction == Direction.Left)
                     {
                         World.CurrentRoomLocationCode[0] -= 1;
+                        playerPosition -= new Vector2((playerPosition.X - World.RoomWidth) + 100, 0);
                     }
                     else if (direction == Direction.Down)
                     {
                         World.CurrentRoomLocationCode[1] += 1;
+                        playerPosition -= new Vector2(0, World.RoomHeight - (World.RoomHeight - playerPosition.Y) - 100);
                     }
                     else if (direction == Direction.Right)
                     {
                         World.CurrentRoomLocationCode[0] += 1;
+                        playerPosition -= new Vector2(World.RoomWidth - (World.RoomWidth - playerPosition.X) - 100, 0);
                     }
                     
-                    playerPosition = new Vector2(World.RoomWidth/2, World.RoomHeight/2);
+                    //playerPosition = new Vector2(World.RoomWidth/2, World.RoomHeight/2);
                 }
             }
             ActivateDoors(Position);
