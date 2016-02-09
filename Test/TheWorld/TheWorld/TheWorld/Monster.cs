@@ -33,6 +33,10 @@ namespace TheWorld {
     }
 
     class Zombie : Monster {
+        public new Rectangle CollisionBox {
+            get { return new Rectangle((int)Position.X - (Texture.Width / Columns / 2), (int)Position.Y - (Texture.Height / Rows / 2), Texture.Width / Columns, Texture.Height - 28); }
+            set { value = CollisionBox; }
+        }
         public Zombie(Texture2D texture, Texture2D heartTexture, Vector2 position, int health, float speed, int textureRows, int textureColumns,
             int totalFrames, int animationSpeed)
             : base(texture, heartTexture, position, health, textureRows, textureColumns, totalFrames, animationSpeed) {
@@ -60,7 +64,7 @@ namespace TheWorld {
         protected Vector2 randomPos;
 
         protected float spitElapsed;
-        protected bool facingTowards;
+        public bool facingTowards;
         public SpitZombie(Texture2D texture, Texture2D heartTexture, Vector2 position, int health, float speed, int textureRows, int textureColumns,
             int totalFrames, int animationSpeed)
             : base(texture, heartTexture, position, health, textureRows, textureColumns, totalFrames, animationSpeed) {

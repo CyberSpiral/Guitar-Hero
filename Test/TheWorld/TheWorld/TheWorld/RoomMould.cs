@@ -43,8 +43,8 @@ namespace TheWorld {
                                         break;
                                     }
                                 case 1: {
-                                        SpitZombie temp = new SpitZombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 6, 2.5f, 1, 4, 4, 500);
+                                        SpitZombie temp = new SpitZombie(monsterTextures[1], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 2.5f, 1,2, 2, 500);
                                         Spits.Add(temp);
                                         break;
                                     }
@@ -85,8 +85,8 @@ namespace TheWorld {
                                         break;
                                     }
                                 case 1: {
-                                        SpitZombie temp = new SpitZombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 6, 2.5f, 1, 4, 4, 500);
+                                        SpitZombie temp = new SpitZombie(monsterTextures[1], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 2.5f, 1, 2, 2, 500);
                                         Spits.Add(temp);
                                         break;
                                     }
@@ -127,8 +127,8 @@ namespace TheWorld {
                                         break;
                                     }
                                 case 1: {
-                                        SpitZombie temp = new SpitZombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 6, 2.5f, 1, 4, 4, 500);
+                                        SpitZombie temp = new SpitZombie(monsterTextures[1], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 2.5f, 1, 2, 2, 500);
                                         Spits.Add(temp);
                                         break;
                                     }

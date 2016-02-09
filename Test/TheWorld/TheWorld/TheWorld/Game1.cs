@@ -56,7 +56,7 @@ namespace TheWorld {
             Static.s = Content.Load<SpriteFont>("text");
             monsters = new List<Texture2D>();
             monsters.Add(Content.Load<Texture2D>("zombiesheet2"));
-            monsters.Add(Content.Load<Texture2D>("zombiesheet2"));
+            monsters.Add(Content.Load<Texture2D>("SpitMoving"));
             roomGraphic = new List<RoomGraphic>();
             objects = new List<Texture2D>();
             objects.Add(Content.Load<Texture2D>("dot"));
@@ -65,7 +65,7 @@ namespace TheWorld {
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"));
 
-            p = new Player(Content.Load<Texture2D>("character"), new Vector2(200, 200), 5, 1, 9, 9, 200);
+            p = new Player(Content.Load<Texture2D>("character"), new Vector2(544, 306), 5, 1, 9, 9, 200);
 
             // TODO: use this.Content to load your game content here
         }
@@ -127,12 +127,40 @@ namespace TheWorld {
             CurrentRoom.SpitZombies.ForEach(m => m.Update(elapsed, p.Position));
             CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position));
 
+
+            foreach (var item in CurrentRoom.Props) {
+                if (item.CollisionBox.Intersects(p.CollisionBox)) {
+                    p.Position = p.OldPos;
+                }
+                foreach (var Z in CurrentRoom.Zombies) {
+                    if (Z.CollisionBox.Intersects(item.CollisionBox)) {
+                        Z.Position = Z.OldPos;
+                    }
+                }
+                foreach (var Z in CurrentRoom.SpitZombies) {
+                    if (Z.CollisionBox.Intersects(item.CollisionBox)) {
+                        Z.Position = Z.OldPos;
+                        Z.facingTowards = true;
+                    }
+                }
+            }
             for (int i = 0; i < CurrentRoom.Zombies.Count; i++) {
                 for (int q = 0; q < p.Weapon.hit.Count; q++) {
                     if (CurrentRoom.Zombies[i].CollisionBox.Intersects(p.Weapon.hit[q].HitCollisionBox)) {
                         CurrentRoom.Zombies[i].Health--;
                         if (CurrentRoom.Zombies[i].Health <= 0) {
                             CurrentRoom.Zombies.RemoveAt(i);
+                            i--;
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < CurrentRoom.SpitZombies.Count; i++) {
+                for (int q = 0; q < p.Weapon.hit.Count; q++) {
+                    if (CurrentRoom.SpitZombies[i].CollisionBox.Intersects(p.Weapon.hit[q].HitCollisionBox)) {
+                        CurrentRoom.SpitZombies[i].Health--;
+                        if (CurrentRoom.SpitZombies[i].Health <= 0) {
+                            CurrentRoom.SpitZombies.RemoveAt(i);
                             i--;
                         }
                     }
@@ -164,6 +192,7 @@ namespace TheWorld {
 
             if (Keyboard.GetState().IsKeyDown(Keys.E)) {
                 CurrentRoom.Props.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), x.CollisionBox, Color.Red));
+                CurrentRoom.Zombies.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), x.CollisionBox, Color.Red));
                 spriteBatch.Draw(Content.Load<Texture2D>("dot"), p.CollisionBox, Color.Red);
             }
             p.Draw(spriteBatch);
