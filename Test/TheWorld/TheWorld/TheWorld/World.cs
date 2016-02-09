@@ -54,18 +54,49 @@ namespace TheWorld {
                     }
                 }
             }
+            int tmpMinX = 25;
+            int tmpMaxX = 0;
+            int tmpMinY = 25;
+            int tmpMaxY = 0;
+            for (int i = 0; i < ActiveRooms.GetLength(0); i++)
+            {
+                for (int j = 0; j < ActiveRooms.GetLength(1); j++)
+                {
+                    if (ActiveRooms[i,j] == true)
+                    {
+                        if (tmpMinX > i) tmpMinX = i;
+                        if (tmpMaxX < i)
+                            tmpMaxX = i;
+                        if (tmpMinY > j) tmpMinY = j;
+                        if (tmpMaxY < j) tmpMaxY = j;
+                    }
+                }
+            }
+            int diffX = tmpMaxX - tmpMinX;
+            int diffY = tmpMaxY - tmpMinY;
+            int Q = 0;
             while (0 == LastRoom[0] || 0 == LastRoom[1])
             {
+                Q += 1;
                 for (int i = 0; i < ActiveRooms.GetLength(0); i++)
                 {
                     for (int j = 0; j < ActiveRooms.GetLength(1); j++)
                     {
                         if (ActiveRooms[i, j] == true)
                         {
-                            if (Static.GetNumber(200) < 10)
+                            if (Math.Abs(CurrentRoomLocationCode[0] - i) > diffX && Math.Abs(CurrentRoomLocationCode[1] - j) > diffX)
                             {
-                                LastRoom[0] = i;
-                                LastRoom[1] = j;
+                                if (Static.GetNumber(200) < 20)
+                                {
+                                    LastRoom[0] = i;
+                                    LastRoom[1] = j;
+                                }
+                            }
+                            if (Q > 30)
+                            {
+                                diffX -= 1;
+                                diffY -= 1;
+                                Q = 0;
                             }
                         }
                     }
