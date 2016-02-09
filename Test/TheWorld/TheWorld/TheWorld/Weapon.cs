@@ -7,11 +7,18 @@ using System.Text;
 
 namespace TheWorld {
     class Weapon {
+
+        public float damage;
+        public float knockback;
+        public float range;
+
+
         public List<WeaponHit> hit;
         protected float totalElapsed;
         public Weapon() {
             hit = new List<WeaponHit>();
         }
+
         public void Update(float elapsed) {
             totalElapsed += elapsed;
             if (totalElapsed > 1) {
