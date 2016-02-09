@@ -13,6 +13,7 @@ namespace TheWorld {
         public List<GameObject> Props { get; protected set; }
         public List<Zombie> Zombies { get; protected set; }
         public List<SpitZombie> SpitZombies { get; protected set; }
+        public List<Monster> Monsters { get; protected set; }
         public List<Rectangle> ProtectedSpace { get; protected set; }
         public List<Door> Doors { get; protected set; }
 

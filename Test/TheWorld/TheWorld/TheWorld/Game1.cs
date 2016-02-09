@@ -126,7 +126,8 @@ namespace TheWorld {
             CurrentRoom.Zombies.ForEach(m => m.Update(elapsed, p.Position));
             CurrentRoom.SpitZombies.ForEach(m => m.Update(elapsed, p.Position));
             CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position));
-
+            CurrentRoom.Monsters.Where(x => x.GetType() == typeof(Zombie)).ToList().ForEach(m => m.Update(elapsed, p.Position));
+            CurrentRoom.Monsters.Where(x => x.GetType() == typeof(SpitZombie)).ToList().ForEach(m => m.Update(elapsed, p.Position));
 
             foreach (var item in CurrentRoom.Props) {
                 if (item.CollisionBox.Intersects(p.CollisionBox)) {
