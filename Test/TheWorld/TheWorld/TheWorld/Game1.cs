@@ -63,7 +63,7 @@ namespace TheWorld {
             roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back1"), Content.Load<Texture2D>("door"), Content.Load<Texture2D>("Overlay1")));
             roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back2"), Content.Load<Texture2D>("door2"), Content.Load<Texture2D>("Overlay2")));
             World.GenerateFloor();
-            World.GenerateRooms(roomGraphic, objects, monsters);
+            World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"));
 
             p = new Player(Content.Load<Texture2D>("character"), new Vector2(200, 200), 5, 1, 9, 9, 200);
 
@@ -90,7 +90,7 @@ namespace TheWorld {
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Q)) {
                 World.GenerateFloor();
-                World.GenerateRooms(roomGraphic, objects, monsters);
+                World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"));
             }
             if (Keyboard.GetState().IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I)) {
                 World.CurrentRoomLocationCode[1] -= 1;
@@ -110,7 +110,7 @@ namespace TheWorld {
                 if (World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1])
                 {
                     World.GenerateFloor();
-                    World.GenerateRooms(roomGraphic, objects, monsters);
+                    World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"));
                     World.CurrentLevel += 1;
                 }
             }
@@ -130,8 +130,11 @@ namespace TheWorld {
             for (int i = 0; i < CurrentRoom.Zombies.Count; i++) {
                 for (int q = 0; q < p.Weapon.hit.Count; q++) {
                     if (CurrentRoom.Zombies[i].CollisionBox.Intersects(p.Weapon.hit[q].HitCollisionBox)) {
-                        CurrentRoom.Zombies.RemoveAt(i);
-                        i--;
+                        CurrentRoom.Zombies[i].Health--;
+                        if (CurrentRoom.Zombies[i].Health <= 0) {
+                            CurrentRoom.Zombies.RemoveAt(i);
+                            i--;
+                        }
                     }
                 }
             }

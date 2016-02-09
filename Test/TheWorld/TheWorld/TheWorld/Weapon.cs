@@ -12,7 +12,7 @@ namespace TheWorld {
         public Weapon() {
             hit = new List<WeaponHit>();
         }
-        public void Update(float elapsed) {
+        public virtual void Update(float elapsed) {
             totalElapsed += elapsed;
             if (totalElapsed > 1) {
                 hit.Clear();
