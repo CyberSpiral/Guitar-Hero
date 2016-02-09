@@ -130,7 +130,7 @@ namespace TheWorld {
 
             foreach (var item in CurrentRoom.Props) {
                 if (item.CollisionBox.Intersects(p.CollisionBox)) {
-                    p.Position = p.OldPos;
+                        p.Position = p.OldPos;
                 }
                 foreach (var Z in CurrentRoom.Zombies) {
                     if (Z.CollisionBox.Intersects(item.CollisionBox)) {
