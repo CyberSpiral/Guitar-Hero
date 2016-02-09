@@ -103,13 +103,13 @@ namespace TheWorld {
                 }
             }
         }
-        public static void GenerateRooms(List<RoomGraphic> graphic, List<Texture2D> objectTextures, List<Texture2D> monsterTextures) {
+        public static void GenerateRooms(List<RoomGraphic> graphic, List<Texture2D> objectTextures, List<Texture2D> monsterTextures, Texture2D heartTexture) {
             Rooms = new Room[25, 25];
             for (int i = 0; i < Rooms.GetLength(0); i++) {
                 for (int q = 0; q < Rooms.GetLength(1); q++)
                 {
 
-                    RoomMould thisRoom = new RoomMould(objectTextures, monsterTextures);
+                    RoomMould thisRoom = new RoomMould(objectTextures, monsterTextures, heartTexture);
 
                     Rooms[i, q] = new Room(graphic[Static.GetNumber(graphic.Count)], thisRoom.ProtectedSpace, thisRoom.Props, thisRoom.Zombies, thisRoom.Spits, World.CurrentLevel);
                     Rooms[i, q].XCoordinate = i;

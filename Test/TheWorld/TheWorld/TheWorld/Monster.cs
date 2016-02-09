@@ -8,19 +8,34 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TheWorld {
     class Monster : GameObject {
-        public Monster(Texture2D texture, Vector2 position, int textureRows, int textureColumns,
+        public int Health { get; set; }
+        protected Texture2D Heart;
+        public Monster(Texture2D texture, Texture2D heartTexture, Vector2 position, int health, int textureRows, int textureColumns,
             int totalFrames, int animationSpeed)
             : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {
+            Health = health;
+            Heart = heartTexture;
         }
         public void Update(float elapsed, Vector2 playerPos) {
             base.Update(elapsed);
         }
+        public override void Draw(SpriteBatch spriteBatch) {
+            base.Draw(spriteBatch);
+            for (int i = 0; i < Health; i++) {
+                if (i % 2 == 0) {
+                    spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 20 + i * 10, (int)Position.Y - 50, 10, 20), new Rectangle(0, 0, 15, 30), Color.Red);
+                }
+                else {
+                    spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 22 + i * 10, (int)Position.Y - 50, 10, 20), new Rectangle(15, 0, 15, 30), Color.Red);
+                }
+            }
+        }
     }
 
     class Zombie : Monster {
-        public Zombie(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns,
+        public Zombie(Texture2D texture, Texture2D heartTexture, Vector2 position, int health, float speed, int textureRows, int textureColumns,
             int totalFrames, int animationSpeed)
-            : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {
+            : base(texture, heartTexture, position, health, textureRows, textureColumns, totalFrames, animationSpeed) {
             this.speed = speed;
         }
 
@@ -46,11 +61,11 @@ namespace TheWorld {
 
         protected float spitElapsed;
         protected bool facingTowards;
-        public SpitZombie(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns,
+        public SpitZombie(Texture2D texture, Texture2D heartTexture, Vector2 position, int health, float speed, int textureRows, int textureColumns,
             int totalFrames, int animationSpeed)
-            : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {
+            : base(texture, heartTexture, position, health, textureRows, textureColumns, totalFrames, animationSpeed) {
             this.speed = speed;
-            
+
             direction = new Vector2(Static.GetNumber(World.RoomWidth), Static.GetNumber(World.RoomHeight));
             if (direction != Vector2.Zero)
                 direction.Normalize();

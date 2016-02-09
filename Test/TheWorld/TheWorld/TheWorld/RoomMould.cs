@@ -12,7 +12,7 @@ namespace TheWorld {
         public List<SpitZombie> Spits { get; set; }
         public List<Rectangle> ProtectedSpace { get; set; }
 
-        public RoomMould(List<Texture2D> objectTextures, List<Texture2D> monsterTextures) {
+        public RoomMould(List<Texture2D> objectTextures, List<Texture2D> monsterTextures, Texture2D heartTexture) {
             Props = new List<GameObject>();
             Zombies = new List<Zombie>();
             Spits = new List<SpitZombie>();
@@ -25,7 +25,11 @@ namespace TheWorld {
                             Texture2D tempTex = objectTextures[Static.GetNumber(objectTextures.Count)];
                             GameObject temp = new GameObject(tempTex, new Vector2(Static.GetNumber(14) * 68 + 102, Static.GetNumber(8) * 68 + 102));
                             bool tempBool = false;
-                            ProtectedSpace.ForEach(x => tempBool = x.Intersects(temp.CollisionBox));
+                            foreach (var item in ProtectedSpace) {
+                                if (item.Intersects(temp.CollisionBox)) {
+                                    tempBool = true;
+                                }
+                            }
                             if (!tempBool) {
                                 Props.Add(temp);
                             }
@@ -33,20 +37,20 @@ namespace TheWorld {
                         for (int o = 0; o < Math.Round(2f * (World.CurrentLevel / 1.5f)); o++) {
                             switch (Static.GetNumber(3)) {
                                 case 0: {
-                                        Zombie temp = new Zombie(monsterTextures[0], new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 1.5f, 1, 4, 4, 500);
+                                        Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 1.5f, 1, 4, 4, 500);
                                         Zombies.Add(temp);
                                         break;
                                     }
                                 case 1: {
-                                        SpitZombie temp = new SpitZombie(monsterTextures[0], new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 2.5f, 1, 4, 4, 500);
+                                        SpitZombie temp = new SpitZombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 2.5f, 1, 4, 4, 500);
                                         Spits.Add(temp);
                                         break;
                                     }
                                 case 2: {
-                                        Zombie temp = new Zombie(monsterTextures[0], new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 1.5f, 1, 4, 4, 500);
+                                        Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 1.5f, 1, 4, 4, 500);
                                         Zombies.Add(temp);
                                         break;
                                     }
@@ -63,7 +67,11 @@ namespace TheWorld {
                             Texture2D tempTex = objectTextures[Static.GetNumber(objectTextures.Count)];
                             GameObject temp = new GameObject(tempTex, new Vector2(Static.GetNumber(14) * 68 + 102, Static.GetNumber(8) * 68 + 102));
                             bool tempBool = false;
-                            ProtectedSpace.ForEach(x => tempBool = x.Intersects(temp.CollisionBox));
+                            foreach (var item in ProtectedSpace) {
+                                if (item.Intersects(temp.CollisionBox)) {
+                                    tempBool = true;
+                                }
+                            }
                             if (!tempBool) {
                                 Props.Add(temp);
                             }
@@ -71,20 +79,20 @@ namespace TheWorld {
                         for (int o = 0; o < Math.Round(2f * (World.CurrentLevel / 1.5f)); o++) {
                             switch (Static.GetNumber(3)) {
                                 case 0: {
-                                        Zombie temp = new Zombie(monsterTextures[0], new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 1.5f, 1, 4, 4, 500);
+                                        Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 1.5f, 1, 4, 4, 500);
                                         Zombies.Add(temp);
                                         break;
                                     }
                                 case 1: {
-                                        SpitZombie temp = new SpitZombie(monsterTextures[0], new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 2.5f, 1, 4, 4, 500);
+                                        SpitZombie temp = new SpitZombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 2.5f, 1, 4, 4, 500);
                                         Spits.Add(temp);
                                         break;
                                     }
                                 case 2: {
-                                        Zombie temp = new Zombie(monsterTextures[0], new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 1.5f, 1, 4, 4, 500);
+                                        Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 1.5f, 1, 4, 4, 500);
                                         Zombies.Add(temp);
                                         break;
                                     }
@@ -101,7 +109,11 @@ namespace TheWorld {
                             Texture2D tempTex = objectTextures[Static.GetNumber(objectTextures.Count)];
                             GameObject temp = new GameObject(tempTex, new Vector2(Static.GetNumber(14) * 68 + 102, Static.GetNumber(8) * 68 + 102));
                             bool tempBool = false;
-                            ProtectedSpace.ForEach(x => tempBool = x.Intersects(temp.CollisionBox));
+                            foreach (var item in ProtectedSpace) {
+                                if (item.Intersects(temp.CollisionBox)) {
+                                    tempBool = true;
+                                }
+                            }
                             if (!tempBool) {
                                 Props.Add(temp);
                             }
@@ -109,20 +121,20 @@ namespace TheWorld {
                         for (int o = 0; o < Math.Round(2f * (World.CurrentLevel / 1.5f)); o++) {
                             switch (Static.GetNumber(3)) {
                                 case 0: {
-                                        Zombie temp = new Zombie(monsterTextures[0], new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 1.5f, 1, 4, 4, 500);
+                                        Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 1.5f, 1, 4, 4, 500);
                                         Zombies.Add(temp);
                                         break;
                                     }
                                 case 1: {
-                                        SpitZombie temp = new SpitZombie(monsterTextures[0], new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 2.5f, 1, 4, 4, 500);
+                                        SpitZombie temp = new SpitZombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 2.5f, 1, 4, 4, 500);
                                         Spits.Add(temp);
                                         break;
                                     }
                                 case 2: {
-                                        Zombie temp = new Zombie(monsterTextures[0], new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 1.5f, 1, 4, 4, 500);
+                                        Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 1.5f, 1, 4, 4, 500);
                                         Zombies.Add(temp);
                                         break;
                                     }
