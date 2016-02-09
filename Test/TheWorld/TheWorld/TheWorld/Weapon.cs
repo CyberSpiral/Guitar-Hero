@@ -7,6 +7,12 @@ using System.Text;
 
 namespace TheWorld {
     class Weapon {
+
+        public float damage;
+        public float knockback;
+        public float range;
+
+
         public List<WeaponHit> hit;
         protected float totalElapsed;
         public Weapon() {
