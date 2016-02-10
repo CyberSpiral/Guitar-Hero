@@ -6,10 +6,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TheWorld
-{
-    class Player : GameObject
-    {
+namespace TheWorld {
+    class Player : GameObject {
         public Weapon Weapon { get; set; }
         public int Health { get; set; }
         public float invTmr { get; set; }
@@ -19,16 +17,14 @@ namespace TheWorld
 
         public Player(Texture2D texture, Texture2D heartTexture, Vector2 position, float speed, int textureRows, int textureColumns
             , int totalFrames, int animationSpeed)
-            : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed)
-        {
+            : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {
             this.speed = speed;
             storedAnimationSpeed = animationSpeed;
             Weapon = new Weapon();
             Health = 10;
             Heart = heartTexture;
         }
-        public void Update(float elapsed, KeyboardState currentKey, KeyboardState oldKey, MouseState mouse)
-        {
+        public void Update(float elapsed, KeyboardState currentKey, KeyboardState oldKey, MouseState mouse) {
             base.Update(elapsed);
             Vector2 direction = new Vector2(Mouse.GetState().X, Mouse.GetState().Y) - Position;
             if (direction != Vector2.Zero)
@@ -39,9 +35,8 @@ namespace TheWorld
             if (currentKey.IsKeyDown(Keys.Space) && oldKey.IsKeyUp(Keys.Space)) {
                 Weapon.Execute(new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation)), Position);
             }
-            if (invTmr > 0)
-            {
-                invTmr -= elapsed/1000;
+            if (invTmr > 0) {
+                invTmr -= elapsed / 1000;
             }
 
             #region CurrentMovement
@@ -65,8 +60,10 @@ namespace TheWorld
             if (currentKey.IsKeyDown(Keys.S) && currentKey.IsKeyDown(Keys.A))
                 Velocity = new Vector2((float)Math.Cos(rotation + MathHelper.ToRadians(-135)), (float)Math.Sin(rotation + MathHelper.ToRadians(-135)));
 
-            if (currentKey.IsKeyUp(Keys.W) && currentKey.IsKeyUp(Keys.A) && currentKey.IsKeyUp(Keys.S) && currentKey.IsKeyUp(Keys.D))
+            if (currentKey.IsKeyUp(Keys.W) && currentKey.IsKeyUp(Keys.A) && currentKey.IsKeyUp(Keys.S) && currentKey.IsKeyUp(Keys.D)) {
                 Velocity = Vector2.Zero;
+                currentFrame = 0;
+            }
             animationSpeed = currentKey.IsKeyUp(Keys.W) && currentKey.IsKeyUp(Keys.A) && currentKey.IsKeyUp(Keys.S) && currentKey.IsKeyUp(Keys.D)
                 ? int.MaxValue : storedAnimationSpeed;
 
@@ -77,13 +74,10 @@ namespace TheWorld
             Position += Velocity * speed;
             #endregion
         }
-        public override void Draw(SpriteBatch spriteBatch)
-        {
+        public override void Draw(SpriteBatch spriteBatch) {
             base.Draw(spriteBatch);
-            for (int i = 0; i < Health; i++)
-            {
-                if (i % 2 == 0)
-                {
+            for (int i = 0; i < Health; i++) {
+                if (i % 2 == 0) {
                     spriteBatch.Draw(Heart, new Rectangle(40 + i * 12, 10, 10, 20), new Rectangle(0, 0, 15, 30), Color.Red);
                 }
                 else {

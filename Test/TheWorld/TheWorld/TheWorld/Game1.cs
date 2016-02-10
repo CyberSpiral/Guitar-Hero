@@ -121,23 +121,30 @@ namespace TheWorld {
             p.Position = p.Position.X > World.RoomWidth - 50 ? p.OldPos : p.Position;
             p.Position = p.Position.Y < 60 ? p.OldPos : p.Position;
             p.Position = p.Position.Y > World.RoomHeight - 60 ? p.OldPos : p.Position;
-            
+
             CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position));
             foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie)) {
                 z.Update(elapsed, p.Position);
-                if (z.CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0)
-                {
-                    p.Health -= 1;
-                    p.invTmr = 1.5f;
-            }
-            }
-            foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie)) {
-                sZ.Update(elapsed, p.Position, CurrentRoom.Props);
-                if (sZ.CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0)
-                {
+                if (z.CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0) {
                     p.Health -= 1;
                     p.invTmr = 1.5f;
                 }
+            }
+            foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie)) {
+                sZ.Update(elapsed, p.Position, CurrentRoom.Props);
+                for (int i = 0; i < sZ.SpitList.Count; i++) {
+                    if (sZ.SpitList[i].CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0) {
+                        p.Health--;
+                        p.invTmr = 1.5f;
+                        sZ.SpitList.RemoveAt(i);
+                        i--;
+                    }
+                    else if (sZ.SpitList[i].CollisionBox.Intersects(p.CollisionBox)) {
+                        sZ.SpitList.RemoveAt(i);
+                        i--;
+                    }
+                }
+
             }
 
             foreach (var item in CurrentRoom.Props) {
