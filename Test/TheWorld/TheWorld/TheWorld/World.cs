@@ -15,6 +15,7 @@ namespace TheWorld {
         public static bool[,] ActiveRooms { get; set; }
         public static int[] CurrentRoomLocationCode { get; set; }
         public static int[] LastRoom { get; set; }
+        public static int[] FirstRoom { get; set; }
         public static int CurrentLevel { get; set; } = 10;
         
         public static void GenerateFloor() {
@@ -102,6 +103,7 @@ namespace TheWorld {
                     }
                 }
             }
+            FirstRoom = CurrentRoomLocationCode;
         }
         public static void GenerateRooms(List<RoomGraphic> graphic, List<Texture2D> objectTextures, List<Texture2D> monsterTextures, Texture2D heartTexture) {
             Rooms = new Room[25, 25];
@@ -117,6 +119,8 @@ namespace TheWorld {
 
                 }
             }
+            Rooms[FirstRoom[0], FirstRoom[1]].Monsters.Clear();
+            Rooms[LastRoom[0], LastRoom[1]].Monsters.Clear();
         }
     }
 }
