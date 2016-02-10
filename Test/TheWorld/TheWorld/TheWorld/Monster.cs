@@ -23,10 +23,10 @@ namespace TheWorld {
             base.Draw(spriteBatch);
             for (int i = 0; i < Health; i++) {
                 if (i % 2 == 0) {
-                    spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 20 + i * 10, (int)Position.Y - 50, 10, 20), new Rectangle(0, 0, 15, 30), Color.Red);
+                    spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 20 + i * 10, (int)Position.Y - 50, 10, 20), new Rectangle(0, 0, 15, 30), Color.White);
                 }
                 else {
-                    spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 22 + i * 10, (int)Position.Y - 50, 10, 20), new Rectangle(15, 0, 15, 30), Color.Red);
+                    spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 22 + i * 10, (int)Position.Y - 50, 10, 20), new Rectangle(15, 0, 15, 30), Color.White);
                 }
             }
         }

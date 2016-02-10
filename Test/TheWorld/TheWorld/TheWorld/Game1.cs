@@ -64,9 +64,9 @@ namespace TheWorld {
             roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back1"), Content.Load<Texture2D>("door"), Content.Load<Texture2D>("Overlay1")));
             roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back2"), Content.Load<Texture2D>("door2"), Content.Load<Texture2D>("Overlay2")));
             World.GenerateFloor();
-            World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"));
+            World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"));
 
-            p = new Player(Content.Load<Texture2D>("Character_sprite"), Content.Load<Texture2D>("heart"), new Vector2(544, 306), 3, 1, 17, 17, 100);
+            p = new Player(Content.Load<Texture2D>("Character_sprite"), Content.Load<Texture2D>("health"), new Vector2(544, 306), 3, 1, 17, 17, 100);
 
             // TODO: use this.Content to load your game content here
         }

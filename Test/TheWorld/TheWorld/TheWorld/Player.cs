@@ -78,10 +78,10 @@ namespace TheWorld {
             base.Draw(spriteBatch);
             for (int i = 0; i < Health; i++) {
                 if (i % 2 == 0) {
-                    spriteBatch.Draw(Heart, new Rectangle(40 + i * 12, 10, 10, 20), new Rectangle(0, 0, 15, 30), Color.Red);
+                    spriteBatch.Draw(Heart, new Rectangle(40 + i * 12, 10, 10, 20), new Rectangle(0, 0, 15, 30), Color.White);
                 }
                 else {
-                    spriteBatch.Draw(Heart, new Rectangle(38 + i * 12, 10, 10, 20), new Rectangle(15, 0, 15, 30), Color.Red);
+                    spriteBatch.Draw(Heart, new Rectangle(38 + i * 12, 10, 10, 20), new Rectangle(15, 0, 15, 30), Color.White);
                 }
             }
         }
