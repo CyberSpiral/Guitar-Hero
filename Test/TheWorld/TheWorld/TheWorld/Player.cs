@@ -12,6 +12,7 @@ namespace TheWorld
     {
         public Weapon Weapon { get; set; }
         public int Health { get; set; }
+        public float invTmr { get; set; }
         protected Texture2D Heart;
 
         protected int storedAnimationSpeed;
@@ -37,7 +38,11 @@ namespace TheWorld
             Weapon.Update(elapsed);
             if (currentKey.IsKeyDown(Keys.Space) && oldKey.IsKeyUp(Keys.Space)) {
                 Weapon.Execute(new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation)), Position);
-            }   
+            }
+            if (invTmr > 0)
+            {
+                invTmr -= elapsed/1000;
+            }
 
             #region CurrentMovement
             //Can be changed
