@@ -57,6 +57,7 @@ namespace TheWorld {
             monsters = new List<Texture2D>();
             monsters.Add(Content.Load<Texture2D>("zombiesheet2"));
             monsters.Add(Content.Load<Texture2D>("SpitMoving"));
+            monsters.Add(Content.Load<Texture2D>("SpitSpit"));
             roomGraphic = new List<RoomGraphic>();
             objects = new List<Texture2D>();
             objects.Add(Content.Load<Texture2D>("dot"));
@@ -65,7 +66,7 @@ namespace TheWorld {
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"));
 
-            p = new Player(Content.Load<Texture2D>("Character_sprite"), new Vector2(544, 306), 5, 1, 17, 17, 200);
+            p = new Player(Content.Load<Texture2D>("Character_sprite"), new Vector2(544, 306), 3, 1, 17, 17, 100);
 
             // TODO: use this.Content to load your game content here
         }
@@ -126,7 +127,7 @@ namespace TheWorld {
                 z.Update(elapsed, p.Position);
             }
             foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie)) {
-                sZ.Update(elapsed, p.Position);
+                sZ.Update(elapsed, p.Position, CurrentRoom.Props);
             }
 
             foreach (var item in CurrentRoom.Props) {

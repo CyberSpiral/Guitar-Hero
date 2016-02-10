@@ -42,7 +42,7 @@ namespace TheWorld {
                                     }
                                 case 1: {
                                         SpitZombie temp = new SpitZombie(monsterTextures[1], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 6, 2.5f, 1,2, 2, 500);
+                                            , monsterTextures[2], 6, 2.5f, 1,2, 2, 500);
                                         Monsters.Add(temp);
                                         break;
                                     }
@@ -84,7 +84,7 @@ namespace TheWorld {
                                     }
                                 case 1: {
                                         SpitZombie temp = new SpitZombie(monsterTextures[1], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 6, 2.5f, 1, 2, 2, 500);
+                                            , monsterTextures[2], 6, 2.5f, 1, 2, 2, 500);
                                         Monsters.Add(temp);
                                         break;
                                     }
@@ -126,7 +126,7 @@ namespace TheWorld {
                                     }
                                 case 1: {
                                         SpitZombie temp = new SpitZombie(monsterTextures[1], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 6, 2.5f, 1, 2, 2, 500);
+                                            , monsterTextures[2], 6, 2.5f, 1, 2, 2, 500);
                                         Monsters.Add(temp);
                                         break;
                                     }

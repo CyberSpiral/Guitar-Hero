@@ -58,26 +58,46 @@ namespace TheWorld {
 
     }
 
+    class Spit : GameObject {
+        protected Vector2 Direction { get; set; }
+        public Spit(Texture2D texture, Vector2 position, Vector2 direction) : base(texture, position) {
+            Texture = texture;
+            Position = position;
+            Direction = direction;
+            rotation = (float)Math.Atan2(direction.Y, direction.X);
+        }
+
+        public void Update() {
+            Position += Direction * 3;
+
+        }
+        public override void Draw(SpriteBatch spriteBatch) {
+            spriteBatch.Draw(Texture, Position, null, Color.White, rotation + (float)(Math.PI * 0.5f), new Vector2(Texture.Width / 2, Texture.Height / 2), 1f, SpriteEffects.None, 0);
+        }
+    }
+
     class SpitZombie : Monster {
 
         protected Vector2 direction;
         protected Vector2 randomPos;
+        public List<Spit> SpitList { get; set; }
+        protected Texture2D spitTexture;
 
         protected float spitElapsed;
         public bool facingTowards;
-        public SpitZombie(Texture2D texture, Texture2D heartTexture, Vector2 position, int health, float speed, int textureRows, int textureColumns,
+        public SpitZombie(Texture2D texture, Texture2D heartTexture, Vector2 position, Texture2D spitTexture, int health, float speed, int textureRows, int textureColumns,
             int totalFrames, int animationSpeed)
             : base(texture, heartTexture, position, health, textureRows, textureColumns, totalFrames, animationSpeed) {
             this.speed = speed;
-
+            SpitList = new List<Spit>();
             direction = new Vector2(Static.GetNumber(World.RoomWidth), Static.GetNumber(World.RoomHeight));
             if (direction != Vector2.Zero)
                 direction.Normalize();
             rotation = (float)Math.Atan2(direction.Y, direction.X);
-
+            this.spitTexture = spitTexture;
         }
 
-        new public void Update(float elapsed, Vector2 playerPos) {
+        public void Update(float elapsed, Vector2 playerPos, List<GameObject> props) {
             base.Update(elapsed);
             spitElapsed += elapsed;
             if (spitElapsed > 1000) {
@@ -85,6 +105,7 @@ namespace TheWorld {
                     direction = playerPos - Position;
                     if (direction != Vector2.Zero)
                         direction.Normalize();
+                    SpitList.Add(new Spit(spitTexture, Position, direction));
                     rotation = (float)Math.Atan2(direction.Y, direction.X);
                     facingTowards = true;
                 }
@@ -109,7 +130,20 @@ namespace TheWorld {
                 Position = OldPos;
                 facingTowards = true;
             }
+            SpitList.ForEach(x => x.Update());
+            foreach (var p in props) {
+                for (int i = 0; i < SpitList.Count; i++) {
+                    if (SpitList[i].CollisionBox.Intersects(p.CollisionBox)) {
+                        SpitList.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
 
+        }
+        public override void Draw(SpriteBatch spriteBatch) {
+            base.Draw(spriteBatch);
+            SpitList.ForEach(x => x.Draw(spriteBatch));
         }
     }
 
