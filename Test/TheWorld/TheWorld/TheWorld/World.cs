@@ -111,7 +111,7 @@ namespace TheWorld {
 
                     RoomMould thisRoom = new RoomMould(objectTextures, monsterTextures, heartTexture);
 
-                    Rooms[i, q] = new Room(graphic[Static.GetNumber(graphic.Count)], thisRoom.ProtectedSpace, thisRoom.Props, thisRoom.Zombies, thisRoom.Spits, World.CurrentLevel);
+                    Rooms[i, q] = new Room(graphic[Static.GetNumber(graphic.Count)], thisRoom.ProtectedSpace, thisRoom.Props, thisRoom.Monsters, World.CurrentLevel);
                     Rooms[i, q].XCoordinate = i;
                     Rooms[i, q].YCoordinate = q;
 

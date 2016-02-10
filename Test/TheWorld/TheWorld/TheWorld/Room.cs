@@ -11,8 +11,6 @@ namespace TheWorld {
 
         public int Level { get; protected set; }
         public List<GameObject> Props { get; protected set; }
-        public List<Zombie> Zombies { get; protected set; }
-        public List<SpitZombie> SpitZombies { get; protected set; }
         public List<Monster> Monsters { get; protected set; }
         public List<Rectangle> ProtectedSpace { get; protected set; }
         public List<Door> Doors { get; protected set; }
@@ -21,14 +19,13 @@ namespace TheWorld {
         public int YCoordinate { get; set; }
 
 
-        public Room(RoomGraphic roomGraphic, List<Rectangle> protectedSpace, List<GameObject> objects, List<Zombie> zombies, List<SpitZombie> spits, int level) {
+        public Room(RoomGraphic roomGraphic, List<Rectangle> protectedSpace, List<GameObject> objects, List<Monster> monsters, int level) {
             Doors = new List<Door>();
             RoomGraphic = roomGraphic;
             ProtectedSpace = protectedSpace;
             Props = objects;
             Level = level;
-            Zombies = zombies;
-            SpitZombies = spits;
+            Monsters = monsters;
 
             Doors.Add(new Door(roomGraphic.Door, new Vector2(38 / 2, World.RoomHeight / 2), 1, 1, 1, 0));
             Doors.Add(new Door(roomGraphic.Door, new Vector2(World.RoomWidth - (38 / 2), World.RoomHeight / 2), 1, 1, 1, 0));
@@ -41,8 +38,12 @@ namespace TheWorld {
             spriteBatch.Draw(RoomGraphic.Background, new Vector2(0, 0), Color.White);
             spriteBatch.Draw(RoomGraphic.OverLay, new Vector2(0, 0), Color.White);
             Props.ForEach(x => x.Draw(spriteBatch));
-            Zombies.ForEach(x => x.Draw(spriteBatch));
-            SpitZombies.ForEach(x => x.Draw(spriteBatch));
+            foreach (Zombie z in Monsters.Where(x => x is Zombie)) {
+                z.Draw(spriteBatch);
+            }
+            foreach (SpitZombie sZ in Monsters.Where(x => x is SpitZombie)) {
+                sZ.Draw(spriteBatch);
+            }
         }
 
     }

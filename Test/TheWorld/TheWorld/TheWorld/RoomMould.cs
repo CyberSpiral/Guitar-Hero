@@ -8,14 +8,12 @@ using System.Text;
 namespace TheWorld {
     class RoomMould {
         public List<GameObject> Props { get; set; }
-        public List<Zombie> Zombies{ get; set; }
-        public List<SpitZombie> Spits { get; set; }
+        public List<Monster> Monsters { get; set; }
         public List<Rectangle> ProtectedSpace { get; set; }
 
         public RoomMould(List<Texture2D> objectTextures, List<Texture2D> monsterTextures, Texture2D heartTexture) {
             Props = new List<GameObject>();
-            Zombies = new List<Zombie>();
-            Spits = new List<SpitZombie>();
+            Monsters = new List<Monster>();
             ProtectedSpace = new List<Rectangle>();
             switch (Static.GetNumber(3)) {
                 case 0: {
@@ -39,19 +37,19 @@ namespace TheWorld {
                                 case 0: {
                                         Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 1.5f, 1, 4, 4, 500);
-                                        Zombies.Add(temp);
+                                        Monsters.Add(temp);
                                         break;
                                     }
                                 case 1: {
                                         SpitZombie temp = new SpitZombie(monsterTextures[1], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 2.5f, 1,2, 2, 500);
-                                        Spits.Add(temp);
+                                        Monsters.Add(temp);
                                         break;
                                     }
                                 case 2: {
                                         Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 1.5f, 1, 4, 4, 500);
-                                        Zombies.Add(temp);
+                                        Monsters.Add(temp);
                                         break;
                                     }
                             }
@@ -81,19 +79,19 @@ namespace TheWorld {
                                 case 0: {
                                         Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 1.5f, 1, 4, 4, 500);
-                                        Zombies.Add(temp);
+                                        Monsters.Add(temp);
                                         break;
                                     }
                                 case 1: {
                                         SpitZombie temp = new SpitZombie(monsterTextures[1], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 2.5f, 1, 2, 2, 500);
-                                        Spits.Add(temp);
+                                        Monsters.Add(temp);
                                         break;
                                     }
                                 case 2: {
                                         Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 1.5f, 1, 4, 4, 500);
-                                        Zombies.Add(temp);
+                                        Monsters.Add(temp);
                                         break;
                                     }
                             }
@@ -123,19 +121,19 @@ namespace TheWorld {
                                 case 0: {
                                         Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 1.5f, 1, 4, 4, 500);
-                                        Zombies.Add(temp);
+                                        Monsters.Add(temp);
                                         break;
                                     }
                                 case 1: {
                                         SpitZombie temp = new SpitZombie(monsterTextures[1], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 2.5f, 1, 2, 2, 500);
-                                        Spits.Add(temp);
+                                        Monsters.Add(temp);
                                         break;
                                     }
                                 case 2: {
                                         Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 1.5f, 1, 4, 4, 500);
-                                        Zombies.Add(temp);
+                                        Monsters.Add(temp);
                                         break;
                                     }
                             }
