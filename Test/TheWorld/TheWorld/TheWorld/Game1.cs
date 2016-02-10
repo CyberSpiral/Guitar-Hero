@@ -66,7 +66,7 @@ namespace TheWorld {
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"));
 
-            p = new Player(Content.Load<Texture2D>("Character_sprite"), new Vector2(544, 306), 3, 1, 17, 17, 100);
+            p = new Player(Content.Load<Texture2D>("Character_sprite"), Content.Load<Texture2D>("heart"), new Vector2(544, 306), 3, 1, 17, 17, 100);
 
             // TODO: use this.Content to load your game content here
         }
@@ -125,9 +125,19 @@ namespace TheWorld {
             CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position));
             foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie)) {
                 z.Update(elapsed, p.Position);
+                if (z.CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0)
+                {
+                    p.Health -= 1;
+                    p.invTmr = 1.5f;
+            }
             }
             foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie)) {
                 sZ.Update(elapsed, p.Position, CurrentRoom.Props);
+                if (sZ.CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0)
+                {
+                    p.Health -= 1;
+                    p.invTmr = 1.5f;
+                }
             }
 
             foreach (var item in CurrentRoom.Props) {
