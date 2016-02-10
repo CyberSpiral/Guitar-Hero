@@ -81,7 +81,7 @@ namespace TheWorld {
             base.Update(elapsed);
             spitElapsed += elapsed;
             if (spitElapsed > 1000) {
-                if (Vector2.Distance(playerPos, Position) > 400) {
+                if (Vector2.Distance(playerPos, Position) > 200) {
                     direction = playerPos - Position;
                     if (direction != Vector2.Zero)
                         direction.Normalize();
@@ -91,7 +91,7 @@ namespace TheWorld {
                 else if (facingTowards) {
                     do {
                         randomPos = new Vector2(Static.GetNumber(68, World.RoomWidth - 68), Static.GetNumber(68, World.RoomHeight - 68));
-                    } while (Vector2.Distance(randomPos, playerPos) < 400);
+                    } while (Vector2.Distance(randomPos, playerPos) < 200);
                     direction = randomPos - Position;
                     if (direction != Vector2.Zero)
                         direction.Normalize();

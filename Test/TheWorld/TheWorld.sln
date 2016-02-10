@@ -5,9 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheWorld", "TheWorld\TheWorld\TheWorld.csproj", "{01BE5111-287E-4132-94A6-F158337E0A82}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "TheWorldContent", "TheWorld\TheWorldContent\TheWorldContent.contentproj", "{BFA65524-FCA6-4887-9746-0D14193267B7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicGame", "..\..\Game\MusicGame\MusicGame\MusicGame\MusicGame.csproj", "{D9C67E44-6734-4FF2-B112-59A5945C1193}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheWorldContent", "TheWorld\TheWorldContent\TheWorldContent.contentproj", "{BFA65524-FCA6-4887-9746-0D14193267B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +19,6 @@ Global
 		{01BE5111-287E-4132-94A6-F158337E0A82}.Release|x86.Build.0 = Release|x86
 		{BFA65524-FCA6-4887-9746-0D14193267B7}.Debug|x86.ActiveCfg = Debug|x86
 		{BFA65524-FCA6-4887-9746-0D14193267B7}.Release|x86.ActiveCfg = Release|x86
-		{D9C67E44-6734-4FF2-B112-59A5945C1193}.Debug|x86.ActiveCfg = Debug|x86
-		{D9C67E44-6734-4FF2-B112-59A5945C1193}.Debug|x86.Build.0 = Debug|x86
-		{D9C67E44-6734-4FF2-B112-59A5945C1193}.Release|x86.ActiveCfg = Release|x86
-		{D9C67E44-6734-4FF2-B112-59A5945C1193}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
