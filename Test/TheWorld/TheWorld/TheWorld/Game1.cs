@@ -65,7 +65,7 @@ namespace TheWorld {
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"));
 
-            p = new Player(Content.Load<Texture2D>("Character_sprite"), new Vector2(544, 306), 5, 1, 17, 17, 200);
+            p = new Player(Content.Load<Texture2D>("Character_sprite"), Content.Load<Texture2D>("heart"), new Vector2(544, 306), 5, 1, 17, 17, 200);
 
             // TODO: use this.Content to load your game content here
         }

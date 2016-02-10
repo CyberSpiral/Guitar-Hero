@@ -11,14 +11,20 @@ namespace TheWorld
     class Player : GameObject
     {
         public Weapon Weapon { get; set; }
+        public int Health { get; set; }
+        protected Texture2D Heart;
+
         protected int storedAnimationSpeed;
-        public Player(Texture2D texture, Vector2 position, float speed, int textureRows, int textureColumns
+
+        public Player(Texture2D texture, Texture2D heartTexture, Vector2 position, float speed, int textureRows, int textureColumns
             , int totalFrames, int animationSpeed)
             : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed)
         {
             this.speed = speed;
             storedAnimationSpeed = animationSpeed;
             Weapon = new Weapon();
+            Health = 10;
+            Heart = heartTexture;
         }
         public void Update(float elapsed, KeyboardState currentKey, KeyboardState oldKey, MouseState mouse)
         {
@@ -65,6 +71,20 @@ namespace TheWorld
             OldPos = Position;
             Position += Velocity * speed;
             #endregion
+        }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+            for (int i = 0; i < Health; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    spriteBatch.Draw(Heart, new Rectangle(40 + i * 12, 10, 10, 20), new Rectangle(0, 0, 15, 30), Color.Red);
+                }
+                else {
+                    spriteBatch.Draw(Heart, new Rectangle(38 + i * 12, 10, 10, 20), new Rectangle(15, 0, 15, 30), Color.Red);
+                }
+            }
         }
     }
 }
