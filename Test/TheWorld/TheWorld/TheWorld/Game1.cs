@@ -29,7 +29,7 @@ namespace TheWorld {
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = World.RoomWidth;
-            graphics.PreferredBackBufferHeight = World.RoomHeight;
+            graphics.PreferredBackBufferHeight = World.RoomHeight + World.UIBar;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }

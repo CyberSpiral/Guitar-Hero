@@ -9,6 +9,7 @@ namespace TheWorld {
     static class World {
         public const int RoomWidth = 1088;
         public const int RoomHeight = 612;
+        public const int UIBar = 136;
 
 
         public static Room[,] Rooms { get; set; }
