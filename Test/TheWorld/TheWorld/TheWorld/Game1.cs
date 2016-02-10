@@ -124,9 +124,19 @@ namespace TheWorld {
             CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position));
             foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie)) {
                 z.Update(elapsed, p.Position);
+                if (z.CollisionBox.Intersects(p.CollisionBox))
+                {
+                    p.Health -= 1;
+                    z.Position -= (z.Position - z.OldPos) * 20;
+                }
             }
             foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie)) {
                 sZ.Update(elapsed, p.Position);
+                if (sZ.CollisionBox.Intersects(p.CollisionBox))
+                {
+                    p.Health -= 1;
+                    sZ.Position -= (sZ.Position - sZ.OldPos) * 20;
+                }
             }
 
             foreach (var item in CurrentRoom.Props) {
