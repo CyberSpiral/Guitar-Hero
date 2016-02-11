@@ -93,7 +93,7 @@ namespace TheWorld {
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Q)) {
                 World.GenerateFloor();
-                World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"));
+                World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"));
             }
             if (Keyboard.GetState().IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I)) {
                 World.CurrentRoomLocationCode[1] -= 1;

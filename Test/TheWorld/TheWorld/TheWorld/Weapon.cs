@@ -97,11 +97,12 @@ namespace TheWorld {
             get { return new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y); }
             set { HitCollisionBox = value; }
         }
-        public WeaponProjectile(Vector2 position, Vector2 size, Texture2D texture, Vector2 rotation) : base(texture, position) {
-            Position = position;
+        public WeaponProjectile(Vector2 position, Vector2 size, Texture2D texture, Vector2 rotation, float speed) : base(texture, position) {
             Size = size;
+            Rotation = rotation;
         }
         public void Update() {
+            Position = Rotation * speed;
         }
     }
     class WeaponOnGround : GameObject {

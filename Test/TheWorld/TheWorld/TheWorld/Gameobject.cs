@@ -60,7 +60,7 @@ namespace TheWorld
                     currentFrame++;
                     if (currentFrame == totalFrames)
                         currentFrame = 0;
-                    totalElapsed -= animationSpeed;
+                    totalElapsed = 0;
                 }
             }
         }
