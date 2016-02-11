@@ -193,7 +193,7 @@ namespace TheWorld {
             for (int i = 0; i < 25; i++) {
                 for (int q = 0; q < 25; q++) {
                     if (World.ActiveRooms[i, q] == true) {
-                        spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * i, 20 + 10 * q, 9, 9), Color.White);
+                        spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * i, 20 + 10 * q - World.UIBar, 9, 9), Color.White);
                     }
                 }
             }
