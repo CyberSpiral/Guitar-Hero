@@ -92,7 +92,7 @@ namespace TheWorld
             }
             else if (menuType == MenuType.InGame)
             {
-                //pause button??
+
             }
             else if (menuType == MenuType.CreditMenu)
             {
@@ -149,8 +149,7 @@ namespace TheWorld
         Texture2D textureMouseHovering;
         Rectangle collisionBox;
         Rectangle mouseCollisionBox;
-
-        bool mouseHovering;
+        
         public bool mouseClicked;
 
         public MenuButton(Texture2D texture, Texture2D textureMouseHovering, Rectangle button)
@@ -158,7 +157,6 @@ namespace TheWorld
             this.texture = texture;
             this.textureMouseHovering = textureMouseHovering;
             this.collisionBox = button;
-            mouseHovering = false;
             mouseClicked = false;
         }
 
@@ -167,7 +165,6 @@ namespace TheWorld
             mouseCollisionBox = new Rectangle(ms.X, ms.Y, 1, 1);
             if (collisionBox.Intersects(mouseCollisionBox))
             {
-                mouseHovering = true;
                 if (ms.LeftButton == ButtonState.Pressed && msOld.LeftButton == ButtonState.Released)
                 {
                     mouseClicked = true;
@@ -179,7 +176,6 @@ namespace TheWorld
             }
             else
             {
-                mouseHovering = false;
                 mouseClicked = false;
             }
         }
