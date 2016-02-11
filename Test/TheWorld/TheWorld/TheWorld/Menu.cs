@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +17,18 @@ namespace TheWorld
     {
         public MenuType menuType;
 
+        MenuButton startButton;
+        MenuButton exitButton;
+        MenuButton pauseButton;
+
+
         public Menu()
         {
             menuType = MenuType.StartMenu;
+
         }
 
-        public void Update()
+        public void Update(MouseState ms)
         {
             if (menuType == MenuType.StartMenu)
             {
@@ -57,6 +65,49 @@ namespace TheWorld
             else if (menuType == MenuType.InGame)
             {
                 //pause button??
+            }
+        }
+    }
+
+    class MenuButton
+    {
+        Texture2D texture;
+        Texture2D textureMouseHovering;
+        Rectangle collisionBox;
+        Rectangle mouseCollisionBox;
+
+        bool mouseHovering;
+
+        public MenuButton(Texture2D texture, Texture2D textureMouseHovering, Rectangle button)
+        {
+            this.texture = texture;
+            this.textureMouseHovering = textureMouseHovering;
+            this.collisionBox = button;
+            mouseHovering = false;
+        }
+
+        public void Update(MouseState ms)
+        {
+            mouseCollisionBox = new Rectangle(ms.X, ms.Y, 1, 1);
+            if (collisionBox.Intersects(mouseCollisionBox))
+            {
+                mouseHovering = true;
+            }
+            else
+            {
+                mouseHovering = false;
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            if (collisionBox.Intersects(mouseCollisionBox))
+            {
+                spriteBatch.Draw(texture, collisionBox, Color.White);
+            }
+            else
+            {
+                spriteBatch.Draw(textureMouseHovering, collisionBox, Color.White);
             }
         }
     }
