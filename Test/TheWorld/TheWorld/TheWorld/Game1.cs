@@ -66,7 +66,8 @@ namespace TheWorld {
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"));
 
-            p = new Player(Content.Load<Texture2D>("Character_sprite"), Content.Load<Texture2D>("health"), new Vector2(544, 306), 3, 1, 17, 17, 100);
+            p = new Player(Content.Load<Texture2D>("Character_sprite_v2"), Content.Load<Texture2D>("health"), new Vector2(544, 306), 3, 1, 19, 19, 100,
+                new Weapon(0.1f, 1, WeaponType.Triangle, Content.Load<Texture2D>("dot")));
 
 
             // TODO: use this.Content to load your game content here
@@ -167,12 +168,23 @@ namespace TheWorld {
             for (int i = 0; i < CurrentRoom.Monsters.Count; i++) {
                 for (int q = 0; q < p.Weapon.hit.Count; q++) {
                     if (CurrentRoom.Monsters[i].CollisionBox.Intersects(p.Weapon.hit[q].HitCollisionBox)) {
-                        CurrentRoom.Monsters[i].Health--;
+                        CurrentRoom.Monsters[i].Health -= p.Weapon.damage;
                         if (CurrentRoom.Monsters[i].Health <= 0) {
+                            if (CurrentRoom.Monsters[i] is Zombie) {
+                                CurrentRoom.Animations.Add(new TempObject(Content.Load<Texture2D>("Zombie_death_sprite"), CurrentRoom.Monsters[i].Position
+                                    , 1, 15, 15, 200, CurrentRoom.Monsters[i].Rotation));
+                            }
                             CurrentRoom.Monsters.RemoveAt(i);
                             i--;
                         }
                     }
+                }
+            }
+            CurrentRoom.Animations.ForEach(x => x.Update(elapsed));
+            for (int i = 0; i < CurrentRoom.Animations.Count; i++) {
+                if (CurrentRoom.Animations[i].Dead) {
+                    CurrentRoom.Animations.RemoveAt(i);
+                    i--;
                 }
             }
 

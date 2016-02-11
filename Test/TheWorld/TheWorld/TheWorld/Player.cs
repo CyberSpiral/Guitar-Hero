@@ -16,24 +16,24 @@ namespace TheWorld {
         protected int storedAnimationSpeed;
 
         public Player(Texture2D texture, Texture2D heartTexture, Vector2 position, float speed, int textureRows, int textureColumns
-            , int totalFrames, int animationSpeed)
+            , int totalFrames, int animationSpeed, Weapon weapon)
             : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {
             this.speed = speed;
             storedAnimationSpeed = animationSpeed;
-            Weapon = new Weapon();
             Health = 10;
             Heart = heartTexture;
+            Weapon = weapon;
         }
         public void Update(float elapsed, KeyboardState currentKey, KeyboardState oldKey, MouseState mouse) {
             base.Update(elapsed);
             Vector2 direction = new Vector2(Mouse.GetState().X, Mouse.GetState().Y - World.UIBar) - Position;
             if (direction != Vector2.Zero)
                 direction.Normalize();
-            rotation = (float)Math.Atan2(direction.Y, direction.X);
+            Rotation = (float)Math.Atan2(direction.Y, direction.X);
 
             Weapon.Update(elapsed);
             if (currentKey.IsKeyDown(Keys.Space) && oldKey.IsKeyUp(Keys.Space)) {
-                Weapon.Execute(new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation)), Position);
+                Weapon.Execute(new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)), Position);
             }
             if (invTmr > 0) {
                 invTmr -= elapsed / 1000;
@@ -42,23 +42,23 @@ namespace TheWorld {
             #region CurrentMovement
             //Can be changed
             if (currentKey.IsKeyDown(Keys.W))
-                Velocity = new Vector2((float)Math.Cos(rotation), (float)Math.Sin(rotation));
+                Velocity = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation));
             if (currentKey.IsKeyDown(Keys.S))
-                Velocity = new Vector2((float)Math.Cos(rotation + MathHelper.ToRadians(180)), (float)Math.Sin(rotation + MathHelper.ToRadians(180)));
+                Velocity = new Vector2((float)Math.Cos(Rotation + MathHelper.ToRadians(180)), (float)Math.Sin(Rotation + MathHelper.ToRadians(180)));
             if (currentKey.IsKeyDown(Keys.D))
-                Velocity = new Vector2((float)Math.Cos(rotation + MathHelper.ToRadians(90)), (float)Math.Sin(rotation + MathHelper.ToRadians(90)));
+                Velocity = new Vector2((float)Math.Cos(Rotation + MathHelper.ToRadians(90)), (float)Math.Sin(Rotation + MathHelper.ToRadians(90)));
             if (currentKey.IsKeyDown(Keys.A))
-                Velocity = new Vector2((float)Math.Cos(rotation + MathHelper.ToRadians(-90)), (float)Math.Sin(rotation + MathHelper.ToRadians(-90)));
+                Velocity = new Vector2((float)Math.Cos(Rotation + MathHelper.ToRadians(-90)), (float)Math.Sin(Rotation + MathHelper.ToRadians(-90)));
 
 
             if (currentKey.IsKeyDown(Keys.W) && currentKey.IsKeyDown(Keys.D))
-                Velocity = new Vector2((float)Math.Cos(rotation + MathHelper.ToRadians(45)), (float)Math.Sin(rotation + MathHelper.ToRadians(45)));
+                Velocity = new Vector2((float)Math.Cos(Rotation + MathHelper.ToRadians(45)), (float)Math.Sin(Rotation + MathHelper.ToRadians(45)));
             if (currentKey.IsKeyDown(Keys.W) && currentKey.IsKeyDown(Keys.A))
-                Velocity = new Vector2((float)Math.Cos(rotation + MathHelper.ToRadians(-45)), (float)Math.Sin(rotation + MathHelper.ToRadians(-45)));
+                Velocity = new Vector2((float)Math.Cos(Rotation + MathHelper.ToRadians(-45)), (float)Math.Sin(Rotation + MathHelper.ToRadians(-45)));
             if (currentKey.IsKeyDown(Keys.S) && currentKey.IsKeyDown(Keys.D))
-                Velocity = new Vector2((float)Math.Cos(rotation + MathHelper.ToRadians(135)), (float)Math.Sin(rotation + MathHelper.ToRadians(135)));
+                Velocity = new Vector2((float)Math.Cos(Rotation + MathHelper.ToRadians(135)), (float)Math.Sin(Rotation + MathHelper.ToRadians(135)));
             if (currentKey.IsKeyDown(Keys.S) && currentKey.IsKeyDown(Keys.A))
-                Velocity = new Vector2((float)Math.Cos(rotation + MathHelper.ToRadians(-135)), (float)Math.Sin(rotation + MathHelper.ToRadians(-135)));
+                Velocity = new Vector2((float)Math.Cos(Rotation + MathHelper.ToRadians(-135)), (float)Math.Sin(Rotation + MathHelper.ToRadians(-135)));
 
             if (currentKey.IsKeyUp(Keys.W) && currentKey.IsKeyUp(Keys.A) && currentKey.IsKeyUp(Keys.S) && currentKey.IsKeyUp(Keys.D)) {
                 Velocity = Vector2.Zero;
