@@ -26,7 +26,7 @@ namespace TheWorld {
         }
         public void Update(float elapsed, KeyboardState currentKey, KeyboardState oldKey, MouseState mouse) {
             base.Update(elapsed);
-            Vector2 direction = new Vector2(Mouse.GetState().X, Mouse.GetState().Y) - Position;
+            Vector2 direction = new Vector2(Mouse.GetState().X, Mouse.GetState().Y - World.UIBar) - Position;
             if (direction != Vector2.Zero)
                 direction.Normalize();
             rotation = (float)Math.Atan2(direction.Y, direction.X);
@@ -78,10 +78,10 @@ namespace TheWorld {
             base.Draw(spriteBatch);
             for (int i = 0; i < Health; i++) {
                 if (i % 2 == 0) {
-                    spriteBatch.Draw(Heart, new Rectangle(40 + i * 12, 10, 10, 20), new Rectangle(0, 0, 15, 30), Color.White);
+                    spriteBatch.Draw(Heart, new Rectangle(240 + i * 12 * 2, 10 - World.UIBar, 20, 40), new Rectangle(0, 0, 15, 30), Color.White);
                 }
                 else {
-                    spriteBatch.Draw(Heart, new Rectangle(38 + i * 12, 10, 10, 20), new Rectangle(15, 0, 15, 30), Color.White);
+                    spriteBatch.Draw(Heart, new Rectangle(236 + i * 12 * 2, 10 - World.UIBar, 20, 40), new Rectangle(15, 0, 15, 30), Color.White);
                 }
             }
         }

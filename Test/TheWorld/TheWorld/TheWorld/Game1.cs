@@ -29,7 +29,7 @@ namespace TheWorld {
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = World.RoomWidth;
-            graphics.PreferredBackBufferHeight = World.RoomHeight;
+            graphics.PreferredBackBufferHeight = World.RoomHeight + World.UIBar;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -67,6 +67,7 @@ namespace TheWorld {
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"));
 
             p = new Player(Content.Load<Texture2D>("Character_sprite"), Content.Load<Texture2D>("health"), new Vector2(544, 306), 3, 1, 17, 17, 100);
+
 
             // TODO: use this.Content to load your game content here
         }
@@ -186,13 +187,13 @@ namespace TheWorld {
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Matrix.CreateTranslation(0, World.UIBar, 0));
             CurrentRoom.Draw(spriteBatch);
 
             for (int i = 0; i < 25; i++) {
                 for (int q = 0; q < 25; q++) {
                     if (World.ActiveRooms[i, q] == true) {
-                        spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * i, 20 + 10 * q, 9, 9), Color.White);
+                        spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(10 + 10 * i, -30 + 10 * q - World.UIBar, 9, 9), Color.White);
                     }
                 }
             }
@@ -208,8 +209,8 @@ namespace TheWorld {
             p.Draw(spriteBatch);
             p.Weapon.hit.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle((int)x.Position.X, (int)x.Position.Y, (int)x.Size.X, (int)x.Size.Y), Color.Green));
 
-            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * World.LastRoom[0], 20 + 10 * World.LastRoom[1], 9, 9), Color.BlueViolet);
-            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(20 + 10 * CurrentRoom.XCoordinate, 20 + 10 * CurrentRoom.YCoordinate, 9, 9), Color.Red);
+            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(10 + 10 * World.LastRoom[0], -30 + 10 * World.LastRoom[1] - World.UIBar, 9, 9), Color.BlueViolet);
+            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(10 + 10 * CurrentRoom.XCoordinate, -30 + 10 * CurrentRoom.YCoordinate - World.UIBar, 9, 9), Color.Red);
 
 
 
