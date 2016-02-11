@@ -14,6 +14,7 @@ namespace TheWorld
         public Vector2 Position { get; set; }
         public Vector2 Velocity { get; protected set; }
         public Vector2 OldPos { get; set; }
+        public bool Collectable { get; set; } = false;
         public Rectangle CollisionBox
         {
             get { return animated ? new Rectangle((int)Position.X - (Texture.Width / Columns / 2), (int)Position.Y - (Texture.Height / Rows / 2), Texture.Width / Columns, Texture.Height / Rows) 
@@ -182,7 +183,6 @@ namespace TheWorld
         }
     }
     class TempObject : GameObject {
-        public bool Dead { get; set; }
         public TempObject(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames, int animationSpeed, float rotation) : base(texture,position,rows,columns,totalFrames,animationSpeed) {
             Texture = texture;
             Position = position;
@@ -193,13 +193,13 @@ namespace TheWorld
             this.totalFrames = totalFrames;
             this.animationSpeed = animationSpeed;
             animated = true;
-            Dead = false;
+            Collectable = false;
             Rotation = rotation;
         }
         public override void Update(float elapsed) {
             base.Update(elapsed);
             if (currentFrame >= totalFrames-1) {
-                Dead = true;
+                Collectable = true;
             }
         }
     }

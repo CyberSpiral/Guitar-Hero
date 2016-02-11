@@ -73,7 +73,7 @@ namespace TheWorld {
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"), 
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("dot"), Content.Load<Texture2D>("dot"));
             p = new Player(Content.Load<Texture2D>("Character_sprite_v2"), Content.Load<Texture2D>("health"), new Vector2(544, 306), 3, 1, 19, 19, 100,
-                new Weapon(1f, 3, WeaponType., Content.Load<Texture2D>("dot")));
+                new Weapon(1f, 3, WeaponType.ElectricGuitar, Content.Load<Texture2D>("dot")));
 
 
             // TODO: use this.Content to load your game content here
@@ -136,13 +136,14 @@ namespace TheWorld {
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-            p.Update(elapsed, Keyboard.GetState(), oldState, Mouse.GetState());
+            p.Update(elapsed, Keyboard.GetState(), oldState, Mouse.GetState(), msOld);
             p.Position = p.Position.X < 50 ? p.OldPos : p.Position;
             p.Position = p.Position.X > World.RoomWidth - 50 ? p.OldPos : p.Position;
             p.Position = p.Position.Y < 60 ? p.OldPos : p.Position;
             p.Position = p.Position.Y > World.RoomHeight - 60 ? p.OldPos : p.Position;
 
-            CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position));
+                #region Collision
+                CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position));
                 foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie))
                 {
                 z.Update(elapsed, p.Position);
@@ -209,21 +210,58 @@ namespace TheWorld {
                                 CurrentRoom.Animations.Add(new TempObject(Content.Load<Texture2D>("Zombie_death_sprite"), CurrentRoom.Monsters[i].Position
                                     , 1, 15, 15, 200, CurrentRoom.Monsters[i].Rotation));
                             }
-                            CurrentRoom.Monsters.RemoveAt(i);
-                            i--;
+                                CurrentRoom.Monsters[i].Collectable = true;
                         }
                     }
+
                 }
-            }
-            CurrentRoom.Animations.ForEach(x => x.Update(elapsed));
+                    for (int q = 0; q < p.Weapon.projectile.Count; q++)
+                    {
+                        if (CurrentRoom.Monsters[i].CollisionBox.Intersects(p.Weapon.projectile[q].HitCollisionBox))
+                        {
+                            CurrentRoom.Monsters[i].Health -= p.Weapon.damage;
+                            if (CurrentRoom.Monsters[i].Health <= 0)
+                            {
+                                if (CurrentRoom.Monsters[i] is Zombie)
+                                {
+                                    CurrentRoom.Animations.Add(new TempObject(Content.Load<Texture2D>("Zombie_death_sprite"), CurrentRoom.Monsters[i].Position
+                                        , 1, 15, 15, 200, CurrentRoom.Monsters[i].Rotation));
+                                }
+                                CurrentRoom.Monsters[i].Collectable = true;
+                            }
+                            p.Weapon.projectile[q].Collectable = true;
+                        }
+
+                    }
+                }
+                #endregion
+                CurrentRoom.Animations.ForEach(x => x.Update(elapsed));
+                #region Garbage
                 for (int i = 0; i < CurrentRoom.Animations.Count; i++)
                 {
-                    if (CurrentRoom.Animations[i].Dead)
+                    if (CurrentRoom.Animations[i].Collectable)
                     {
                     CurrentRoom.Animations.RemoveAt(i);
                     i--;
                 }
             }
+                for (int i = 0; i < CurrentRoom.Monsters.Count; i++)
+                {
+                    if (CurrentRoom.Monsters[i].Collectable)
+                    {
+                        CurrentRoom.Monsters.RemoveAt(i);
+                        i--;
+                    }
+                }
+                for (int i = 0; i < p.Weapon.projectile.Count; i++)
+                {
+                    if (p.Weapon.projectile[i].Collectable)
+                    {
+                        p.Weapon.projectile.RemoveAt(i);
+                        i--;
+                    }
+                }
+                #endregion
             }
 
             msOld = Mouse.GetState();
