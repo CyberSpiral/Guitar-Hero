@@ -33,17 +33,18 @@ namespace TheWorld
         Texture2D creditTexture;
         Texture2D creditTextureMouseHovering;
 
-        public Menu(Texture2D sT, Texture2D sTMH, Texture2D eT, Texture2D eTMH, Texture2D pT, Texture2D pTMH, Texture2D cT, Texture2D cTMH)
+        public Menu(Texture2D startTexture, Texture2D startTextureMouseHovering, Texture2D exitTexture, Texture2D exitTextureMouseHovering, 
+            Texture2D pauseTexture, Texture2D pauseTextureMouseHovering, Texture2D creditTexture, Texture2D creditTextureMouseHovering)
         {
             menuType = MenuType.StartMenu;
-            startTexture = sT;
-            startTextureMouseHovering = sTMH;
-            exitTexture = eT;
-            exitTextureMouseHovering = eTMH;
-            pauseTexture = pT;
-            pauseTextureMouseHovering = pTMH;
-            creditTexture = cT;
-            creditTextureMouseHovering = cTMH;
+            this.startTexture = startTexture;
+            this.startTextureMouseHovering = startTextureMouseHovering;
+            this.exitTexture = exitTexture;
+            this.exitTextureMouseHovering = exitTextureMouseHovering;
+            this.pauseTexture = pauseTexture;
+            this.pauseTextureMouseHovering = pauseTextureMouseHovering;
+            this.creditTexture = creditTexture;
+            this.creditTextureMouseHovering = creditTextureMouseHovering;
 
             startButton = new MenuButton(startTexture, startTextureMouseHovering, new Rectangle(100, 100, 100, 100));
             exitButton = new MenuButton(exitTexture, exitTextureMouseHovering, new Rectangle(500, 100, 100, 100));
@@ -52,8 +53,13 @@ namespace TheWorld
 
         }
 
-        public void Update(MouseState ms)
+        public void Update(MouseState ms, MouseState msOld)
         {
+            startButton.Update(ms, msOld);
+            exitButton.Update(ms, msOld);
+            pauseButton.Update(ms, msOld);
+            creditButton.Update(ms, msOld);
+
             if (menuType == MenuType.StartMenu)
             {
                 //exit, start

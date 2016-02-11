@@ -20,10 +20,13 @@ namespace TheWorld {
         List<Texture2D> objects;
         List<Texture2D> monsters;
         KeyboardState oldState;
+        MouseState ms;
+        MouseState msOld;
         Room CurrentRoom {
             get { return World.Rooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1]]; }
         }
 
+        Menu menu;
         Player p;
 
         public Game1() {
@@ -66,6 +69,9 @@ namespace TheWorld {
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"));
 
+
+            menu = new Menu(Content.Load<Texture2D>(""), Content.Load<Texture2D>(""), Content.Load<Texture2D>(""), Content.Load<Texture2D>(""), 
+                            Content.Load<Texture2D>(""), Content.Load<Texture2D>(""), Content.Load<Texture2D>(""), Content.Load<Texture2D>(""));
             p = new Player(Content.Load<Texture2D>("Character_sprite_v2"), Content.Load<Texture2D>("health"), new Vector2(544, 306), 3, 1, 19, 19, 100,
                 new Weapon(0.1f, 1, WeaponType.Triangle, Content.Load<Texture2D>("dot")));
 
@@ -91,6 +97,9 @@ namespace TheWorld {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) {
                 this.Exit();
             }
+            ms = Mouse.GetState();
+            menu.Update(ms, msOld);
+
             if (Keyboard.GetState().IsKeyDown(Keys.Q)) {
                 World.GenerateFloor();
                 World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"));
@@ -188,6 +197,7 @@ namespace TheWorld {
                 }
             }
 
+            msOld = Mouse.GetState();
             oldState = Keyboard.GetState();
             base.Update(gameTime);
         }
