@@ -70,8 +70,8 @@ namespace TheWorld {
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"));
 
 
-            menu = new Menu(Content.Load<Texture2D>(""), Content.Load<Texture2D>(""), Content.Load<Texture2D>(""), Content.Load<Texture2D>(""), 
-                            Content.Load<Texture2D>(""), Content.Load<Texture2D>(""), Content.Load<Texture2D>(""), Content.Load<Texture2D>(""));
+            menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"), 
+                Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("dot"), Content.Load<Texture2D>("dot"));
             p = new Player(Content.Load<Texture2D>("Character_sprite_v2"), Content.Load<Texture2D>("health"), new Vector2(544, 306), 3, 1, 19, 19, 100,
                 new Weapon(0.1f, 1, WeaponType.Triangle, Content.Load<Texture2D>("dot")));
 
@@ -100,100 +100,129 @@ namespace TheWorld {
             ms = Mouse.GetState();
             menu.Update(ms, msOld);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Q)) {
-                World.GenerateFloor();
-                World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"));
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I)) {
-                World.CurrentRoomLocationCode[1] -= 1;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.K) && oldState.IsKeyUp(Keys.K)) {
-                World.CurrentRoomLocationCode[1] += 1;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.L) && oldState.IsKeyUp(Keys.L)) {
-                World.CurrentRoomLocationCode[0] += 1;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.J) && oldState.IsKeyUp(Keys.J)) {
-                World.CurrentRoomLocationCode[0] -= 1;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.G)) {
-                if (World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1]) {
+            if (menu.menuType == MenuType.InGame)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                {
                     World.GenerateFloor();
-                    World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"));
-                    World.CurrentLevel += 1;
+                    World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"));
                 }
-            }
-
-            float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-
-            p.Update(elapsed, Keyboard.GetState(), oldState, Mouse.GetState());
-            p.Position = p.Position.X < 50 ? p.OldPos : p.Position;
-            p.Position = p.Position.X > World.RoomWidth - 50 ? p.OldPos : p.Position;
-            p.Position = p.Position.Y < 60 ? p.OldPos : p.Position;
-            p.Position = p.Position.Y > World.RoomHeight - 60 ? p.OldPos : p.Position;
-
-            CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position));
-            foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie)) {
-                z.Update(elapsed, p.Position);
-                if (z.CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0) {
-                    p.Health -= 1;
-                    p.invTmr = 1.5f;
+                if (Keyboard.GetState().IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I))
+                {
+                    World.CurrentRoomLocationCode[1] -= 1;
                 }
-            }
-            foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie)) {
-                sZ.Update(elapsed, p.Position, CurrentRoom.Props);
-                for (int i = 0; i < sZ.SpitList.Count; i++) {
-                    if (sZ.SpitList[i].CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0) {
-                        p.Health--;
+                if (Keyboard.GetState().IsKeyDown(Keys.K) && oldState.IsKeyUp(Keys.K))
+                {
+                    World.CurrentRoomLocationCode[1] += 1;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.L) && oldState.IsKeyUp(Keys.L))
+                {
+                    World.CurrentRoomLocationCode[0] += 1;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.J) && oldState.IsKeyUp(Keys.J))
+                {
+                    World.CurrentRoomLocationCode[0] -= 1;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.G))
+                {
+                    if (World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1])
+                    {
+                        World.GenerateFloor();
+                        World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"));
+                        World.CurrentLevel += 1;
+                    }
+                }
+
+                float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                p.Update(elapsed, Keyboard.GetState(), oldState, Mouse.GetState());
+                p.Position = p.Position.X < 50 ? p.OldPos : p.Position;
+                p.Position = p.Position.X > World.RoomWidth - 50 ? p.OldPos : p.Position;
+                p.Position = p.Position.Y < 60 ? p.OldPos : p.Position;
+                p.Position = p.Position.Y > World.RoomHeight - 60 ? p.OldPos : p.Position;
+
+                CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position));
+                foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie))
+                {
+                    z.Update(elapsed, p.Position);
+                    if (z.CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0)
+                    {
+                        p.Health -= 1;
                         p.invTmr = 1.5f;
-                        sZ.SpitList.RemoveAt(i);
-                        i--;
-                    }
-                    else if (sZ.SpitList[i].CollisionBox.Intersects(p.CollisionBox)) {
-                        sZ.SpitList.RemoveAt(i);
-                        i--;
                     }
                 }
-
-            }
-
-            foreach (var item in CurrentRoom.Props) {
-                if (item.CollisionBox.Intersects(p.CollisionBox)) {
-                    p.Position = p.OldPos;
-                }
-                foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie)) {
-                    if (z.CollisionBox.Intersects(item.CollisionBox)) {
-                        z.Position = z.OldPos;
-                    }
-                }
-                foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie)) {
-                    if (sZ.CollisionBox.Intersects(item.CollisionBox)) {
-                        sZ.Position = sZ.OldPos;
-                        sZ.facingTowards = true;
-                    }
-                }
-            }
-            for (int i = 0; i < CurrentRoom.Monsters.Count; i++) {
-                for (int q = 0; q < p.Weapon.hit.Count; q++) {
-                    if (CurrentRoom.Monsters[i].CollisionBox.Intersects(p.Weapon.hit[q].HitCollisionBox)) {
-                        CurrentRoom.Monsters[i].Health -= p.Weapon.damage;
-                        if (CurrentRoom.Monsters[i].Health <= 0) {
-                            if (CurrentRoom.Monsters[i] is Zombie) {
-                                CurrentRoom.Animations.Add(new TempObject(Content.Load<Texture2D>("Zombie_death_sprite"), CurrentRoom.Monsters[i].Position
-                                    , 1, 15, 15, 200, CurrentRoom.Monsters[i].Rotation));
-                            }
-                            CurrentRoom.Monsters.RemoveAt(i);
+                foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie))
+                {
+                    sZ.Update(elapsed, p.Position, CurrentRoom.Props);
+                    for (int i = 0; i < sZ.SpitList.Count; i++)
+                    {
+                        if (sZ.SpitList[i].CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0)
+                        {
+                            p.Health--;
+                            p.invTmr = 1.5f;
+                            sZ.SpitList.RemoveAt(i);
+                            i--;
+                        }
+                        else if (sZ.SpitList[i].CollisionBox.Intersects(p.CollisionBox))
+                        {
+                            sZ.SpitList.RemoveAt(i);
                             i--;
                         }
                     }
+
                 }
-            }
-            CurrentRoom.Animations.ForEach(x => x.Update(elapsed));
-            for (int i = 0; i < CurrentRoom.Animations.Count; i++) {
-                if (CurrentRoom.Animations[i].Dead) {
-                    CurrentRoom.Animations.RemoveAt(i);
-                    i--;
+
+                foreach (var item in CurrentRoom.Props)
+                {
+                    if (item.CollisionBox.Intersects(p.CollisionBox))
+                    {
+                        p.Position = p.OldPos;
+                    }
+                    foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie))
+                    {
+                        if (z.CollisionBox.Intersects(item.CollisionBox))
+                        {
+                            z.Position = z.OldPos;
+                        }
+                    }
+                    foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie))
+                    {
+                        if (sZ.CollisionBox.Intersects(item.CollisionBox))
+                        {
+                            sZ.Position = sZ.OldPos;
+                            sZ.facingTowards = true;
+                        }
+                    }
+                }
+                for (int i = 0; i < CurrentRoom.Monsters.Count; i++)
+                {
+                    for (int q = 0; q < p.Weapon.hit.Count; q++)
+                    {
+                        if (CurrentRoom.Monsters[i].CollisionBox.Intersects(p.Weapon.hit[q].HitCollisionBox))
+                        {
+                            CurrentRoom.Monsters[i].Health -= p.Weapon.damage;
+                            if (CurrentRoom.Monsters[i].Health <= 0)
+                            {
+                                if (CurrentRoom.Monsters[i] is Zombie)
+                                {
+                                    CurrentRoom.Animations.Add(new TempObject(Content.Load<Texture2D>("Zombie_death_sprite"), CurrentRoom.Monsters[i].Position
+                                        , 1, 15, 15, 200, CurrentRoom.Monsters[i].Rotation));
+                                }
+                                CurrentRoom.Monsters.RemoveAt(i);
+                                i--;
+                            }
+                        }
+                    }
+                }
+                CurrentRoom.Animations.ForEach(x => x.Update(elapsed));
+                for (int i = 0; i < CurrentRoom.Animations.Count; i++)
+                {
+                    if (CurrentRoom.Animations[i].Dead)
+                    {
+                        CurrentRoom.Animations.RemoveAt(i);
+                        i--;
+                    }
                 }
             }
 
@@ -208,33 +237,44 @@ namespace TheWorld {
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Matrix.CreateTranslation(0, World.UIBar, 0));
-            CurrentRoom.Draw(spriteBatch);
 
-            for (int i = 0; i < 25; i++) {
-                for (int q = 0; q < 25; q++) {
-                    if (World.ActiveRooms[i, q] == true) {
-                        spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * i, -40 + 10 * q - World.UIBar, 9, 9), Color.White);
+            if (menu.menuType == MenuType.InGame)
+            {
+                CurrentRoom.Draw(spriteBatch);
+
+                for (int i = 0; i < 25; i++)
+                {
+                    for (int q = 0; q < 25; q++)
+                    {
+                        if (World.ActiveRooms[i, q] == true)
+                        {
+                            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * i, -40 + 10 * q - World.UIBar, 9, 9), Color.White);
+                        }
                     }
                 }
-            }
-            CurrentRoom.Doors.Where(x => x.active).ToList().ForEach(x => x.Draw(spriteBatch));
+                CurrentRoom.Doors.Where(x => x.active).ToList().ForEach(x => x.Draw(spriteBatch));
 
-            if (Keyboard.GetState().IsKeyDown(Keys.E)) {
-                CurrentRoom.Props.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), x.CollisionBox, Color.Red));
-                foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie)) {
-                    spriteBatch.Draw(Content.Load<Texture2D>("dot"), z.CollisionBox, Color.Red);
+                if (Keyboard.GetState().IsKeyDown(Keys.E))
+                {
+                    CurrentRoom.Props.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), x.CollisionBox, Color.Red));
+                    foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie))
+                    {
+                        spriteBatch.Draw(Content.Load<Texture2D>("dot"), z.CollisionBox, Color.Red);
+                    }
+                    spriteBatch.Draw(Content.Load<Texture2D>("dot"), p.CollisionBox, Color.Red);
                 }
-                spriteBatch.Draw(Content.Load<Texture2D>("dot"), p.CollisionBox, Color.Red);
+                p.Draw(spriteBatch);
+                p.Weapon.hit.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle((int)x.Position.X, (int)x.Position.Y, (int)x.Size.X, (int)x.Size.Y), Color.Green));
+
+                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.LastRoom[0], -40 + 10 * World.LastRoom[1] - World.UIBar, 9, 9), Color.BlueViolet);
+                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * CurrentRoom.XCoordinate, -40 + 10 * CurrentRoom.YCoordinate - World.UIBar, 9, 9), Color.Red);
+
             }
-            p.Draw(spriteBatch);
-            p.Weapon.hit.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle((int)x.Position.X, (int)x.Position.Y, (int)x.Size.X, (int)x.Size.Y), Color.Green));
-
-            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.LastRoom[0], -40 + 10 * World.LastRoom[1] - World.UIBar, 9, 9), Color.BlueViolet);
-            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * CurrentRoom.XCoordinate, -40 + 10 * CurrentRoom.YCoordinate - World.UIBar, 9, 9), Color.Red);
-
-
+            else
+            {
+                menu.Draw(spriteBatch);
+            }
 
             spriteBatch.End();
 

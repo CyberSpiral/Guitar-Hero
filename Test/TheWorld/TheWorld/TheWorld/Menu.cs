@@ -26,30 +26,25 @@ namespace TheWorld
         Texture2D exitTextureMouseHovering;
 
         MenuButton pauseButton;
-        Texture2D pauseTexture;
-        Texture2D pauseTextureMouseHovering;
 
         MenuButton creditButton;
         Texture2D creditTexture;
         Texture2D creditTextureMouseHovering;
 
         public Menu(Texture2D startTexture, Texture2D startTextureMouseHovering, Texture2D exitTexture, Texture2D exitTextureMouseHovering, 
-            Texture2D pauseTexture, Texture2D pauseTextureMouseHovering, Texture2D creditTexture, Texture2D creditTextureMouseHovering)
+            Texture2D creditTexture, Texture2D creditTextureMouseHovering)
         {
             menuType = MenuType.StartMenu;
             this.startTexture = startTexture;
             this.startTextureMouseHovering = startTextureMouseHovering;
             this.exitTexture = exitTexture;
             this.exitTextureMouseHovering = exitTextureMouseHovering;
-            this.pauseTexture = pauseTexture;
-            this.pauseTextureMouseHovering = pauseTextureMouseHovering;
             this.creditTexture = creditTexture;
             this.creditTextureMouseHovering = creditTextureMouseHovering;
 
-            startButton = new MenuButton(startTexture, startTextureMouseHovering, new Rectangle(100, 100, 100, 100));
-            exitButton = new MenuButton(exitTexture, exitTextureMouseHovering, new Rectangle(500, 100, 100, 100));
-            pauseButton = new MenuButton(pauseTexture, pauseTextureMouseHovering, new Rectangle(100, 300, 100, 100));
-            creditButton = new MenuButton(creditTexture, creditTextureMouseHovering, new Rectangle(500, 300, 100, 100));
+            startButton = new MenuButton(startTexture, startTextureMouseHovering, new Rectangle((World.RoomWidth - 530)/2, 80, 530, 196));
+            exitButton = new MenuButton(exitTexture, exitTextureMouseHovering, new Rectangle(World.RoomWidth / 2 + 100, 300, 329, 128));
+            creditButton = new MenuButton(creditTexture, creditTextureMouseHovering, new Rectangle(World.RoomWidth / 2 - 100 - 329, 300, 329, 128));
 
         }
 
@@ -57,7 +52,7 @@ namespace TheWorld
         {
             startButton.Update(ms, msOld);
             exitButton.Update(ms, msOld);
-            pauseButton.Update(ms, msOld);
+            //pauseButton.Update(ms, msOld);
             creditButton.Update(ms, msOld);
 
             if (menuType == MenuType.StartMenu)
@@ -71,6 +66,10 @@ namespace TheWorld
                 {
                     menuType = MenuType.InGame;
                 }
+                if (creditButton.mouseClicked)
+                {
+                    menuType = MenuType.CreditMenu;
+                }
             }
             else if (menuType == MenuType.DeathMenu)
             {
@@ -83,6 +82,10 @@ namespace TheWorld
                 {
                     menuType = MenuType.InGame;
                 }
+                if (creditButton.mouseClicked)
+                {
+                    menuType = MenuType.CreditMenu;
+                }
             }
             else if (menuType == MenuType.PauseMenu)
             {
@@ -94,6 +97,10 @@ namespace TheWorld
                 if (startButton.mouseClicked)
                 {
                     menuType = MenuType.InGame;
+                }
+                if (creditButton.mouseClicked)
+                {
+                    menuType = MenuType.CreditMenu;
                 }
             }
             else if (menuType == MenuType.InGame)
@@ -168,7 +175,7 @@ namespace TheWorld
 
         public void Update(MouseState ms, MouseState msOld)
         {
-            mouseCollisionBox = new Rectangle(ms.X, ms.Y, 1, 1);
+            mouseCollisionBox = new Rectangle(ms.X, ms.Y - World.UIBar, 1, 1);
             if (collisionBox.Intersects(mouseCollisionBox))
             {
                 if (ms.LeftButton == ButtonState.Pressed && msOld.LeftButton == ButtonState.Released)
@@ -190,11 +197,11 @@ namespace TheWorld
         {
             if (collisionBox.Intersects(mouseCollisionBox))
             {
-                spriteBatch.Draw(texture, collisionBox, Color.White);
+                spriteBatch.Draw(textureMouseHovering, collisionBox, Color.White);
             }
             else
             {
-                spriteBatch.Draw(textureMouseHovering, collisionBox, Color.White);
+                spriteBatch.Draw(texture, collisionBox, Color.White);
             }
         }
     }
