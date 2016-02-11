@@ -67,6 +67,7 @@ namespace TheWorld {
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"));
 
             p = new Player(Content.Load<Texture2D>("Character_sprite"), Content.Load<Texture2D>("heart"), new Vector2(544, 306), 3, 1, 17, 17, 100);
+            
 
             // TODO: use this.Content to load your game content here
         }
@@ -186,7 +187,7 @@ namespace TheWorld {
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Matrix.CreateTranslation(0, World.UIBar, 0));
             CurrentRoom.Draw(spriteBatch);
 
             for (int i = 0; i < 25; i++) {

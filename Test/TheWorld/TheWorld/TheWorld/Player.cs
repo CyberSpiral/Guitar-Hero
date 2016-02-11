@@ -26,7 +26,7 @@ namespace TheWorld {
         }
         public void Update(float elapsed, KeyboardState currentKey, KeyboardState oldKey, MouseState mouse) {
             base.Update(elapsed);
-            Vector2 direction = new Vector2(Mouse.GetState().X, Mouse.GetState().Y) - Position;
+            Vector2 direction = new Vector2(Mouse.GetState().X, Mouse.GetState().Y - World.UIBar) - Position;
             if (direction != Vector2.Zero)
                 direction.Normalize();
             rotation = (float)Math.Atan2(direction.Y, direction.X);
