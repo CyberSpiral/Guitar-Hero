@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TheWorld {
     class Monster : GameObject {
-        public int Health { get; set; }
+        public float Health { get; set; }
         protected Texture2D Heart;
         public Monster(Texture2D texture, Texture2D heartTexture, Vector2 position, int health, int textureRows, int textureColumns,
             int totalFrames, int animationSpeed)
@@ -21,12 +21,18 @@ namespace TheWorld {
         }
         public override void Draw(SpriteBatch spriteBatch) {
             base.Draw(spriteBatch);
-            for (int i = 0; i < Health; i++) {
-                if (i % 2 == 0) {
-                    spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 20 + i * 10, (int)Position.Y - 50, 10, 20), new Rectangle(0, 0, 15, 30), Color.White);
+            for (int i = 0; i < Health * 2; i++) {
+                if (i % 4 == 0) {
+                    spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 20 + i * 5, (int)Position.Y - 50, 5, 20), new Rectangle(0, 0, 7, 30), Color.White);
                 }
-                else {
-                    spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 22 + i * 10, (int)Position.Y - 50, 10, 20), new Rectangle(15, 0, 15, 30), Color.White);
+                else if (i % 4 == 1){
+                    spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 20 + i * 5, (int)Position.Y - 50, 5, 20), new Rectangle(7, 0, 8, 30), Color.White);
+                }
+                else if (i % 4 == 2) {
+                    spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 20 + i * 5, (int)Position.Y - 50, 5, 20), new Rectangle(15, 0, 7, 30), Color.White);
+                }
+                else if (i % 4 == 3) {
+                    spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 20 + i * 5, (int)Position.Y - 50, 5, 20), new Rectangle(22, 0, 8, 30), Color.White);
                 }
             }
         }
@@ -44,7 +50,7 @@ namespace TheWorld {
             Vector2 direction = playerPos - Position;
             if (direction != Vector2.Zero)
                 direction.Normalize();
-            rotation = (float)Math.Atan2(direction.Y, direction.X);
+            Rotation = (float)Math.Atan2(direction.Y, direction.X);
 
             OldPos = Position;
             Position += direction * speed;
@@ -60,7 +66,7 @@ namespace TheWorld {
             Texture = texture;
             Position = position;
             Direction = direction;
-            rotation = (float)Math.Atan2(direction.Y, direction.X);
+            Rotation = (float)Math.Atan2(direction.Y, direction.X);
         }
 
         public void Update() {
@@ -68,7 +74,7 @@ namespace TheWorld {
 
         }
         public override void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(Texture, Position, null, Color.White, rotation + (float)(Math.PI * 0.5f), new Vector2(Texture.Width / 2, Texture.Height / 2), 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(Texture, Position, null, Color.White, Rotation + (float)(Math.PI * 0.5f), new Vector2(Texture.Width / 2, Texture.Height / 2), 1f, SpriteEffects.None, 0);
         }
     }
 
@@ -89,7 +95,7 @@ namespace TheWorld {
             direction = new Vector2(Static.GetNumber(World.RoomWidth), Static.GetNumber(World.RoomHeight));
             if (direction != Vector2.Zero)
                 direction.Normalize();
-            rotation = (float)Math.Atan2(direction.Y, direction.X);
+            Rotation = (float)Math.Atan2(direction.Y, direction.X);
             this.spitTexture = spitTexture;
         }
 
@@ -102,7 +108,7 @@ namespace TheWorld {
                     if (direction != Vector2.Zero)
                         direction.Normalize();
                     SpitList.Add(new Spit(spitTexture, Position, direction));
-                    rotation = (float)Math.Atan2(direction.Y, direction.X);
+                    Rotation = (float)Math.Atan2(direction.Y, direction.X);
                     facingTowards = true;
                 }
                 else if (facingTowards) {
@@ -112,7 +118,7 @@ namespace TheWorld {
                     direction = randomPos - Position;
                     if (direction != Vector2.Zero)
                         direction.Normalize();
-                    rotation = (float)Math.Atan2(direction.Y, direction.X);
+                    Rotation = (float)Math.Atan2(direction.Y, direction.X);
                     facingTowards = false;
                 }
                 spitElapsed -= 1000;

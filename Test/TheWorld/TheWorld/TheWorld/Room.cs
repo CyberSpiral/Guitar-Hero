@@ -14,6 +14,7 @@ namespace TheWorld {
         public List<Monster> Monsters { get; protected set; }
         public List<Rectangle> ProtectedSpace { get; protected set; }
         public List<Door> Doors { get; protected set; }
+        public List<TempObject> Animations { get; set; }
 
         public int XCoordinate { get; set; }
         public int YCoordinate { get; set; }
@@ -21,6 +22,7 @@ namespace TheWorld {
 
         public Room(RoomGraphic roomGraphic, List<Rectangle> protectedSpace, List<GameObject> objects, List<Monster> monsters, int level) {
             Doors = new List<Door>();
+            Animations = new List<TempObject>();
             RoomGraphic = roomGraphic;
             ProtectedSpace = protectedSpace;
             Props = objects;
@@ -38,6 +40,7 @@ namespace TheWorld {
             spriteBatch.Draw(RoomGraphic.Background, new Vector2(0, 0), Color.White);
             spriteBatch.Draw(RoomGraphic.OverLay, new Vector2(0, 0), Color.White);
             Props.ForEach(x => x.Draw(spriteBatch));
+            Animations.ForEach(x => x.Draw(spriteBatch));
             foreach (Zombie z in Monsters.Where(x => x is Zombie)) {
                 z.Draw(spriteBatch);
             }

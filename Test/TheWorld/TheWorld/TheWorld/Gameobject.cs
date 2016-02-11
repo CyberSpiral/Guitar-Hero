@@ -31,7 +31,7 @@ namespace TheWorld
         protected int animationSpeed;
         protected bool animated;
 
-        protected float rotation;
+        public float Rotation { get; set; }
         protected float speed;
 
         public GameObject(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames, int animationSpeed)
@@ -52,7 +52,7 @@ namespace TheWorld
             totalElapsed = 0;
             animated = false;
         }
-        public void Update(float elapsed)
+        public virtual void Update(float elapsed)
         {
             totalElapsed += elapsed;
             if (animated) {
@@ -75,10 +75,10 @@ namespace TheWorld
                 Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
                 Rectangle destinationRectangle = new Rectangle((int)Position.X, (int)Position.Y, width, height);
 
-                spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White, rotation - (float)(Math.PI * 0.5f), new Vector2((width / 2), (height / 2)), SpriteEffects.None, 0);
+                spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White, Rotation - (float)(Math.PI * 0.5f), new Vector2((width / 2), (height / 2)), SpriteEffects.None, 0);
             }
             else {
-                spriteBatch.Draw(Texture, Position, null, Color.White, rotation - (float)(Math.PI * 0.5f), new Vector2((Texture.Width / 2), (Texture.Height / 2)), 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(Texture, Position, null, Color.White, Rotation - (float)(Math.PI * 0.5f), new Vector2((Texture.Width / 2), (Texture.Height / 2)), 1, SpriteEffects.None, 0);
             }
         }
         public virtual void ChangeTexture(Texture2D texture, int rows, int columns, int totalFrames)
@@ -108,22 +108,22 @@ namespace TheWorld
             if (position.X < World.RoomWidth / 3)
             {
                 direction = Direction.Left;
-                rotation = (float)Math.PI / 2;
+                Rotation = (float)Math.PI / 2;
             }
             else if (position.X > World.RoomWidth - (World.RoomWidth / 3))
             {
                 direction = Direction.Right;
-                rotation = (float)Math.PI * 1.5f;
+                Rotation = (float)Math.PI * 1.5f;
             }
             else if (position.Y < World.RoomHeight / 3)
             {
                 direction = Direction.Up;
-                rotation = (float)Math.PI;
+                Rotation = (float)Math.PI;
             }
             else if (position.Y > World.RoomHeight - (World.RoomHeight / 3))
             {
                 direction = Direction.Down;
-                rotation = (float)Math.PI * 0;
+                Rotation = (float)Math.PI * 0;
             }
             ActivateDoors(position);
         }
@@ -179,6 +179,28 @@ namespace TheWorld
             }
             ActivateDoors(Position);
             return playerPosition;
+        }
+    }
+    class TempObject : GameObject {
+        public bool Dead { get; set; }
+        public TempObject(Texture2D texture, Vector2 position, int rows, int columns, int totalFrames, int animationSpeed, float rotation) : base(texture,position,rows,columns,totalFrames,animationSpeed) {
+            Texture = texture;
+            Position = position;
+            totalElapsed = 0;
+            Rows = rows;
+            Columns = columns;
+            currentFrame = 0;
+            this.totalFrames = totalFrames;
+            this.animationSpeed = animationSpeed;
+            animated = true;
+            Dead = false;
+            Rotation = rotation;
+        }
+        public override void Update(float elapsed) {
+            base.Update(elapsed);
+            if (currentFrame >= totalFrames-1) {
+                Dead = true;
+            }
         }
     }
 }

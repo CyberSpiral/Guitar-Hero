@@ -11,7 +11,7 @@ namespace TheWorld {
     }
     class Weapon {
 
-        public int damage;
+        public float damage;
         public float knockback;
         public float range;
         public WeaponType weaponType { get; set; }
@@ -19,7 +19,7 @@ namespace TheWorld {
 
         public List<WeaponHit> hit;
         protected float totalElapsed;
-        public Weapon(int damage, float range, WeaponType weaponType, Texture2D texture) {
+        public Weapon(float damage, float range, WeaponType weaponType, Texture2D texture) {
             hit = new List<WeaponHit>();
             this.damage = damage;
             this.range = range;
@@ -27,15 +27,55 @@ namespace TheWorld {
             weaponTexture = texture;
         }
         public virtual void Update(float elapsed) {
-            totalElapsed += elapsed;
-            if (totalElapsed > 1) {
-                hit.Clear();
-                totalElapsed -= 1;
+            switch (weaponType) {
+                case WeaponType.Drumsticks:
+                    break;
+                case WeaponType.Trumpet:
+                    break;
+                case WeaponType.ElectricGuitar:
+                    break;
+                case WeaponType.Guitar: {
+                        totalElapsed += elapsed;
+                        if (totalElapsed > 1) {
+                            hit.Clear();
+                            totalElapsed -= 1;
+                        }
+                        break;
+                    }
+                case WeaponType.Triangle: {
+                        totalElapsed += elapsed;
+                        if (totalElapsed > 1) {
+                            hit.Clear();
+                            totalElapsed -= 1;
+                        }
+                        break;
+                    }
+                case WeaponType.Keyboard:
+                    break;
+                default:
+                    break;
             }
         }
 
         public virtual void Execute(Vector2 rotation, Vector2 playerPosition) {
-            hit.Add(new WeaponHit(playerPosition - new Vector2(17, 17) + (rotation * 50), new Vector2(40, 40), weaponTexture));
+            switch (weaponType) {
+                case WeaponType.Drumsticks:
+                    break;
+                case WeaponType.Trumpet:
+                    break;
+                case WeaponType.ElectricGuitar:
+                    break;
+                case WeaponType.Guitar:
+                    hit.Add(new WeaponHit(playerPosition - new Vector2(17, 17) + (rotation * 50), new Vector2(40, 40), weaponTexture));
+                    break;
+                case WeaponType.Triangle:
+                    hit.Add(new WeaponHit(new Vector2(0, 0), new Vector2(World.RoomWidth, World.RoomHeight), weaponTexture));
+                    break;
+                case WeaponType.Keyboard:
+                    break;
+                default:
+                    break;
+            }
         }
 
     }
