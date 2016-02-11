@@ -10,7 +10,7 @@ namespace TheWorld
 {
     public enum MenuType
     {
-        StartMenu, PauseMenu, InGame, DeathMenu //add more??
+        StartMenu, PauseMenu, InGame, CreditMenu, DeathMenu //add more??
     }
 
     class Menu
@@ -20,6 +20,7 @@ namespace TheWorld
         MenuButton startButton;
         MenuButton exitButton;
         MenuButton pauseButton;
+        MenuButton creditButton;
 
 
         public Menu()
@@ -46,6 +47,10 @@ namespace TheWorld
             {
                 //pause button??
             }
+            else if (menuType == MenuType.CreditMenu)
+            {
+                //our names
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -65,6 +70,10 @@ namespace TheWorld
             else if (menuType == MenuType.InGame)
             {
                 //pause button??
+            }
+            else if (menuType == MenuType.CreditMenu)
+            {
+                //our names
             }
         }
     }
