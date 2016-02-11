@@ -67,7 +67,7 @@ namespace TheWorld {
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"));
 
             p = new Player(Content.Load<Texture2D>("Character_sprite_v2"), Content.Load<Texture2D>("health"), new Vector2(544, 306), 3, 1, 19, 19, 100,
-                new Weapon(0.1f, 1, WeaponType.Triangle, Content.Load<Texture2D>("dot")));
+                new Weapon(1f, 3, WeaponType., Content.Load<Texture2D>("dot")));
 
 
             // TODO: use this.Content to load your game content here
@@ -115,7 +115,7 @@ namespace TheWorld {
                     World.CurrentLevel += 1;
                 }
             }
-
+            
             float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
             p.Update(elapsed, Keyboard.GetState(), oldState, Mouse.GetState());
@@ -220,6 +220,7 @@ namespace TheWorld {
             }
             p.Draw(spriteBatch);
             p.Weapon.hit.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle((int)x.Position.X, (int)x.Position.Y, (int)x.Size.X, (int)x.Size.Y), Color.Green));
+            p.Weapon.projectile.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle((int)x.Position.X, (int)x.Position.Y, (int)x.Size.X, (int)x.Size.Y), Color.Green));
 
             spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.LastRoom[0], -40 + 10 * World.LastRoom[1] - World.UIBar, 9, 9), Color.BlueViolet);
             spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * CurrentRoom.XCoordinate, -40 + 10 * CurrentRoom.YCoordinate - World.UIBar, 9, 9), Color.Red);

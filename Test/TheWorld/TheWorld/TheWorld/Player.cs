@@ -25,7 +25,15 @@ namespace TheWorld {
             Weapon = weapon;
         }
         public void Update(float elapsed, KeyboardState currentKey, KeyboardState oldKey, MouseState mouse) {
-            base.Update(elapsed);
+            totalElapsed += elapsed;
+            if (animated) {
+                if (totalElapsed > animationSpeed) {
+                    currentFrame++;
+                    if (currentFrame == totalFrames - 2)
+                        currentFrame = 0;
+                    totalElapsed = 0;
+                }
+            }
             Vector2 direction = new Vector2(Mouse.GetState().X, Mouse.GetState().Y - World.UIBar) - Position;
             if (direction != Vector2.Zero)
                 direction.Normalize();
@@ -62,8 +70,10 @@ namespace TheWorld {
 
             if (currentKey.IsKeyUp(Keys.W) && currentKey.IsKeyUp(Keys.A) && currentKey.IsKeyUp(Keys.S) && currentKey.IsKeyUp(Keys.D)) {
                 Velocity = Vector2.Zero;
-                currentFrame = 0;
+                currentFrame = totalFrames - 1;
             }
+            else if (currentFrame == totalFrames - 1)
+                currentFrame = 0;
             animationSpeed = currentKey.IsKeyUp(Keys.W) && currentKey.IsKeyUp(Keys.A) && currentKey.IsKeyUp(Keys.S) && currentKey.IsKeyUp(Keys.D)
                 ? int.MaxValue : storedAnimationSpeed;
 
