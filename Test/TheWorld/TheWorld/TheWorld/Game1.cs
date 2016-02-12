@@ -350,13 +350,13 @@ namespace TheWorld {
                             CurrentRoom.WOP = new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.01f + 0.02f * World.CurrentLevel, 2f, WeaponType.Drumsticks, note));
                         }
                         if (tmp == 1) {
-                            CurrentRoom.WOP = new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(0.2f + 0.1f * World.CurrentLevel, 2f, WeaponType.ElectricGuitar, note));
+                            CurrentRoom.WOP = new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(0.2f + 0.1f * World.CurrentLevel, 3f, WeaponType.ElectricGuitar, note));
                         }
                         if (tmp == 2) {
-                            CurrentRoom.WOP = new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Guitar, guitar));
+                            CurrentRoom.WOP = new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 1f, WeaponType.Guitar, guitar));
                         }
                         if (tmp == 3) {
-                            CurrentRoom.WOP = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.01f + 0.01f * World.CurrentLevel, 2f, WeaponType.Triangle, note));
+                            CurrentRoom.WOP = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.01f + 0.01f * World.CurrentLevel, 1f, WeaponType.Triangle, note));
                         }
                     }
                 }
