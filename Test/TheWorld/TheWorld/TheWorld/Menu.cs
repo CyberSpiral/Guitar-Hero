@@ -16,6 +16,8 @@ namespace TheWorld
     class Menu
     {
         public MenuType menuType;
+        Texture2D mainMenu;
+        Rectangle mainMenuRec;
 
         MenuButton startButton;
         Texture2D startTexture;
@@ -25,14 +27,12 @@ namespace TheWorld
         Texture2D exitTexture;
         Texture2D exitTextureMouseHovering;
 
-        MenuButton pauseButton;
-
         MenuButton creditButton;
         Texture2D creditTexture;
         Texture2D creditTextureMouseHovering;
 
         public Menu(Texture2D startTexture, Texture2D startTextureMouseHovering, Texture2D exitTexture, Texture2D exitTextureMouseHovering, 
-            Texture2D creditTexture, Texture2D creditTextureMouseHovering)
+            Texture2D creditTexture, Texture2D creditTextureMouseHovering, Texture2D mainMenu)
         {
             menuType = MenuType.StartMenu;
             this.startTexture = startTexture;
@@ -41,10 +41,12 @@ namespace TheWorld
             this.exitTextureMouseHovering = exitTextureMouseHovering;
             this.creditTexture = creditTexture;
             this.creditTextureMouseHovering = creditTextureMouseHovering;
+            this.mainMenu = mainMenu;
+            mainMenuRec = new Rectangle(0, -World.UIBar, World.RoomWidth, World.RoomHeight + World.UIBar);
 
-            startButton = new MenuButton(startTexture, startTextureMouseHovering, new Rectangle((World.RoomWidth - 530)/2, 80, 530, 196));
-            exitButton = new MenuButton(exitTexture, exitTextureMouseHovering, new Rectangle(World.RoomWidth / 2 + 100, 300, 329, 128));
-            creditButton = new MenuButton(creditTexture, creditTextureMouseHovering, new Rectangle(World.RoomWidth / 2 - 100 - 329, 300, 329, 128));
+            startButton = new MenuButton(startTexture, startTextureMouseHovering, new Rectangle((World.RoomWidth - 530)/2 + 30, -110, 530, 196));
+            exitButton = new MenuButton(exitTexture, exitTextureMouseHovering, new Rectangle(80, 400, 329, 128));
+            creditButton = new MenuButton(creditTexture, creditTextureMouseHovering, new Rectangle(80, 200, 329, 128));
 
         }
 
@@ -52,7 +54,6 @@ namespace TheWorld
         {
             startButton.Update(ms, msOld);
             exitButton.Update(ms, msOld);
-            //pauseButton.Update(ms, msOld);
             creditButton.Update(ms, msOld);
 
             if (menuType == MenuType.StartMenu)
@@ -126,6 +127,7 @@ namespace TheWorld
             if (menuType == MenuType.StartMenu)
             {
                 //exit, start
+                spriteBatch.Draw(mainMenu, mainMenuRec, Color.White);
                 startButton.Draw(spriteBatch);
                 exitButton.Draw(spriteBatch);
                 creditButton.Draw(spriteBatch);

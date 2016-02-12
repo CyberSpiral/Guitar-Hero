@@ -63,7 +63,11 @@ namespace TheWorld {
             monsters.Add(Content.Load<Texture2D>("SpitSpit"));
             roomGraphic = new List<RoomGraphic>();
             objects = new List<Texture2D>();
-            objects.Add(Content.Load<Texture2D>("dot"));
+            objects.Add(Content.Load<Texture2D>("Trummor"));
+            objects.Add(Content.Load<Texture2D>("Keyboard"));
+            objects.Add(Content.Load<Texture2D>("DJ_table"));
+            objects.Add(Content.Load<Texture2D>("Desk"));
+            objects.Add(Content.Load<Texture2D>("Broken_Guitar"));
             roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back1"), Content.Load<Texture2D>("door"), Content.Load<Texture2D>("Overlay1")));
             roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back2"), Content.Load<Texture2D>("door2"), Content.Load<Texture2D>("Overlay2")));
             World.GenerateFloor();
@@ -71,7 +75,8 @@ namespace TheWorld {
 
 
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"), 
-                Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("dot"), Content.Load<Texture2D>("dot"));
+                Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
+                Content.Load<Texture2D>("main_menu_NO_buttons"));
             p = new Player(Content.Load<Texture2D>("Character_sprite_v2"), Content.Load<Texture2D>("health"), new Vector2(544, 306), 3, 1, 19, 19, 100,
                 new Weapon(1f, 3, WeaponType.ElectricGuitar, Content.Load<Texture2D>("dot")));
 

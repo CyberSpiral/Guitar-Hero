@@ -122,6 +122,8 @@ namespace TheWorld {
             }
             Rooms[FirstRoom[0], FirstRoom[1]].Monsters.Clear();
             Rooms[LastRoom[0], LastRoom[1]].Monsters.Clear();
+            Rooms[FirstRoom[0], FirstRoom[1]].Props.Clear();
+            Rooms[LastRoom[0], LastRoom[1]].Props.Clear();
         }
     }
 }
