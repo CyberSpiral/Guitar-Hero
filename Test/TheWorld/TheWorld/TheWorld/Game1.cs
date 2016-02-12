@@ -165,7 +165,7 @@ namespace TheWorld {
                     {
                         tmpWeapon = CurrentRoom.WOP.ContainedWeapon;
                         CurrentRoom.WOP = new WeaponOnGround(p.Weapon.weaponTexture, weaponOnGroundPosition, p.Weapon);
-                        p.Weapon = tmpWeapon;
+
 
                         if (p.Weapon.weaponType == WeaponType.Drumsticks)
                         {
@@ -182,8 +182,9 @@ namespace TheWorld {
                         else if (p.Weapon.weaponType == WeaponType.Triangle)
                         {
                             CurrentRoom.WOP.Texture = triangleOnGround;
+                        }
+                        p.Weapon = tmpWeapon;
                     }
-                }
                 }
 
                 #region Collision
