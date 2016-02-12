@@ -21,7 +21,7 @@ namespace TheWorld {
             : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {
             this.speed = speed;
             storedAnimationSpeed = animationSpeed;
-            Health = 1;
+            Health = 10;
             Heart = heartTexture;
             Weapon = weapon;
         }

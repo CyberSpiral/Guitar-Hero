@@ -94,12 +94,13 @@ namespace TheWorld {
             drumsticks = Content.Load<Texture2D>("Trumpinnar");
             electricGuitar = Content.Load<Texture2D>("El_guitar");
             guitar = Content.Load<Texture2D>("Guitar");
-            triangle = Content.Load<Texture2D>("Heart");
+            triangle = Content.Load<Texture2D>("Triangel");
             drumsticksOnGround = Content.Load<Texture2D>("Trumpinnar");
             electricGuitarOnGround = Content.Load<Texture2D>("El_guitar");
             guitarOnGround = Content.Load<Texture2D>("Guitar");
             triangleOnGround = Content.Load<Texture2D>("Heart");
             note = Content.Load<Texture2D>("Note");
+            Random r = new Random();
             //weaponInHUD = new Rectangle(World.RoomWidth - 400, -World.HUD, )
 
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"),
