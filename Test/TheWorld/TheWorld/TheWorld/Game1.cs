@@ -25,6 +25,8 @@ namespace TheWorld {
         KeyboardState oldState;
         MouseState ms;
         MouseState msOld;
+        float winElapsed;
+        bool winAni = false;
         Room CurrentRoom {
             get { return World.Rooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1]]; }
         }
@@ -130,7 +132,21 @@ namespace TheWorld {
             }
             ms = Mouse.GetState();
             menu.Update(ms, msOld);
+            if (menu.menuType == MenuType.WinMenu) {
+                winElapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (winElapsed > 400) {
+                    if (winAni) {
+                        winElapsed -= 400;
+                        winAni = false;
+                    }
+                    else {
+                        winElapsed -= 400;
+                        winAni = true;
+                    }
+                }
+            }
 
+            #region game
             if (menu.menuType == MenuType.InGame) {
                 if (Keyboard.GetState().IsKeyDown(Keys.Q)) {
                     World.GenerateFloor();
@@ -354,13 +370,17 @@ namespace TheWorld {
 
                 if (World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1]) {
                     if (p.CollisionBox.Intersects(CurrentRoom.Props[0].CollisionBox)) {
-                        World.CurrentLevel += 1;
-                        World.GenerateFloor();
-                        World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"), stairway);
-                        p.Position = new Vector2(544, 306 + 150);
+                        if (World.CurrentLevel == 10) {
+                            menu.menuType = MenuType.WinMenu;
+                        }
+                        else {
+                            World.CurrentLevel += 1;
+                            World.GenerateFloor();
+                            World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"), stairway);
+                            p.Position = new Vector2(544, 306 + 150);
+                        }
                     }
                 }
-            }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Y) && p.Dead == true) {
                 p.Health = 10;
@@ -376,7 +396,9 @@ namespace TheWorld {
             oldState = Keyboard.GetState();
             if (p.Health <= 0) {
                 p.Dead = true;
+                }
             }
+#endregion
 
             base.Update(gameTime);
         }
@@ -426,26 +448,41 @@ namespace TheWorld {
                     spriteBatch.Draw(Content.Load<Texture2D>("Continue"), new Vector2(0), Color.White);
                 }
 
-                
-                if (p.Weapon.weaponType == WeaponType.Drumsticks)
-                {
-                    tmpWeaponForHUD = drumsticksOnGround;
+
+
+                switch (p.Weapon.weaponType) {
+                    case WeaponType.Drumsticks:
+                        spriteBatch.Draw(drumsticks, new Rectangle(World.RoomWidth - 400, -World.HUD + 20, drumsticks.Width, drumsticks.Height), Color.White);
+                        break;
+                    case WeaponType.ElectricGuitar:
+                        spriteBatch.Draw(electricGuitar, new Rectangle(World.RoomWidth - 400, -World.HUD + 20, electricGuitar.Width, electricGuitar.Height), Color.White);
+                        break;
+                    case WeaponType.Guitar:
+                        spriteBatch.Draw(guitar, new Rectangle(World.RoomWidth - 400, -World.HUD + 20, guitar.Width, guitar.Height), Color.White);
+                        break;
+                    case WeaponType.Triangle:
+                        spriteBatch.Draw(triangle, new Rectangle(World.RoomWidth - 400, -World.HUD + 20, triangle.Width, triangle.Height), Color.White);
+                        break;
+                    default:
+                        break;
                 }
-                else if (p.Weapon.weaponType == WeaponType.ElectricGuitar)
-                {
-                    tmpWeaponForHUD = electricGuitarOnGround;
+                for (int i = 0; i < p.Weapon.damage; i++) {
+                    spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(World.RoomWidth - 500 + 20 * i, -World.HUD + 20, 20, 20), Color.Red);
                 }
-                else if (p.Weapon.weaponType == WeaponType.Guitar)
-                {
-                    tmpWeaponForHUD = guitarOnGround;
+                for (int i = 0; i < p.Weapon.range; i++) {
+                    spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(World.RoomWidth - 500 + 20 * i, -World.HUD + 50, 20, 20), Color.Red);
                 }
-                else if (p.Weapon.weaponType == WeaponType.Triangle)
-                {
-                    tmpWeaponForHUD = triangleOnGround;
-                }
-                weaponInHUD = new Rectangle(World.RoomWidth - 400, -World.HUD, tmpWeaponForHUD.Width * 2, tmpWeaponForHUD.Height * 2);
-                spriteBatch.Draw(tmpWeaponForHUD, weaponInHUD, Color.White);
             }
+            else if (menu.menuType == MenuType.WinMenu) {
+                if (winAni) {
+                    spriteBatch.Draw(Content.Load<Texture2D>("Endingscene_KLAR_Bild_1"), new Vector2(0), Color.White);
+                }
+                if (!winAni) {
+                    spriteBatch.Draw(Content.Load<Texture2D>("Endingscene_KLAR_Bild_2"), new Vector2(0), Color.White);
+                }
+
+            }
+
             else {
                 menu.Draw(spriteBatch);
             }
