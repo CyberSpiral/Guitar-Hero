@@ -36,6 +36,9 @@ namespace TheWorld
         Menu menu;
         Player p;
 
+        Rectangle weaponInHUD;
+        Texture2D tmpWeaponForHUD;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -98,6 +101,7 @@ namespace TheWorld
             guitarOnGround = Content.Load<Texture2D>("Guitar");
             triangleOnGround = Content.Load<Texture2D>("Heart");
             note = Content.Load<Texture2D>("Note");
+            //weaponInHUD = new Rectangle(World.RoomWidth - 400, -World.HUD, )
 
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"),
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
@@ -174,6 +178,23 @@ namespace TheWorld
                         tmpWeapon = weaponOnGround.ContainedWeapon;
                         weaponOnGround = new WeaponOnGround(p.Weapon.weaponTexture, weaponOnGroundPosition, p.Weapon);
                         p.Weapon = tmpWeapon;
+
+                        if (p.Weapon.weaponType == WeaponType.Drumsticks)
+                        {
+                            weaponOnGround.Texture = drumsticksOnGround;
+                        }
+                        else if (p.Weapon.weaponType == WeaponType.ElectricGuitar)
+                        {
+                            weaponOnGround.Texture = electricGuitarOnGround;
+                        }
+                        else if (p.Weapon.weaponType == WeaponType.Guitar)
+                        {
+                            weaponOnGround.Texture = guitarOnGround;
+                        }
+                        else if (p.Weapon.weaponType == WeaponType.Triangle)
+                        {
+                            weaponOnGround.Texture = triangleOnGround;
+                        }
                     }
                 }
 
@@ -446,6 +467,25 @@ namespace TheWorld
                 spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.FirstRoom[0], -40 + 10 * World.FirstRoom[1] - World.HUD, 9, 9), Color.LawnGreen);
                 spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * CurrentRoom.XCoordinate, -40 + 10 * CurrentRoom.YCoordinate - World.HUD, 9, 9), Color.Red);
 
+                
+                if (p.Weapon.weaponType == WeaponType.Drumsticks)
+                {
+                    tmpWeaponForHUD = drumsticksOnGround;
+                }
+                else if (p.Weapon.weaponType == WeaponType.ElectricGuitar)
+                {
+                    tmpWeaponForHUD = electricGuitarOnGround;
+                }
+                else if (p.Weapon.weaponType == WeaponType.Guitar)
+                {
+                    tmpWeaponForHUD = guitarOnGround;
+                }
+                else if (p.Weapon.weaponType == WeaponType.Triangle)
+                {
+                    tmpWeaponForHUD = triangleOnGround;
+                }
+                weaponInHUD = new Rectangle(World.RoomWidth - 400, -World.HUD, tmpWeaponForHUD.Width * 2, tmpWeaponForHUD.Height * 2);
+                spriteBatch.Draw(tmpWeaponForHUD, weaponInHUD, Color.White);
             }
             else
             {
