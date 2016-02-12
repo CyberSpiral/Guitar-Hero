@@ -29,10 +29,11 @@ namespace TheWorld
 
         MenuButton creditButton;
         Texture2D creditTexture;
+        Texture2D credits;
         Texture2D creditTextureMouseHovering;
 
         public Menu(Texture2D startTexture, Texture2D startTextureMouseHovering, Texture2D exitTexture, Texture2D exitTextureMouseHovering, 
-            Texture2D creditTexture, Texture2D creditTextureMouseHovering, Texture2D mainMenu)
+            Texture2D creditTexture, Texture2D creditTextureMouseHovering, Texture2D mainMenu, Texture2D credits)
         {
             menuType = MenuType.StartMenu;
             this.startTexture = startTexture;
@@ -42,6 +43,7 @@ namespace TheWorld
             this.creditTexture = creditTexture;
             this.creditTextureMouseHovering = creditTextureMouseHovering;
             this.mainMenu = mainMenu;
+            this.credits = credits;
             mainMenuRec = new Rectangle(0, -World.HUD, World.RoomWidth, World.RoomHeight + World.HUD);
 
             startButton = new MenuButton(startTexture, startTextureMouseHovering, new Rectangle((World.RoomWidth - 530)/2 + 30, -110, 530, 196));
@@ -153,7 +155,8 @@ namespace TheWorld
             else if (menuType == MenuType.CreditMenu)
             {
                 //our names
-                spriteBatch.Draw(mainMenu, mainMenuRec, Color.White);
+
+                spriteBatch.Draw(credits, new Vector2(0), Color.White);
                 exitButton.Draw(spriteBatch);
             }
         }
