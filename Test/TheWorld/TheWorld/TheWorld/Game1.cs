@@ -104,7 +104,7 @@ namespace TheWorld {
 
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"),
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
-                Content.Load<Texture2D>("main_menu_NO_buttons"));
+                Content.Load<Texture2D>("main_menu_NO_buttons"), Content.Load<Texture2D>("Game_Credits"));
             p = new Player(Content.Load<Texture2D>("Character_sprite_v2"), Content.Load<Texture2D>("health"), new Vector2(544, 456), 3, 1, 19, 19, 100,
                 new Weapon(1f, 3, WeaponType.Guitar, note));
 
@@ -127,11 +127,15 @@ namespace TheWorld {
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime) {
             // Allows the game to exit
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape)) {
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !(menu.menuType == MenuType.CreditMenu)) {
                 this.Exit();
             }
             ms = Mouse.GetState();
             menu.Update(ms, msOld);
+
+            if (menu.menuType == MenuType.CreditMenu && (Keyboard.GetState().GetPressedKeys().Length > 0)) {
+                    menu.menuType = MenuType.StartMenu;
+            }
             if (menu.menuType == MenuType.WinMenu) {
                 winElapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
                 if (winElapsed > 400) {
@@ -410,6 +414,9 @@ namespace TheWorld {
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Matrix.CreateTranslation(0, World.HUD, 0));
+            if (menu.menuType == MenuType.CreditMenu) {
+                spriteBatch.Draw(hudTexture, new Vector2(0, -World.HUD), Color.White);
+            }
 
             if (menu.menuType == MenuType.InGame) {
                 CurrentRoom.Draw(spriteBatch);
@@ -473,6 +480,35 @@ namespace TheWorld {
                     spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(World.RoomWidth - 500 + 20 * i, -World.HUD + 50, 20, 20), Color.Red);
                 }
             }
+            if (CurrentRoom.WOP != null) {
+                if (Vector2.Distance(p.Position, CurrentRoom.WOP.Position) < 100) {
+                    switch (CurrentRoom.WOP.ContainedWeapon.weaponType) {
+                        case WeaponType.Drumsticks:
+                            spriteBatch.Draw(drumsticks, new Rectangle(World.RoomWidth - 100, -World.HUD + 20, drumsticks.Width, drumsticks.Height), Color.White);
+                            break;
+                        case WeaponType.ElectricGuitar:
+                            spriteBatch.Draw(electricGuitar, new Rectangle(World.RoomWidth - 100, -World.HUD + 20, electricGuitar.Width, electricGuitar.Height), Color.White);
+                            break;
+                        case WeaponType.Guitar:
+                            spriteBatch.Draw(guitar, new Rectangle(World.RoomWidth - 100, -World.HUD + 20, guitar.Width, guitar.Height), Color.White);
+                            break;
+                        case WeaponType.Triangle:
+                            spriteBatch.Draw(triangle, new Rectangle(World.RoomWidth - 100, -World.HUD + 20, triangle.Width, triangle.Height), Color.White);
+                            break;
+                        default:
+                            break;
+                    }
+                    for (int i = 0; i < CurrentRoom.WOP.ContainedWeapon.damage; i++) {
+                        spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(World.RoomWidth - 200 + 20 * i, -World.HUD + 20, 20, 20), Color.Red);
+                    }
+                    for (int i = 0; i < CurrentRoom.WOP.ContainedWeapon.range; i++) {
+                        spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(World.RoomWidth - 200 + 20 * i, -World.HUD + 50, 20, 20), Color.Red);
+                    }
+                }
+            }
+
+
+
             else if (menu.menuType == MenuType.WinMenu) {
                 if (winAni) {
                     spriteBatch.Draw(Content.Load<Texture2D>("Endingscene_KLAR_Bild_1"), new Vector2(0), Color.White);
@@ -480,7 +516,9 @@ namespace TheWorld {
                 if (!winAni) {
                     spriteBatch.Draw(Content.Load<Texture2D>("Endingscene_KLAR_Bild_2"), new Vector2(0), Color.White);
                 }
-
+            }
+            else if(menu.menuType == MenuType.CreditMenu) {
+                spriteBatch.Draw(Content.Load<Texture2D>("Game_Credits"), new Vector2(0), Color.White);
             }
 
             else {
