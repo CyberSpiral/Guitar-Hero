@@ -406,6 +406,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FinalBckGrndSndTrack.wav">
+      <Name>FinalBckGrndSndTrack</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="HarshBckGrndSndTrack.wav">
+      <Name>HarshBckGrndSndTrack</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="LightBckGrndSndTrack.wav">
+      <Name>LightBckGrndSndTrack</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Game_Credits.png">
       <Name>Game_Credits</Name>
       <Importer>TextureImporter</Importer>

@@ -39,6 +39,9 @@ namespace TheWorld {
         Rectangle weaponInHUD;
         Texture2D tmpWeaponForHUD;
 
+        SoundEffect musicMenu;
+        SoundEffect musicGame;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -100,14 +103,14 @@ namespace TheWorld {
             guitarOnGround = Content.Load<Texture2D>("Guitar");
             triangleOnGround = Content.Load<Texture2D>("Heart");
             note = Content.Load<Texture2D>("Note");
-            Random r = new Random();
-            //weaponInHUD = new Rectangle(World.RoomWidth - 400, -World.HUD, )
+            
 
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"),
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
                 Content.Load<Texture2D>("main_menu_NO_buttons"), Content.Load<Texture2D>("Game_Credits"));
             p = new Player(Content.Load<Texture2D>("Character_sprite_v2"), Content.Load<Texture2D>("health"), new Vector2(544, 456), 3, 1, 19, 19, 100,
-                new Weapon(1f, 3, WeaponType.Guitar, note));
+                new Weapon(0.5f + 0.2f, 1f, WeaponType.Guitar, guitar));
+            
 
 
             // TODO: use this.Content to load your game content here
