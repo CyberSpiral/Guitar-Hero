@@ -345,19 +345,19 @@ namespace TheWorld {
                         int tmp = Static.GetNumber(4);//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
                         if (tmp == 0)       //NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
                         {
-                            CurrentRoom.WOP = new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(Static.GetNumber(100) / 1000 + 0.001f + 0.002f * World.CurrentLevel, 2f, WeaponType.Drumsticks, note));
+                            CurrentRoom.WOP = new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(Static.GetNumber(100) / 1000 * World.CurrentLevel + 0.001f + 0.002f * World.CurrentLevel, 2f, WeaponType.Drumsticks, note));
                         }
                         if (tmp == 1)
                         {
-                            CurrentRoom.WOP = new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(Static.GetNumber(100)/1000 + 0.2f + 0.1f * World.CurrentLevel, 3f, WeaponType.ElectricGuitar, note));
+                            CurrentRoom.WOP = new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(Static.GetNumber(100)/1000 * World.CurrentLevel + 0.2f + 0.1f * World.CurrentLevel, 3f, WeaponType.ElectricGuitar, note));
                         }
                         if (tmp == 2)
                         {
-                            CurrentRoom.WOP = new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(Static.GetNumber(100) / 1000 + 0.3f + 0.2f * World.CurrentLevel, 1f, WeaponType.Guitar, guitar));
+                            CurrentRoom.WOP = new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(Static.GetNumber(100) / 1000 * World.CurrentLevel + 0.3f + 0.2f * World.CurrentLevel, 1f, WeaponType.Guitar, guitar));
                         }
                         if (tmp == 3)
                         {
-                            CurrentRoom.WOP = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(Static.GetNumber(100) / 1000 + 0.02f + 0.01f * World.CurrentLevel, 1f, WeaponType.Triangle, null));
+                            CurrentRoom.WOP = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(Static.GetNumber(100) / 1000 * World.CurrentLevel + 0.02f + 0.01f * World.CurrentLevel, 1f, WeaponType.Triangle, null));
                         }
                     }
                 }
