@@ -18,7 +18,7 @@ namespace TheWorld
         public float knockback;
         public float range;
         public WeaponType weaponType { get; set; }
-        protected Texture2D weaponTexture;
+        public Texture2D weaponTexture;
 
         public List<WeaponHit> hit;
         public List<WeaponProjectile> projectile;

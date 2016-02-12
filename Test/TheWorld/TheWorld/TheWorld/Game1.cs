@@ -31,6 +31,8 @@ namespace TheWorld
             get { return World.Rooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1]]; }
         }
 
+        WeaponOnGround weaponOnGround;
+        Weapon tmpWeapon;
         Menu menu;
         Player p;
 
@@ -86,14 +88,14 @@ namespace TheWorld
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"), stairway);
             monsterCountOld = 0;
             weaponOnGroundPosition = new Vector2(World.RoomWidth / 2, World.RoomHeight / 2);
-            drumsticks = Content.Load<Texture2D>("");
-            electricGuitar = Content.Load<Texture2D>("");
-            guitar = Content.Load<Texture2D>("");
-            triangle = Content.Load<Texture2D>("");
-            drumsticksOnGround = Content.Load<Texture2D>("");
-            electricGuitarOnGround = Content.Load<Texture2D>("");
-            guitarOnGround = Content.Load<Texture2D>("");
-            triangleOnGround = Content.Load<Texture2D>("");
+            drumsticks = Content.Load<Texture2D>("Trumpinnar");
+            electricGuitar = Content.Load<Texture2D>("El_guitar");
+            guitar = Content.Load<Texture2D>("Guitar");
+            triangle = Content.Load<Texture2D>("Heart");
+            drumsticksOnGround = Content.Load<Texture2D>("Trumpinnar");
+            electricGuitarOnGround = Content.Load<Texture2D>("El_guitar");
+            guitarOnGround = Content.Load<Texture2D>("Guitar");
+            triangleOnGround = Content.Load<Texture2D>("Heart");
 
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"),
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
@@ -163,6 +165,16 @@ namespace TheWorld
                 p.Position = p.Position.Y < 60 ? p.OldPos : p.Position;
                 p.Position = p.Position.Y > World.RoomHeight - 60 ? p.OldPos : p.Position;
 
+                if (Keyboard.GetState().IsKeyDown(Keys.X) && oldState.IsKeyUp(Keys.X) && weaponOnGround != null)
+                {
+                    if (Vector2.Distance(p.Position,weaponOnGround.Position) < 200)
+                    {
+                        tmpWeapon = weaponOnGround.ContainedWeapon;
+                        weaponOnGround = new WeaponOnGround(p.Weapon.weaponTexture, weaponOnGroundPosition, p.Weapon);
+                        p.Weapon = tmpWeapon;
+                    }
+                }
+
                 #region Collision
 
                 
@@ -184,20 +196,17 @@ namespace TheWorld
                         {
                             p.Health--;
                             p.invTmr = 1.5f;
-                            sZ.SpitList.RemoveAt(i);
-                            i--;
+                            sZ.SpitList[i].Collectable = true;
                         }
                         else if (sZ.SpitList[i].CollisionBox.Intersects(p.CollisionBox))
                         {
-                            sZ.SpitList.RemoveAt(i);
-                            i--;
+                            sZ.SpitList[i].Collectable = true;
                         }
                         for (int q = 0; q < p.Weapon.hit.Count; q++)
                         {
                             if (sZ.SpitList[i].CollisionBox.Intersects(p.Weapon.hit[q].CollisionBox))
                             {
-                                sZ.SpitList.RemoveAt(i);
-                                i--;
+                                sZ.SpitList[i].Collectable = true;
                             }
                         }
                     }
@@ -278,6 +287,17 @@ namespace TheWorld
                 #endregion
                 CurrentRoom.Animations.ForEach(x => x.Update(elapsed));
                 #region Garbage
+                foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie))
+                {
+                    for (int i = 0; i < sZ.SpitList.Count; i++)
+                    {
+                        if (sZ.SpitList[i].Collectable)
+                        {
+                            sZ.SpitList.RemoveAt(i);
+                            i--;
+                        }
+                    }
+                }
                 if (p.Weapon.weaponType == WeaponType.Drumsticks)
                 {
                     for (int i = 0; i < p.Weapon.projectile.Count; i++)
@@ -321,19 +341,19 @@ namespace TheWorld
                         int tmp = Static.GetNumber(4);
                         if (tmp == 0)
                         {
-                            new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Drumsticks, drumsticks));
+                            weaponOnGround = new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Drumsticks, drumsticks));
                         }
                         if (tmp == 1)
                         {
-                            new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.ElectricGuitar, electricGuitar));
+                            weaponOnGround = new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.ElectricGuitar, electricGuitar));
                         }
                         if (tmp == 2)
                         {
-                            new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Guitar, guitar));
+                            weaponOnGround = new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Guitar, guitar));
                         }
                         if (tmp == 3)
                         {
-                            new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Triangle, triangle));
+                            weaponOnGround = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Triangle, triangle));
                         }
                         /*if (tmp == 4)
                         {
