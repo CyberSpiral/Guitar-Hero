@@ -21,8 +21,9 @@ namespace TheWorld
         List<RoomGraphic> roomGraphic;
         List<Texture2D> objects;
         List<Texture2D> monsters;
-        Texture2D stairway;
+        Texture2D stairway, drumsticks, electricGuitar, guitar, triangle, drumsticksOnGround, electricGuitarOnGround, guitarOnGround, triangleOnGround;
         int monsterCountOld;
+        Vector2 weaponOnGroundPosition;
         KeyboardState oldState;
         MouseState ms;
         MouseState msOld;
@@ -81,6 +82,15 @@ namespace TheWorld
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"), stairway);
             monsterCountOld = 0;
+            weaponOnGroundPosition = new Vector2(World.RoomWidth / 2, World.RoomHeight / 2);
+            drumsticks = Content.Load<Texture2D>("");
+            electricGuitar = Content.Load<Texture2D>("");
+            guitar = Content.Load<Texture2D>("");
+            triangle = Content.Load<Texture2D>("");
+            drumsticksOnGround = Content.Load<Texture2D>("");
+            electricGuitarOnGround = Content.Load<Texture2D>("");
+            guitarOnGround = Content.Load<Texture2D>("");
+            triangleOnGround = Content.Load<Texture2D>("");
 
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"),
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
@@ -295,9 +305,33 @@ namespace TheWorld
 
                 if (CurrentRoom.Monsters.Count == 0 && monsterCountOld != 0)
                 {
-                    if (Static.GetNumber(1) < 10)
+                    if (Static.GetNumber(100) < 100)
                     {
-
+                        int tmp = Static.GetNumber(4);
+                        if (tmp == 0)
+                        {
+                            new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Drumsticks, drumsticks));
+                        }
+                        if (tmp == 1)
+                        {
+                            new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.ElectricGuitar, electricGuitar));
+                        }
+                        if (tmp == 2)
+                        {
+                            new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Guitar, guitar));
+                        }
+                        if (tmp == 3)
+                        {
+                            new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Triangle, triangle));
+                        }
+                        /*if (tmp == 4)
+                        {
+                            new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Drumsticks, drumsticks));
+                        }
+                        if (tmp == 5)
+                        {
+                            new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Drumsticks, drumsticks));
+                        }*/
                     }
                 }
                 monsterCountOld = CurrentRoom.Monsters.Count;

@@ -199,14 +199,11 @@ namespace TheWorld
     {
         public Weapon ContainedWeapon { get; protected set; }
         public bool existing;
-        public Texture2D playerTexture;
-        public WeaponOnGround(Texture2D texture, Vector2 position, Weapon containedWeapon,
-            Texture2D playerTexture) : base(texture, position)
+        public WeaponOnGround(Texture2D texture, Vector2 position, Weapon containedWeapon) : base(texture, position)
         {
 
             ContainedWeapon = containedWeapon;
             existing = true;
-            this.playerTexture = playerTexture;
         }
 
         public void Draw(SpriteBatch spriteBatch, SpriteFont spriteFont, Vector2 playerPosition)
