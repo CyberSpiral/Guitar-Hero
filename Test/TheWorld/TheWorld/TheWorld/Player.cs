@@ -24,7 +24,7 @@ namespace TheWorld {
             Heart = heartTexture;
             Weapon = weapon;
         }
-        public void Update(float elapsed, KeyboardState currentKey, KeyboardState oldKey, MouseState mouse) {
+        public void Update(float elapsed, KeyboardState currentKey, KeyboardState oldKey, MouseState currentMouse, MouseState oldMouse) {
             totalElapsed += elapsed;
             if (animated) {
                 if (totalElapsed > animationSpeed) {
@@ -40,7 +40,7 @@ namespace TheWorld {
             Rotation = (float)Math.Atan2(direction.Y, direction.X);
 
             Weapon.Update(elapsed);
-            if (currentKey.IsKeyDown(Keys.Space) && oldKey.IsKeyUp(Keys.Space)) {
+            if (currentMouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released) {
                 Weapon.Execute(new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)), Position);
             }
             if (invTmr > 0) {
