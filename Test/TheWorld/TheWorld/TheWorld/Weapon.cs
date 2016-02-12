@@ -108,7 +108,7 @@ namespace TheWorld
                     projectile.Add(new WeaponProjectile(playerPosition - new Vector2(17) + (rotation * 20), new Vector2(30), weaponTexture, rotation, range));
                     break;
                 case WeaponType.Guitar:
-                    hit.Add(new WeaponHit(playerPosition - new Vector2(17) + (rotation * 50), new Vector2(40), weaponTexture));
+                    hit.Add(new WeaponHit(playerPosition - new Vector2(17) + (rotation * 50), new Vector2(weaponTexture.Width,weaponTexture.Height), weaponTexture));
                     break;
                 case WeaponType.Triangle:
                     hit.Add(new WeaponHit(new Vector2(0), new Vector2(World.RoomWidth, World.RoomHeight), weaponTexture));
