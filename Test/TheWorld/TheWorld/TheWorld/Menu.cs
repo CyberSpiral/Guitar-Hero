@@ -10,7 +10,7 @@ namespace TheWorld
 {
     public enum MenuType
     {
-        StartMenu, PauseMenu, InGame, CreditMenu, DeathMenu //add more??
+        StartMenu, PauseMenu, InGame, CreditMenu, DeathMenu, WinMenu //add more??
     }
 
     class Menu
