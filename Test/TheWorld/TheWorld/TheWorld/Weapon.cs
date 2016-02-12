@@ -18,7 +18,7 @@ namespace TheWorld
         public float knockback;
         public float range;
         public WeaponType weaponType { get; set; }
-        protected Texture2D weaponTexture;
+        public Texture2D weaponTexture;
 
         public List<WeaponHit> hit;
         public List<WeaponProjectile> projectile;
@@ -187,14 +187,11 @@ namespace TheWorld
     {
         public Weapon ContainedWeapon { get; protected set; }
         public bool existing;
-        public Texture2D playerTexture;
-        public WeaponOnGround(Texture2D texture, Vector2 position, Weapon containedWeapon,
-            Texture2D playerTexture) : base(texture, position)
+        public WeaponOnGround(Texture2D texture, Vector2 position, Weapon containedWeapon) : base(texture, position)
         {
 
             ContainedWeapon = containedWeapon;
             existing = true;
-            this.playerTexture = playerTexture;
         }
 
         public void Draw(SpriteBatch spriteBatch, SpriteFont spriteFont, Vector2 playerPosition)
@@ -203,6 +200,7 @@ namespace TheWorld
             {
                 spriteBatch.DrawString(spriteFont, "X", new Vector2(Position.X, Position.Y), Color.White);
             }
+            spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height), Color.White);
         }
     }
 }

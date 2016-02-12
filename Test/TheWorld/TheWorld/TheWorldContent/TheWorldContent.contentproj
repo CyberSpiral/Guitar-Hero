@@ -342,6 +342,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="El_guitar.png">
+      <Name>El_guitar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Guitar.png">
+      <Name>Guitar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Trumpinnar.png">
+      <Name>Trumpinnar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Charger.png">
       <Name>Charger</Name>
       <Importer>TextureImporter</Importer>

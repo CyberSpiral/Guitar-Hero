@@ -21,8 +21,9 @@ namespace TheWorld
         List<RoomGraphic> roomGraphic;
         List<Texture2D> objects;
         List<Texture2D> monsters;
-        Texture2D stairway;
+        Texture2D stairway, drumsticks, electricGuitar, guitar, triangle, drumsticksOnGround, electricGuitarOnGround, guitarOnGround, triangleOnGround;
         int monsterCountOld;
+        Vector2 weaponOnGroundPosition;
         KeyboardState oldState;
         MouseState ms;
         MouseState msOld;
@@ -30,6 +31,8 @@ namespace TheWorld
             get { return World.Rooms[World.CurrentRoomLocationCode[0], World.CurrentRoomLocationCode[1]]; }
         }
 
+        WeaponOnGround weaponOnGround;
+        Weapon tmpWeapon;
         Menu menu;
         Player p;
 
@@ -85,6 +88,15 @@ namespace TheWorld
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"), stairway);
             monsterCountOld = 0;
+            weaponOnGroundPosition = new Vector2(World.RoomWidth / 2, World.RoomHeight / 2);
+            drumsticks = Content.Load<Texture2D>("Trumpinnar");
+            electricGuitar = Content.Load<Texture2D>("El_guitar");
+            guitar = Content.Load<Texture2D>("Guitar");
+            triangle = Content.Load<Texture2D>("Heart");
+            drumsticksOnGround = Content.Load<Texture2D>("Trumpinnar");
+            electricGuitarOnGround = Content.Load<Texture2D>("El_guitar");
+            guitarOnGround = Content.Load<Texture2D>("Guitar");
+            triangleOnGround = Content.Load<Texture2D>("Heart");
 
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"),
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
@@ -154,6 +166,16 @@ namespace TheWorld
                 p.Position = p.Position.Y < 60 ? p.OldPos : p.Position;
                 p.Position = p.Position.Y > World.RoomHeight - 60 ? p.OldPos : p.Position;
 
+                if (Keyboard.GetState().IsKeyDown(Keys.X) && oldState.IsKeyUp(Keys.X) && weaponOnGround != null)
+                {
+                    if (Vector2.Distance(p.Position,weaponOnGround.Position) < 200)
+                    {
+                        tmpWeapon = weaponOnGround.ContainedWeapon;
+                        weaponOnGround = new WeaponOnGround(p.Weapon.weaponTexture, weaponOnGroundPosition, p.Weapon);
+                        p.Weapon = tmpWeapon;
+                    }
+                }
+
                 #region Collision
 
                 
@@ -182,20 +204,17 @@ namespace TheWorld
                         {
                             p.Health--;
                             p.invTmr = 1.5f;
-                            sZ.SpitList.RemoveAt(i);
-                            i--;
+                            sZ.SpitList[i].Collectable = true;
                         }
                         else if (sZ.SpitList[i].CollisionBox.Intersects(p.CollisionBox))
                         {
-                            sZ.SpitList.RemoveAt(i);
-                            i--;
+                            sZ.SpitList[i].Collectable = true;
                         }
                         for (int q = 0; q < p.Weapon.hit.Count; q++)
                         {
                             if (sZ.SpitList[i].CollisionBox.Intersects(p.Weapon.hit[q].CollisionBox))
                             {
-                                sZ.SpitList.RemoveAt(i);
-                                i--;
+                                sZ.SpitList[i].Collectable = true;
                             }
                         }
                     }
@@ -283,6 +302,17 @@ namespace TheWorld
                 #endregion
                 CurrentRoom.Animations.ForEach(x => x.Update(elapsed));
                 #region Garbage
+                foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie))
+                {
+                    for (int i = 0; i < sZ.SpitList.Count; i++)
+                    {
+                        if (sZ.SpitList[i].Collectable)
+                        {
+                            sZ.SpitList.RemoveAt(i);
+                            i--;
+                        }
+                    }
+                }
                 if (p.Weapon.weaponType == WeaponType.Drumsticks)
                 {
                     for (int i = 0; i < p.Weapon.projectile.Count; i++)
@@ -319,11 +349,35 @@ namespace TheWorld
                 }
                 #endregion
 
-                if (CurrentRoom.Monsters.Count == 0 && monsterCountOld != 0)
+                if (CurrentRoom.Monsters.Count == 0 && monsterCountOld != 0)//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
                 {
-                    if (Static.GetNumber(1) < 10)
+                    if (Static.GetNumber(100) < 100)//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
                     {
-
+                        int tmp = Static.GetNumber(4);//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
+                        if (tmp == 0)       //NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
+                        {
+                            weaponOnGround = new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Drumsticks, drumsticks));
+                        }
+                        if (tmp == 1)
+                        {
+                            weaponOnGround = new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.ElectricGuitar, electricGuitar));
+                        }
+                        if (tmp == 2)
+                        {
+                            weaponOnGround = new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Guitar, guitar));
+                        }
+                        if (tmp == 3)
+                        {
+                            weaponOnGround = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Triangle, triangle));
+                        }
+                        /*if (tmp == 4)
+                {
+                            new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Drumsticks, drumsticks));
+                        }
+                        if (tmp == 5)
+                    {
+                            new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Drumsticks, drumsticks));
+                        }*/
                     }
                 }
                 monsterCountOld = CurrentRoom.Monsters.Count;
@@ -359,16 +413,7 @@ namespace TheWorld
             {
                 CurrentRoom.Draw(spriteBatch);
 
-                for (int i = 0; i < 25; i++)
-                {
-                    for (int q = 0; q < 25; q++)
-                    {
-                        if (World.ActiveRooms[i, q] == true)
-                        {
-                            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * i, -40 + 10 * q - World.HUD, 9, 9), Color.White);
-                        }
-                    }
-                }
+                
                 CurrentRoom.Doors.Where(x => x.active).ToList().ForEach(x => x.Draw(spriteBatch));
 
                 if (Keyboard.GetState().IsKeyDown(Keys.E))
@@ -380,12 +425,28 @@ namespace TheWorld
                     }
                     spriteBatch.Draw(Content.Load<Texture2D>("dot"), p.CollisionBox, Color.Red);
                 }
+                if (weaponOnGround != null && CurrentRoom.Monsters.Count == 0)
+                {
+                    weaponOnGround.Draw(spriteBatch);
+                }
+                
                 p.Draw(spriteBatch);
 
                 p.Weapon.hit.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("Note"), x.HitCollisionBox, new Rectangle(0, 0, 52, 56), Color.White));
-                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.LastRoom[0], -40 + 10 * World.LastRoom[1] - World.HUD, 9, 9), Color.BlueViolet);
-                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.FirstRoom[0], -40 + 10 * World.FirstRoom[1] - World.HUD, 9, 9), Color.LawnGreen);
-                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * CurrentRoom.XCoordinate, -40 + 10 * CurrentRoom.YCoordinate - World.HUD, 9, 9), Color.Red);
+                
+                for (int i = 0; i < 25; i++)
+                {
+                    for (int q = 0; q < 25; q++)
+                    {
+                        if (World.ActiveRooms[i, q] == true)
+                        {
+                            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * i, -40 + 10 * q - World.UIBar, 9, 9), Color.White);
+                        }
+                    }
+                }
+                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.LastRoom[0], -40 + 10 * World.LastRoom[1] - World.UIBar, 9, 9), Color.BlueViolet);
+                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.FirstRoom[0], -40 + 10 * World.FirstRoom[1] - World.UIBar, 9, 9), Color.LawnGreen);
+                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * CurrentRoom.XCoordinate, -40 + 10 * CurrentRoom.YCoordinate - World.UIBar, 9, 9), Color.Red);
 
             }
             else
