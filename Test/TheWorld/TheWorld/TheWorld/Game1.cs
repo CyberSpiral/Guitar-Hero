@@ -99,7 +99,7 @@ namespace TheWorld {
             drumsticks = Content.Load<Texture2D>("Trumpinnar");
             electricGuitar = Content.Load<Texture2D>("El_guitar");
             guitar = Content.Load<Texture2D>("Guitar");
-            triangle = Content.Load<Texture2D>("Heart");
+            triangle = Content.Load<Texture2D>("Triangel");
             drumsticksOnGround = Content.Load<Texture2D>("Trumpinnar");
             electricGuitarOnGround = Content.Load<Texture2D>("El_guitar");
             guitarOnGround = Content.Load<Texture2D>("Guitar");
