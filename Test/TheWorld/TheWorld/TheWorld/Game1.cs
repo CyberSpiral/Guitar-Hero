@@ -357,28 +357,20 @@ namespace TheWorld
                         int tmp = Static.GetNumber(4);//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
                         if (tmp == 0)       //NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
                         {
-                            weaponOnGround = new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Drumsticks, drumsticks));
+                            weaponOnGround = new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.05f + 0.01f * World.CurrentLevel, 2f, WeaponType.Drumsticks, note));
                         }
                         if (tmp == 1)
                         {
-                            weaponOnGround = new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.ElectricGuitar, electricGuitar));
+                            weaponOnGround = new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(0.2f + 0.1f * World.CurrentLevel, 2f, WeaponType.ElectricGuitar, note));
                         }
                         if (tmp == 2)
                         {
-                            weaponOnGround = new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Guitar, guitar));
+                            weaponOnGround = new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.1f * World.CurrentLevel, 2f, WeaponType.Guitar, guitar));
                         }
                         if (tmp == 3)
                         {
-                            weaponOnGround = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Triangle, triangle));
+                            weaponOnGround = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.1f + 0.02f * World.CurrentLevel, 2f, WeaponType.Triangle, note));
                         }
-                        /*if (tmp == 4)
-                {
-                            new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Drumsticks, drumsticks));
-                        }
-                        if (tmp == 5)
-                    {
-                            new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Drumsticks, drumsticks));
-                        }*/
                     }
                 }
                 monsterCountOld = CurrentRoom.Monsters.Count;
