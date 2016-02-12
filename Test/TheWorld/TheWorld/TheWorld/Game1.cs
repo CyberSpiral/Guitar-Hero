@@ -441,13 +441,13 @@ namespace TheWorld
                     {
                         if (World.ActiveRooms[i, q] == true)
                         {
-                            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * i, -40 + 10 * q - World.UIBar, 9, 9), Color.White);
+                            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * i, -40 + 10 * q - World.HUD, 9, 9), Color.White);
                         }
                     }
                 }
-                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.LastRoom[0], -40 + 10 * World.LastRoom[1] - World.UIBar, 9, 9), Color.BlueViolet);
-                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.FirstRoom[0], -40 + 10 * World.FirstRoom[1] - World.UIBar, 9, 9), Color.LawnGreen);
-                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * CurrentRoom.XCoordinate, -40 + 10 * CurrentRoom.YCoordinate - World.UIBar, 9, 9), Color.Red);
+                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.LastRoom[0], -40 + 10 * World.LastRoom[1] - World.HUD, 9, 9), Color.BlueViolet);
+                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.FirstRoom[0], -40 + 10 * World.FirstRoom[1] - World.HUD, 9, 9), Color.LawnGreen);
+                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * CurrentRoom.XCoordinate, -40 + 10 * CurrentRoom.YCoordinate - World.HUD, 9, 9), Color.Red);
 
             }
             else
