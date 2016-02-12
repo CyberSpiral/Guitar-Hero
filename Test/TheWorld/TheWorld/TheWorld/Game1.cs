@@ -117,7 +117,7 @@ namespace TheWorld {
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
                 Content.Load<Texture2D>("main_menu_NO_buttons"), Content.Load<Texture2D>("Game_Credits"));
             p = new Player(Content.Load<Texture2D>("Character_sprite_v2"), Content.Load<Texture2D>("health"), new Vector2(544, 456), 3, 1, 19, 19, 100,
-                new Weapon(0.5f + 0.2f, 1f, WeaponType.Guitar, guitar));
+                new Weapon(0.3f, 1f, WeaponType.Guitar, guitar));
             
 
 
@@ -425,11 +425,11 @@ namespace TheWorld {
                         }
                         if (tmp == 2)
                         {
-                            CurrentRoom.WOP = new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 1f, WeaponType.Guitar, guitar));
+                            CurrentRoom.WOP = new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(0.3f + 0.2f * World.CurrentLevel, 1f, WeaponType.Guitar, guitar));
                         }
                         if (tmp == 3)
                         {
-                            CurrentRoom.WOP = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.002f + 0.001f * World.CurrentLevel, 1f, WeaponType.Triangle, null));
+                            CurrentRoom.WOP = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.02f + 0.01f * World.CurrentLevel, 1f, WeaponType.Triangle, null));
                         }
                     }
                 }
