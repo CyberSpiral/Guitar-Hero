@@ -42,6 +42,8 @@ namespace TheWorld {
         SoundEffect musicMenu;
         SoundEffect musicGame;
 
+        SoundEffectInstance sEI;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -103,7 +105,13 @@ namespace TheWorld {
             guitarOnGround = Content.Load<Texture2D>("Guitar");
             triangleOnGround = Content.Load<Texture2D>("Heart");
             note = Content.Load<Texture2D>("Note");
-            
+
+            musicGame = Content.Load<SoundEffect>("HarshBckGrndSndTrack");
+            musicMenu = Content.Load<SoundEffect>("LightBckGrndSndTrack");
+
+            sEI = musicGame.CreateInstance();
+            sEI.IsLooped = true;
+            sEI.Play();
 
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"),
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
@@ -160,6 +168,8 @@ namespace TheWorld {
             #region game
             if (menu.menuType == MenuType.InGame)
             {
+                
+                
                 if (Keyboard.GetState().IsKeyDown(Keys.Q))
                 {
                     World.GenerateFloor();
@@ -419,7 +429,7 @@ namespace TheWorld {
                         }
                         if (tmp == 3)
                         {
-                            CurrentRoom.WOP = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.002f + 0.001f * World.CurrentLevel, 1f, WeaponType.Triangle, note));
+                            CurrentRoom.WOP = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.002f + 0.001f * World.CurrentLevel, 1f, WeaponType.Triangle, null));
                         }
                     }
                 }
@@ -467,6 +477,10 @@ namespace TheWorld {
                 p.Dead = true;
                     CurrentRoom.Monsters.Clear();
                 }
+            }
+            else
+            {
+                
             }
 #endregion
 
