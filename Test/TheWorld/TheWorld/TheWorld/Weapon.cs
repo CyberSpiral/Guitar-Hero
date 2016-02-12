@@ -212,6 +212,7 @@ namespace TheWorld
             {
                 spriteBatch.DrawString(spriteFont, "X", new Vector2(Position.X, Position.Y), Color.White);
             }
+            spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height), Color.White);
         }
     }
 }

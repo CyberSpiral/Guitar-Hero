@@ -398,16 +398,7 @@ namespace TheWorld
             {
                 CurrentRoom.Draw(spriteBatch);
 
-                for (int i = 0; i < 25; i++)
-                {
-                    for (int q = 0; q < 25; q++)
-                    {
-                        if (World.ActiveRooms[i, q] == true)
-                        {
-                            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * i, -40 + 10 * q - World.UIBar, 9, 9), Color.White);
-                        }
-                    }
-                }
+                
                 CurrentRoom.Doors.Where(x => x.active).ToList().ForEach(x => x.Draw(spriteBatch));
 
                 if (Keyboard.GetState().IsKeyDown(Keys.E))
@@ -419,9 +410,25 @@ namespace TheWorld
                     }
                     spriteBatch.Draw(Content.Load<Texture2D>("dot"), p.CollisionBox, Color.Red);
                 }
+                if (weaponOnGround != null)
+                {
+                    weaponOnGround.Draw(spriteBatch);
+                }
+                
                 p.Draw(spriteBatch);
 
                 p.Weapon.hit.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("Note"), x.HitCollisionBox, new Rectangle(0, 0, 52, 56), Color.White));
+                
+                for (int i = 0; i < 25; i++)
+                {
+                    for (int q = 0; q < 25; q++)
+                    {
+                        if (World.ActiveRooms[i, q] == true)
+                        {
+                            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * i, -40 + 10 * q - World.UIBar, 9, 9), Color.White);
+                        }
+                    }
+                }
                 spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.LastRoom[0], -40 + 10 * World.LastRoom[1] - World.UIBar, 9, 9), Color.BlueViolet);
                 spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.FirstRoom[0], -40 + 10 * World.FirstRoom[1] - World.UIBar, 9, 9), Color.LawnGreen);
                 spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * CurrentRoom.XCoordinate, -40 + 10 * CurrentRoom.YCoordinate - World.UIBar, 9, 9), Color.Red);
