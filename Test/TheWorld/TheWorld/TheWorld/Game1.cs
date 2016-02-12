@@ -410,7 +410,7 @@ namespace TheWorld
                     }
                     spriteBatch.Draw(Content.Load<Texture2D>("dot"), p.CollisionBox, Color.Red);
                 }
-                if (weaponOnGround != null)
+                if (weaponOnGround != null && CurrentRoom.Monsters.Count == 0)
                 {
                     weaponOnGround.Draw(spriteBatch);
                 }
