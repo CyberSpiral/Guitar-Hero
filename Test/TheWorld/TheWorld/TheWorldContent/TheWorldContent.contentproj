@@ -275,22 +275,54 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Wave.png">
-      <Name>Wave</Name>
+    <Compile Include="CREDIT_button.png">
+      <Name>CREDIT_button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="CREDIT_flash_button.png">
+      <Name>CREDIT_flash_button</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="rings.png">
-      <Name>rings</Name>
+    <Compile Include="main_menu_NO_buttons.png">
+      <Name>main_menu_NO_buttons</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Note.png">
-      <Name>Note</Name>
+    <Compile Include="Broken_Guitar.png">
+      <Name>Broken_Guitar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Desk.png">
+      <Name>Desk</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="DJ_table.png">
+      <Name>DJ_table</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Keyboard.png">
+      <Name>Keyboard</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Trummor.png">
+      <Name>Trummor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="stairway.png">
+      <Name>stairway</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
