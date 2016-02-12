@@ -167,7 +167,7 @@ namespace TheWorld
                 p.Position = p.Position.Y < 60 ? p.OldPos : p.Position;
                 p.Position = p.Position.Y > World.RoomHeight - 60 ? p.OldPos : p.Position;
 
-                if (Keyboard.GetState().IsKeyDown(Keys.X) && oldState.IsKeyUp(Keys.X) && weaponOnGround != null && monsters.Count == 0)
+                if (Keyboard.GetState().IsKeyDown(Keys.X) && oldState.IsKeyUp(Keys.X) && weaponOnGround != null && CurrentRoom.Monsters.Count == 0)
                 {
                     if (Vector2.Distance(p.Position,weaponOnGround.Position) < 100)
                     {
