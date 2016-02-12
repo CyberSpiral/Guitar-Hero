@@ -334,12 +334,12 @@ namespace TheWorld
                 }
                 #endregion
 
-                if (CurrentRoom.Monsters.Count == 0 && monsterCountOld != 0)
+                if (CurrentRoom.Monsters.Count == 0 && monsterCountOld != 0)//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
                 {
-                    if (Static.GetNumber(100) < 100)
+                    if (Static.GetNumber(100) < 100)//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
                     {
-                        int tmp = Static.GetNumber(4);
-                        if (tmp == 0)
+                        int tmp = Static.GetNumber(4);//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
+                        if (tmp == 0)       //NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
                         {
                             weaponOnGround = new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 2f, WeaponType.Drumsticks, drumsticks));
                         }
