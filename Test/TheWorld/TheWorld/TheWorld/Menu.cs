@@ -153,6 +153,7 @@ namespace TheWorld
             else if (menuType == MenuType.CreditMenu)
             {
                 //our names
+                spriteBatch.Draw(mainMenu, mainMenuRec, Color.White);
                 exitButton.Draw(spriteBatch);
             }
         }

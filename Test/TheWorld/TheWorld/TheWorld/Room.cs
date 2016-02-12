@@ -19,6 +19,8 @@ namespace TheWorld {
         public int XCoordinate { get; set; }
         public int YCoordinate { get; set; }
 
+        public WeaponOnGround WOP { get; set; }
+
 
         public Room(RoomGraphic roomGraphic, List<Rectangle> protectedSpace, List<GameObject> objects, List<Monster> monsters, int level) {
             Doors = new List<Door>();
