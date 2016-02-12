@@ -149,7 +149,8 @@ namespace TheWorld
                 p.Position = p.Position.Y > World.RoomHeight - 60 ? p.OldPos : p.Position;
 
                 #region Collision
-                CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position));
+
+                CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position, CurrentRoom.Monsters.Count));
                 foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie))
                 {
                     z.Update(elapsed, p.Position);

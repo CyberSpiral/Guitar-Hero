@@ -149,32 +149,35 @@ namespace TheWorld
             }
         }
 
-        public Vector2 Update(float elapsed, Rectangle playerCollisionBox, Vector2 playerPosition)
+        public Vector2 Update(float elapsed, Rectangle playerCollisionBox, Vector2 playerPosition, int monsterCount)
         {
             base.Update(elapsed);
             if (active)
             {
-                if (CollisionBox.Intersects(playerCollisionBox))
+                if (monsterCount == 0)
                 {
-                    if (direction == Direction.Up)
+                    if (CollisionBox.Intersects(playerCollisionBox))
                     {
-                        World.CurrentRoomLocationCode[1] -= 1;
-                        playerPosition -= new Vector2(0, (playerPosition.Y - World.RoomHeight) + 100);
-                    }
-                    else if (direction == Direction.Left)
-                    {
-                        World.CurrentRoomLocationCode[0] -= 1;
-                        playerPosition -= new Vector2((playerPosition.X - World.RoomWidth) + 100, 0);
-                    }
-                    else if (direction == Direction.Down)
-                    {
-                        World.CurrentRoomLocationCode[1] += 1;
-                        playerPosition -= new Vector2(0, World.RoomHeight - (World.RoomHeight - playerPosition.Y) - 100);
-                    }
-                    else if (direction == Direction.Right)
-                    {
-                        World.CurrentRoomLocationCode[0] += 1;
-                        playerPosition -= new Vector2(World.RoomWidth - (World.RoomWidth - playerPosition.X) - 100, 0);
+                        if (direction == Direction.Up)
+                        {
+                            World.CurrentRoomLocationCode[1] -= 1;
+                            playerPosition -= new Vector2(0, (playerPosition.Y - World.RoomHeight) + 100);
+                        }
+                        else if (direction == Direction.Left)
+                        {
+                            World.CurrentRoomLocationCode[0] -= 1;
+                            playerPosition -= new Vector2((playerPosition.X - World.RoomWidth) + 100, 0);
+                        }
+                        else if (direction == Direction.Down)
+                        {
+                            World.CurrentRoomLocationCode[1] += 1;
+                            playerPosition -= new Vector2(0, World.RoomHeight - (World.RoomHeight - playerPosition.Y) - 100);
+                        }
+                        else if (direction == Direction.Right)
+                        {
+                            World.CurrentRoomLocationCode[0] += 1;
+                            playerPosition -= new Vector2(World.RoomWidth - (World.RoomWidth - playerPosition.X) - 100, 0);
+                        }
                     }
                 }
             }
