@@ -73,7 +73,7 @@ namespace TheWorld {
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"), 
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("dot"), Content.Load<Texture2D>("dot"));
             p = new Player(Content.Load<Texture2D>("Character_sprite_v2"), Content.Load<Texture2D>("health"), new Vector2(544, 306), 3, 1, 19, 19, 100,
-                new Weapon(1f, 3, WeaponType., Content.Load<Texture2D>("dot")));
+                new Weapon(1f, 3, WeaponType.ElectricGuitar, Content.Load<Texture2D>("dot")));
 
 
             // TODO: use this.Content to load your game content here
