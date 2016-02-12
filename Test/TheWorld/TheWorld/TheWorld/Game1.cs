@@ -139,7 +139,7 @@ namespace TheWorld
                 {
                     World.CurrentRoomLocationCode[0] -= 1;
                 }
-                
+
                 float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
                 p.Update(elapsed, Keyboard.GetState(), oldState, Mouse.GetState(), msOld);
@@ -271,16 +271,16 @@ namespace TheWorld
                     }
                 }
                 #endregion
-            }
 
-            if (World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1])
-            {
-                if (p.CollisionBox.Intersects(CurrentRoom.Props[0].CollisionBox))
+                if (World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1])
                 {
-                    World.GenerateFloor();
-                    World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"), stairway);
-                    World.CurrentLevel += 1;
-                    p.Position = new Vector2(544, 306 + 150);
+                    if (p.CollisionBox.Intersects(CurrentRoom.Props[0].CollisionBox))
+                    {
+                        World.GenerateFloor();
+                        World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("heart"), stairway);
+                        World.CurrentLevel += 1;
+                        p.Position = new Vector2(544, 306 + 150);
+                    }
                 }
             }
 
