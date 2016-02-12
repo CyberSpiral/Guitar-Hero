@@ -77,8 +77,11 @@ namespace TheWorld
             objects.Add(Content.Load<Texture2D>("Desk"));
             objects.Add(Content.Load<Texture2D>("Broken_Guitar"));
             stairway = Content.Load<Texture2D>("stairway");
-            roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back1"), Content.Load<Texture2D>("door"), Content.Load<Texture2D>("Overlay1")));
-            roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back2"), Content.Load<Texture2D>("door2"), Content.Load<Texture2D>("Overlay2")));
+            roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("Background_Number_1_Pixelated"), Content.Load<Texture2D>("door"), Content.Load<Texture2D>("Background_Overlay_Number_1")));
+            roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("Background_Number_2_Pixelated"), Content.Load<Texture2D>("door2"), Content.Load<Texture2D>("Background_Overlay_Number_2")));
+            roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("Background_Number_3_Pixelated"), Content.Load<Texture2D>("Dörr_3"), Content.Load<Texture2D>("Background_Overlay_Number_3")));
+            roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("Background_Number_4"), Content.Load<Texture2D>("Dörr_4"), Content.Load<Texture2D>("Background_Overlay_Number_4")));
+            roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("Background_Number_5"), Content.Load<Texture2D>("door2"), Content.Load<Texture2D>("Background_Overlay_Number_5")));
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"), stairway);
             monsterCountOld = 0;
@@ -96,7 +99,7 @@ namespace TheWorld
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
                 Content.Load<Texture2D>("main_menu_NO_buttons"));
             p = new Player(Content.Load<Texture2D>("Character_sprite_v2"), Content.Load<Texture2D>("health"), new Vector2(544, 456), 3, 1, 19, 19, 100,
-                new Weapon(1f, 3, WeaponType.ElectricGuitar, Content.Load<Texture2D>("Note")));
+                new Weapon(1f, 3, WeaponType.Guitar, Content.Load<Texture2D>("Note")));
 
 
             // TODO: use this.Content to load your game content here
@@ -188,6 +191,14 @@ namespace TheWorld
                         {
                             sZ.SpitList.RemoveAt(i);
                             i--;
+                        }
+                        for (int q = 0; q < p.Weapon.hit.Count; q++)
+                        {
+                            if (sZ.SpitList[i].CollisionBox.Intersects(p.Weapon.hit[q].CollisionBox))
+                            {
+                                sZ.SpitList.RemoveAt(i);
+                                i--;
+                            }
                         }
                     }
 
@@ -390,6 +401,7 @@ namespace TheWorld
                 }
                 p.Draw(spriteBatch);
 
+                p.Weapon.hit.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("Note"), x.HitCollisionBox, new Rectangle(0, 0, 52, 56), Color.White));
                 spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.LastRoom[0], -40 + 10 * World.LastRoom[1] - World.UIBar, 9, 9), Color.BlueViolet);
                 spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.FirstRoom[0], -40 + 10 * World.FirstRoom[1] - World.UIBar, 9, 9), Color.LawnGreen);
                 spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * CurrentRoom.XCoordinate, -40 + 10 * CurrentRoom.YCoordinate - World.UIBar, 9, 9), Color.Red);
