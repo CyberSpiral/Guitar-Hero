@@ -125,17 +125,22 @@ namespace TheWorld {
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Update(GameTime gameTime) {
+        protected override void Update(GameTime gameTime)
+        {
             // Allows the game to exit
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape)) {
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 this.Exit();
             }
             ms = Mouse.GetState();
             menu.Update(ms, msOld);
-            if (menu.menuType == MenuType.WinMenu) {
+            if (menu.menuType == MenuType.WinMenu)
+            {
                 winElapsed += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (winElapsed > 400) {
-                    if (winAni) {
+                if (winElapsed > 400)
+                {
+                    if (winAni)
+                    {
                         winElapsed -= 400;
                         winAni = false;
                     }
@@ -147,21 +152,27 @@ namespace TheWorld {
             }
 
             #region game
-            if (menu.menuType == MenuType.InGame) {
-                if (Keyboard.GetState().IsKeyDown(Keys.Q)) {
+            if (menu.menuType == MenuType.InGame)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                {
                     World.GenerateFloor();
                     World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"), stairway);
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I)) {
+                if (Keyboard.GetState().IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I))
+                {
                     World.CurrentRoomLocationCode[1] -= 1;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.K) && oldState.IsKeyUp(Keys.K)) {
+                if (Keyboard.GetState().IsKeyDown(Keys.K) && oldState.IsKeyUp(Keys.K))
+                {
                     World.CurrentRoomLocationCode[1] += 1;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.L) && oldState.IsKeyUp(Keys.L)) {
+                if (Keyboard.GetState().IsKeyDown(Keys.L) && oldState.IsKeyUp(Keys.L))
+                {
                     World.CurrentRoomLocationCode[0] += 1;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.J) && oldState.IsKeyUp(Keys.J)) {
+                if (Keyboard.GetState().IsKeyDown(Keys.J) && oldState.IsKeyUp(Keys.J))
+                {
                     World.CurrentRoomLocationCode[0] -= 1;
                 }
 
@@ -205,79 +216,106 @@ namespace TheWorld {
 
                 #region Collision
 
-                
-                if (!p.Dead) {
-                    foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie)) {
-                    z.Update(elapsed, p.Position);
-                        if (z.CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0) {
-                        p.Health -= 1;
-                        p.invTmr = 1.5f;
-                    }
-                }
-                foreach (Charger c in CurrentRoom.Monsters.Where(x => x is Charger)) {
-                    c.Update(elapsed, p.Position);
-                    if (c.CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0) {
-                        p.Health -= 1;
-                        p.invTmr = 1.5f;
-                    }
-                }
-                    foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie)) {
-                    sZ.Update(elapsed, p.Position, CurrentRoom.Props);
-                        for (int i = 0; i < sZ.SpitList.Count; i++) {
-                            if (sZ.SpitList[i].CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0) {
-                            p.Health--;
+
+                if (!p.Dead)
+                {
+                    foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie))
+                    {
+                        z.Update(elapsed, p.Position);
+                        if (z.CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0)
+                        {
+                            p.Health -= 1;
                             p.invTmr = 1.5f;
-                            sZ.SpitList[i].Collectable = true;
                         }
-                            else if (sZ.SpitList[i].CollisionBox.Intersects(p.CollisionBox)) {
-                            sZ.SpitList[i].Collectable = true;
+                    }
+                    foreach (Charger c in CurrentRoom.Monsters.Where(x => x is Charger))
+                    {
+                        c.Update(elapsed, p.Position);
+                        if (c.CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0)
+                        {
+                            p.Health -= 1;
+                            p.invTmr = 1.5f;
                         }
-                            for (int q = 0; q < p.Weapon.hit.Count; q++) {
-                                if (sZ.SpitList[i].CollisionBox.Intersects(p.Weapon.hit[q].CollisionBox)) {
+                    }
+                    foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie))
+                    {
+                        sZ.Update(elapsed, p.Position, CurrentRoom.Props);
+                        for (int i = 0; i < sZ.SpitList.Count; i++)
+                        {
+                            if (sZ.SpitList[i].CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0)
+                            {
+                                p.Health--;
+                                p.invTmr = 1.5f;
                                 sZ.SpitList[i].Collectable = true;
                             }
+                            else if (sZ.SpitList[i].CollisionBox.Intersects(p.CollisionBox))
+                            {
+                                sZ.SpitList[i].Collectable = true;
+                            }
+                            for (int q = 0; q < p.Weapon.hit.Count; q++)
+                            {
+                                if (sZ.SpitList[i].CollisionBox.Intersects(p.Weapon.hit[q].CollisionBox))
+                                {
+                                    sZ.SpitList[i].Collectable = true;
+                                }
+                            }
                         }
-                    }
 
+                    }
                 }
-                }
-                if (!(World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1])) {
-                    foreach (var item in CurrentRoom.Props) {
-                        if (item.CollisionBox.Intersects(p.CollisionBox)) {
+                if (!(World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1]))
+                {
+                    foreach (var item in CurrentRoom.Props)
+                    {
+                        if (item.CollisionBox.Intersects(p.CollisionBox))
+                        {
                             p.Position = p.OldPos;
                         }
-                        foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie)) {
-                            if (z.CollisionBox.Intersects(item.CollisionBox)) {
+                        foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie))
+                        {
+                            if (z.CollisionBox.Intersects(item.CollisionBox))
+                            {
                                 z.Position = z.OldPos;
                             }
                         }
-                        foreach (Charger c in CurrentRoom.Monsters.Where(x => x is Charger)) {
-                            if (c.CollisionBox.Intersects(item.CollisionBox)) {
+                        foreach (Charger c in CurrentRoom.Monsters.Where(x => x is Charger))
+                        {
+                            if (c.CollisionBox.Intersects(item.CollisionBox))
+                            {
                                 c.Position = c.OldPos;
                                 c.charging = false;
                                 c.wait = 0;
                             }
                         }
-                        foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie)) {
-                            if (sZ.CollisionBox.Intersects(item.CollisionBox)) {
+                        foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie))
+                        {
+                            if (sZ.CollisionBox.Intersects(item.CollisionBox))
+                            {
                                 sZ.Position = sZ.OldPos;
                                 sZ.facingTowards = true;
                             }
                         }
-                        for (int i = 0; i < p.Weapon.projectile.Count; i++) {
+                        for (int i = 0; i < p.Weapon.projectile.Count; i++)
+                        {
                             if (
-                                p.Weapon.projectile[i].HitCollisionBox.Intersects(item.CollisionBox)) {
+                                p.Weapon.projectile[i].HitCollisionBox.Intersects(item.CollisionBox))
+                            {
                                 p.Weapon.projectile[i].Collectable = true;
                             }
                         }
                     }
                 }
-                for (int i = 0; i < CurrentRoom.Monsters.Count; i++) {
-                    for (int q = 0; q < p.Weapon.hit.Count; q++) {
-                        if (CurrentRoom.Monsters[i].CollisionBox.Intersects(p.Weapon.hit[q].HitCollisionBox)) {
+                for (int i = 0; i < CurrentRoom.Monsters.Count; i++)
+                {
+                    for (int q = 0; q < p.Weapon.hit.Count; q++)
+                    {
+                        if (CurrentRoom.Monsters[i].CollisionBox.Intersects(p.Weapon.hit[q].HitCollisionBox))
+                        {
                             CurrentRoom.Monsters[i].Health -= p.Weapon.damage;
-                            if (CurrentRoom.Monsters[i].Health <= 0) {
-                                if (CurrentRoom.Monsters[i] is Zombie) {
+                            if (CurrentRoom.Monsters[i].Health <= 0)
+                            {
+                                if (CurrentRoom.Monsters[i] is Zombie)
+                                {
                                     CurrentRoom.Animations.Add(new TempObject(Content.Load<Texture2D>("Zombie_death_sprite"), CurrentRoom.Monsters[i].Position
                                         , 1, 15, 15, 200, CurrentRoom.Monsters[i].Rotation));
                                 }
@@ -286,11 +324,15 @@ namespace TheWorld {
                         }
 
                     }
-                    for (int q = 0; q < p.Weapon.projectile.Count; q++) {
-                        if (CurrentRoom.Monsters[i].CollisionBox.Intersects(p.Weapon.projectile[q].HitCollisionBox)) {
+                    for (int q = 0; q < p.Weapon.projectile.Count; q++)
+                    {
+                        if (CurrentRoom.Monsters[i].CollisionBox.Intersects(p.Weapon.projectile[q].HitCollisionBox))
+                        {
                             CurrentRoom.Monsters[i].Health -= p.Weapon.damage;
-                            if (CurrentRoom.Monsters[i].Health <= 0) {
-                                if (CurrentRoom.Monsters[i] is Zombie) {
+                            if (CurrentRoom.Monsters[i].Health <= 0)
+                            {
+                                if (CurrentRoom.Monsters[i] is Zombie)
+                                {
                                     CurrentRoom.Animations.Add(new TempObject(Content.Load<Texture2D>("Zombie_death_sprite"), CurrentRoom.Monsters[i].Position
                                         , 1, 15, 15, 200, CurrentRoom.Monsters[i].Rotation));
                                 }
@@ -305,35 +347,47 @@ namespace TheWorld {
                 #endregion
                 CurrentRoom.Animations.ForEach(x => x.Update(elapsed));
                 #region Garbage
-                foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie)) {
-                    for (int i = 0; i < sZ.SpitList.Count; i++) {
-                        if (sZ.SpitList[i].Collectable) {
+                foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie))
+                {
+                    for (int i = 0; i < sZ.SpitList.Count; i++)
+                    {
+                        if (sZ.SpitList[i].Collectable)
+                        {
                             sZ.SpitList.RemoveAt(i);
                             i--;
                         }
                     }
                 }
-                if (p.Weapon.weaponType == WeaponType.Drumsticks) {
-                    for (int i = 0; i < p.Weapon.projectile.Count; i++) {
-                        if (Vector2.Distance(p.Weapon.projectile[i].Position, p.Position) > 100) {
+                if (p.Weapon.weaponType == WeaponType.Drumsticks)
+                {
+                    for (int i = 0; i < p.Weapon.projectile.Count; i++)
+                    {
+                        if (Vector2.Distance(p.Weapon.projectile[i].Position, p.Position) > 100)
+                        {
                             p.Weapon.projectile[i].Collectable = true;
                         }
                     }
                 }
-                for (int i = 0; i < CurrentRoom.Animations.Count; i++) {
-                    if (CurrentRoom.Animations[i].Collectable) {
+                for (int i = 0; i < CurrentRoom.Animations.Count; i++)
+                {
+                    if (CurrentRoom.Animations[i].Collectable)
+                    {
                         CurrentRoom.Animations.RemoveAt(i);
                         i--;
                     }
                 }
-                for (int i = 0; i < CurrentRoom.Monsters.Count; i++) {
-                    if (CurrentRoom.Monsters[i].Collectable) {
+                for (int i = 0; i < CurrentRoom.Monsters.Count; i++)
+                {
+                    if (CurrentRoom.Monsters[i].Collectable)
+                    {
                         CurrentRoom.Monsters.RemoveAt(i);
                         i--;
                     }
                 }
-                for (int i = 0; i < p.Weapon.projectile.Count; i++) {
-                    if (p.Weapon.projectile[i].Collectable) {
+                for (int i = 0; i < p.Weapon.projectile.Count; i++)
+                {
+                    if (p.Weapon.projectile[i].Collectable)
+                    {
                         p.Weapon.projectile.RemoveAt(i);
                         i--;
                     }
@@ -349,13 +403,16 @@ namespace TheWorld {
                         {
                             CurrentRoom.WOP = new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.001f + 0.002f * World.CurrentLevel, 2f, WeaponType.Drumsticks, note));
                         }
-                        if (tmp == 1) {
+                        if (tmp == 1)
+                        {
                             CurrentRoom.WOP = new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(0.2f + 0.1f * World.CurrentLevel, 3f, WeaponType.ElectricGuitar, note));
                         }
-                        if (tmp == 2) {
+                        if (tmp == 2)
+                        {
                             CurrentRoom.WOP = new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.2f * World.CurrentLevel, 1f, WeaponType.Guitar, guitar));
                         }
-                        if (tmp == 3) {
+                        if (tmp == 3)
+                        {
                             CurrentRoom.WOP = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.002f + 0.001f * World.CurrentLevel, 1f, WeaponType.Triangle, note));
                         }
                     }
@@ -363,14 +420,18 @@ namespace TheWorld {
                 monsterCountOld = CurrentRoom.Monsters.Count;
                 Vector2 tempPos = p.Position;
                 CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position, CurrentRoom.Monsters.Count));
-                if (tempPos != p.Position) {
+                if (tempPos != p.Position)
+                {
                     p.Weapon.hit.ForEach(x => x.Collectable = true);
                     p.Weapon.projectile.ForEach(x => x.Collectable = true);
                 }
 
-                if (World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1]) {
-                    if (p.CollisionBox.Intersects(CurrentRoom.Props[0].CollisionBox)) {
-                        if (World.CurrentLevel == 10) {
+                if (World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1])
+                {
+                    if (p.CollisionBox.Intersects(CurrentRoom.Props[0].CollisionBox))
+                    {
+                        if (World.CurrentLevel == 10)
+                        {
                             menu.menuType = MenuType.WinMenu;
                         }
                         else {
@@ -382,23 +443,26 @@ namespace TheWorld {
                     }
                 }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Y) && p.Dead == true) {
-                p.Health = 10;
-                World.CurrentLevel = 1;
-                World.GenerateFloor();
-                World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"), stairway);
-                p.Position = new Vector2(544, 306 + 150);
-                CurrentRoom.Animations.Add(new TempObject(Content.Load<Texture2D>("SATAN"), p.Position, 1, 5, 5, 200, MathHelper.ToRadians(90)));
-                p.Dead = false;
-            }
+                if (Keyboard.GetState().IsKeyDown(Keys.Y) && p.Dead == true)
+                {
+                    p.Health = 10;
+                    World.CurrentLevel = 1;
+                    World.GenerateFloor();
+                    World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"), stairway);
+                    p.Position = new Vector2(544, 306 + 150);
+                    CurrentRoom.Animations.Add(new TempObject(Content.Load<Texture2D>("SATAN"), p.Position, 1, 5, 5, 200, MathHelper.ToRadians(90)));
+                    p.Dead = false;
+                }
 
-            msOld = Mouse.GetState();
-            oldState = Keyboard.GetState();
-            if (p.Health <= 0) {
-                p.Dead = true;
+                msOld = Mouse.GetState();
+                oldState = Keyboard.GetState();
+                if (p.Health <= 0)
+                {
+                    p.Dead = true;
+                    CurrentRoom.Monsters.Clear();
                 }
             }
-#endregion
+            #endregion
 
             base.Update(gameTime);
         }
