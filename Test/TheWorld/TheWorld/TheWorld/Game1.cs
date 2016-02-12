@@ -159,29 +159,29 @@ namespace TheWorld {
                 p.Position = p.Position.Y < 60 ? p.OldPos : p.Position;
                 p.Position = p.Position.Y > World.RoomHeight - 60 ? p.OldPos : p.Position;
 
-                if (Keyboard.GetState().IsKeyDown(Keys.X) && oldState.IsKeyUp(Keys.X) && weaponOnGround != null && CurrentRoom.Monsters.Count == 0)
+                if (Keyboard.GetState().IsKeyDown(Keys.X) && oldState.IsKeyUp(Keys.X) && CurrentRoom.WOP != null && CurrentRoom.Monsters.Count == 0)
                 {
-                    if (Vector2.Distance(p.Position,weaponOnGround.Position) < 100)
+                    if (Vector2.Distance(p.Position, CurrentRoom.WOP.Position) < 100)
                     {
-                        tmpWeapon = weaponOnGround.ContainedWeapon;
-                        weaponOnGround = new WeaponOnGround(p.Weapon.weaponTexture, weaponOnGroundPosition, p.Weapon);
+                        tmpWeapon = CurrentRoom.WOP.ContainedWeapon;
+                        CurrentRoom.WOP = new WeaponOnGround(p.Weapon.weaponTexture, weaponOnGroundPosition, p.Weapon);
                         p.Weapon = tmpWeapon;
 
                         if (p.Weapon.weaponType == WeaponType.Drumsticks)
                         {
-                            weaponOnGround.Texture = drumsticksOnGround;
+                            CurrentRoom.WOP.Texture = drumsticksOnGround;
                         }
                         else if (p.Weapon.weaponType == WeaponType.ElectricGuitar)
                         {
-                            weaponOnGround.Texture = electricGuitarOnGround;
+                            CurrentRoom.WOP.Texture = electricGuitarOnGround;
                         }
                         else if (p.Weapon.weaponType == WeaponType.Guitar)
                         {
-                            weaponOnGround.Texture = guitarOnGround;
+                            CurrentRoom.WOP.Texture = guitarOnGround;
                         }
                         else if (p.Weapon.weaponType == WeaponType.Triangle)
                         {
-                            weaponOnGround.Texture = triangleOnGround;
+                            CurrentRoom.WOP.Texture = triangleOnGround;
                     }
                 }
                 }
@@ -325,21 +325,21 @@ namespace TheWorld {
 
                 if (CurrentRoom.Monsters.Count == 0 && monsterCountOld != 0)//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
                 {
-                    if (Static.GetNumber(100) < 100)//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
+                    if (Static.GetNumber(100) < 101)//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
                     {
                         int tmp = Static.GetNumber(4);//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
                         if (tmp == 0)       //NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!//NEED TO CHANGE DAMAGE RANGE ETC!!!
                         {
-                            weaponOnGround = new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.05f + 0.01f * World.CurrentLevel, 2f, WeaponType.Drumsticks, note));
+                            CurrentRoom.WOP = new WeaponOnGround(drumsticksOnGround, weaponOnGroundPosition, new Weapon(0.05f + 0.01f * World.CurrentLevel, 2f, WeaponType.Drumsticks, note));
                         }
                         if (tmp == 1) {
-                            weaponOnGround = new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(0.2f + 0.1f * World.CurrentLevel, 2f, WeaponType.ElectricGuitar, note));
+                            CurrentRoom.WOP = new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(0.2f + 0.1f * World.CurrentLevel, 2f, WeaponType.ElectricGuitar, note));
                         }
                         if (tmp == 2) {
-                            weaponOnGround = new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.1f * World.CurrentLevel, 2f, WeaponType.Guitar, guitar));
+                            CurrentRoom.WOP = new WeaponOnGround(guitarOnGround, weaponOnGroundPosition, new Weapon(0.5f + 0.1f * World.CurrentLevel, 2f, WeaponType.Guitar, guitar));
                         }
                         if (tmp == 3) {
-                            weaponOnGround = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.1f + 0.02f * World.CurrentLevel, 2f, WeaponType.Triangle, note));
+                            CurrentRoom.WOP = new WeaponOnGround(triangleOnGround, weaponOnGroundPosition, new Weapon(0.1f + 0.02f * World.CurrentLevel, 2f, WeaponType.Triangle, note));
                         }
                     }
                 }
@@ -401,8 +401,8 @@ namespace TheWorld {
                     }
                     spriteBatch.Draw(Content.Load<Texture2D>("dot"), p.CollisionBox, Color.Red);
                 }
-                if (weaponOnGround != null && CurrentRoom.Monsters.Count == 0) {
-                    weaponOnGround.Draw(spriteBatch);
+                if (CurrentRoom.WOP != null && CurrentRoom.Monsters.Count == 0) {
+                    CurrentRoom.WOP.Draw(spriteBatch);
                 }
                 
                 if (!p.Dead) {
