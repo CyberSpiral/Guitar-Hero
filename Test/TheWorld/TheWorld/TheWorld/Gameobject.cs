@@ -10,7 +10,7 @@ namespace TheWorld
 {
     class GameObject
     {
-        public Texture2D Texture { get; protected set; }
+        public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Velocity { get; protected set; }
         public Vector2 OldPos { get; set; }
