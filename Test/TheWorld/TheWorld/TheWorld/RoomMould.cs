@@ -37,19 +37,43 @@ namespace TheWorld {
                                 case 0: {
                                         Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 1.5f, 1, 4, 4, 500);
-                                        Monsters.Add(temp);
+                                        bool tempBool = false;
+                                        foreach (var item in Props) {
+                                            if (temp.CollisionBox.Intersects(item.CollisionBox)) {
+                                                tempBool = true;
+                                            }
+                                        }
+                                        if (!tempBool) {
+                                            Monsters.Add(temp);
+                                        }
                                         break;
                                     }
                                 case 1: {
                                         SpitZombie temp = new SpitZombie(monsterTextures[1], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , monsterTextures[2], 6, 2.5f, 1,2, 2, 500);
-                                        Monsters.Add(temp);
+                                        bool tempBool = false;
+                                        foreach (var item in Props) {
+                                            if (temp.CollisionBox.Intersects(item.CollisionBox)) {
+                                                tempBool = true;
+                                            }
+                                        }
+                                        if (!tempBool) {
+                                            Monsters.Add(temp);
+                                        }
                                         break;
                                     }
                                 case 2: {
                                         Charger temp = new Charger(monsterTextures[3], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 4f, 1, 2, 2, 500);
-                                        Monsters.Add(temp);
+                                        bool tempBool = false;
+                                        foreach (var item in Props) {
+                                            if (temp.CollisionBox.Intersects(item.CollisionBox)) {
+                                                tempBool = true;
+                                            }
+                                        }
+                                        if (!tempBool) {
+                                            Monsters.Add(temp);
+                                        }
                                         break;
                                     }
                             }
@@ -79,19 +103,43 @@ namespace TheWorld {
                                 case 0: {
                                         Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 1.5f, 1, 4, 4, 500);
-                                        Monsters.Add(temp);
+                                        bool tempBool = false;
+                                        foreach (var item in Props) {
+                                            if (temp.CollisionBox.Intersects(item.CollisionBox)) {
+                                                tempBool = true;
+                                            }
+                                        }
+                                        if (!tempBool) {
+                                            Monsters.Add(temp);
+                                        }
                                         break;
                                     }
                                 case 1: {
                                         SpitZombie temp = new SpitZombie(monsterTextures[1], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , monsterTextures[2], 6, 2.5f, 1, 2, 2, 500);
-                                        Monsters.Add(temp);
+                                        bool tempBool = false;
+                                        foreach (var item in Props) {
+                                            if (temp.CollisionBox.Intersects(item.CollisionBox)) {
+                                                tempBool = true;
+                                            }
+                                        }
+                                        if (!tempBool) {
+                                            Monsters.Add(temp);
+                                        }
                                         break;
                                     }
                                 case 2: {
                                         Charger temp = new Charger(monsterTextures[3], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 4f, 1, 2, 2, 500);
-                                        Monsters.Add(temp);
+                                        bool tempBool = false;
+                                        foreach (var item in Props) {
+                                            if (temp.CollisionBox.Intersects(item.CollisionBox)) {
+                                                tempBool = true;
+                                            }
+                                        }
+                                        if (!tempBool) {
+                                            Monsters.Add(temp);
+                                        }
                                         break;
                                     }
                             }
@@ -121,19 +169,43 @@ namespace TheWorld {
                                 case 0: {
                                         Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 1.5f, 1, 4, 4, 500);
-                                        Monsters.Add(temp);
+                                        bool tempBool = false;
+                                        foreach (var item in Props) {
+                                            if (temp.CollisionBox.Intersects(item.CollisionBox)) {
+                                                tempBool = true;
+                                            }
+                                        }
+                                        if (!tempBool) {
+                                            Monsters.Add(temp);
+                                        }
                                         break;
                                     }
                                 case 1: {
                                         SpitZombie temp = new SpitZombie(monsterTextures[1], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , monsterTextures[2], 6, 2.5f, 1, 2, 2, 500);
-                                        Monsters.Add(temp);
+                                        bool tempBool = false;
+                                        foreach (var item in Props) {
+                                            if (temp.CollisionBox.Intersects(item.CollisionBox)) {
+                                                tempBool = true;
+                                            }
+                                        }
+                                        if (!tempBool) {
+                                            Monsters.Add(temp);
+                                        }
                                         break;
                                     }
                                 case 2: {
                                         Charger temp = new Charger(monsterTextures[3], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
                                             , 6, 4f, 1, 2,2, 500);
-                                        Monsters.Add(temp);
+                                        bool tempBool = false;
+                                        foreach (var item in Props) {
+                                            if (temp.CollisionBox.Intersects(item.CollisionBox)) {
+                                                tempBool = true;
+                                            }
+                                        }
+                                        if (!tempBool) {
+                                            Monsters.Add(temp);
+                                        }
                                         break;
                                     }
                             }

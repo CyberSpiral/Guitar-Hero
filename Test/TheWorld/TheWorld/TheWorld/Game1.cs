@@ -382,8 +382,13 @@ namespace TheWorld
                     }
                 }
                 monsterCountOld = CurrentRoom.Monsters.Count;
-
+                Vector2 tempPos = p.Position;
                 CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position, CurrentRoom.Monsters.Count));
+                if (tempPos != p.Position) {
+                    p.Weapon.hit.ForEach(x => x.Collectable = true);
+                    p.Weapon.projectile.ForEach(x => x.Collectable = true);
+                }
+
                 if (World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1])
                 {
                     if (p.CollisionBox.Intersects(CurrentRoom.Props[0].CollisionBox))
