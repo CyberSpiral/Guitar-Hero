@@ -39,6 +39,9 @@ namespace TheWorld {
         Rectangle weaponInHUD;
         Texture2D tmpWeaponForHUD;
 
+        SoundEffect musicMenu;
+        SoundEffect musicGame;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -100,7 +103,7 @@ namespace TheWorld {
             guitarOnGround = Content.Load<Texture2D>("Guitar");
             triangleOnGround = Content.Load<Texture2D>("Heart");
             note = Content.Load<Texture2D>("Note");
-            //weaponInHUD = new Rectangle(World.RoomWidth - 400, -World.HUD, )
+            
 
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"),
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
