@@ -11,6 +11,7 @@ namespace TheWorld {
         public Weapon Weapon { get; set; }
         public int Health { get; set; }
         public float invTmr { get; set; }
+        public bool Dead { get; set; }
         protected Texture2D Heart;
 
         protected int storedAnimationSpeed;
@@ -20,7 +21,7 @@ namespace TheWorld {
             : base(texture, position, textureRows, textureColumns, totalFrames, animationSpeed) {
             this.speed = speed;
             storedAnimationSpeed = animationSpeed;
-            Health = 10;
+            Health = 1;
             Heart = heartTexture;
             Weapon = weapon;
         }
