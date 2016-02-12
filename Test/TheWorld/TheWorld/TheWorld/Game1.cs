@@ -22,6 +22,7 @@ namespace TheWorld
         List<Texture2D> objects;
         List<Texture2D> monsters;
         Texture2D stairway;
+        int monsterCountOld;
         KeyboardState oldState;
         MouseState ms;
         MouseState msOld;
@@ -80,7 +81,7 @@ namespace TheWorld
             roomGraphic.Add(new RoomGraphic(Content.Load<Texture2D>("back2"), Content.Load<Texture2D>("door2"), Content.Load<Texture2D>("Overlay2")));
             World.GenerateFloor();
             World.GenerateRooms(roomGraphic, objects, monsters, Content.Load<Texture2D>("health"), stairway);
-
+            monsterCountOld = 0;
 
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"),
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
@@ -150,7 +151,7 @@ namespace TheWorld
 
                 #region Collision
 
-                CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position, CurrentRoom.Monsters.Count));
+                
                 foreach (Zombie z in CurrentRoom.Monsters.Where(x => x is Zombie))
                 {
                     z.Update(elapsed, p.Position);
@@ -272,6 +273,16 @@ namespace TheWorld
                 }
                 #endregion
 
+                if (CurrentRoom.Monsters.Count == 0 && monsterCountOld != 0)
+                {
+                    if (Static.GetNumber(1) < 10)
+                    {
+
+                    }
+                }
+                monsterCountOld = CurrentRoom.Monsters.Count;
+
+                CurrentRoom.Doors.ForEach(d => p.Position = d.Update(elapsed, p.CollisionBox, p.Position, CurrentRoom.Monsters.Count));
                 if (World.CurrentRoomLocationCode[0] == World.LastRoom[0] && World.CurrentRoomLocationCode[1] == World.LastRoom[1])
                 {
                     if (p.CollisionBox.Intersects(CurrentRoom.Props[0].CollisionBox))
