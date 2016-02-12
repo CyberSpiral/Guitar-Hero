@@ -109,7 +109,8 @@ namespace TheWorld {
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
                 Content.Load<Texture2D>("main_menu_NO_buttons"));
             p = new Player(Content.Load<Texture2D>("Character_sprite_v2"), Content.Load<Texture2D>("health"), new Vector2(544, 456), 3, 1, 19, 19, 100,
-                new Weapon(1f, 3, WeaponType.Guitar, note));
+                new Weapon(0.5f + 0.2f, 1f, WeaponType.Guitar, guitar));
+            
 
 
             // TODO: use this.Content to load your game content here
