@@ -86,6 +86,7 @@ namespace TheWorld {
         }
         public override void Draw(SpriteBatch spriteBatch) {
             base.Draw(spriteBatch);
+            Weapon.Draw(spriteBatch);
             for (int i = 0; i < Health; i++) {
                 if (i % 2 == 0) {
                     spriteBatch.Draw(Heart, new Rectangle(240 + i * 12 * 2, 10 - World.UIBar, 20, 40), new Rectangle(0, 0, 15, 30), Color.White);
