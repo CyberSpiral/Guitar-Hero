@@ -21,7 +21,7 @@ namespace TheWorld
         List<RoomGraphic> roomGraphic;
         List<Texture2D> objects;
         List<Texture2D> monsters;
-        Texture2D stairway, drumsticks, electricGuitar, guitar, triangle, drumsticksOnGround, electricGuitarOnGround, guitarOnGround, triangleOnGround;
+        Texture2D stairway, drumsticks, electricGuitar, guitar, triangle, drumsticksOnGround, electricGuitarOnGround, guitarOnGround, triangleOnGround, note;
         int monsterCountOld;
         Vector2 weaponOnGroundPosition;
         KeyboardState oldState;
@@ -97,12 +97,13 @@ namespace TheWorld
             electricGuitarOnGround = Content.Load<Texture2D>("El_guitar");
             guitarOnGround = Content.Load<Texture2D>("Guitar");
             triangleOnGround = Content.Load<Texture2D>("Heart");
+            note = Content.Load<Texture2D>("Note");
 
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"),
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
                 Content.Load<Texture2D>("main_menu_NO_buttons"));
             p = new Player(Content.Load<Texture2D>("Character_sprite_v2"), Content.Load<Texture2D>("health"), new Vector2(544, 456), 3, 1, 19, 19, 100,
-                new Weapon(1f, 3, WeaponType.Guitar, Content.Load<Texture2D>("Note")));
+                new Weapon(1f, 3, WeaponType.Guitar, note));
 
 
             // TODO: use this.Content to load your game content here
