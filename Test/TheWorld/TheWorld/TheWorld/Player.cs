@@ -34,7 +34,7 @@ namespace TheWorld {
                     totalElapsed = 0;
                 }
             }
-            Vector2 direction = new Vector2(Mouse.GetState().X, Mouse.GetState().Y - World.UIBar) - Position;
+            Vector2 direction = new Vector2(Mouse.GetState().X, Mouse.GetState().Y - World.HUD) - Position;
             if (direction != Vector2.Zero)
                 direction.Normalize();
             Rotation = (float)Math.Atan2(direction.Y, direction.X);
@@ -89,10 +89,10 @@ namespace TheWorld {
             Weapon.Draw(spriteBatch);
             for (int i = 0; i < Health; i++) {
                 if (i % 2 == 0) {
-                    spriteBatch.Draw(Heart, new Rectangle(240 + i * 12 * 2, 10 - World.UIBar, 20, 40), new Rectangle(0, 0, 15, 30), Color.White);
+                    spriteBatch.Draw(Heart, new Rectangle(240 + i * 12 * 2, 10 - World.HUD, 20, 40), new Rectangle(0, 0, 15, 30), Color.White);
                 }
                 else {
-                    spriteBatch.Draw(Heart, new Rectangle(236 + i * 12 * 2, 10 - World.UIBar, 20, 40), new Rectangle(15, 0, 15, 30), Color.White);
+                    spriteBatch.Draw(Heart, new Rectangle(236 + i * 12 * 2, 10 - World.HUD, 20, 40), new Rectangle(15, 0, 15, 30), Color.White);
                 }
             }
         }

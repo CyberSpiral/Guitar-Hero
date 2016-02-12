@@ -37,7 +37,7 @@ namespace TheWorld
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = World.RoomWidth;
-            graphics.PreferredBackBufferHeight = World.RoomHeight + World.UIBar;
+            graphics.PreferredBackBufferHeight = World.RoomHeight + World.HUD;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -68,6 +68,7 @@ namespace TheWorld
             monsters.Add(Content.Load<Texture2D>("zombiesheet2"));
             monsters.Add(Content.Load<Texture2D>("SpitMoving"));
             monsters.Add(Content.Load<Texture2D>("SpitSpit"));
+            monsters.Add(Content.Load<Texture2D>("Charger"));
             roomGraphic = new List<RoomGraphic>();
             objects = new List<Texture2D>();
             objects.Add(Content.Load<Texture2D>("Trummor"));
@@ -165,6 +166,13 @@ namespace TheWorld
                         p.invTmr = 1.5f;
                     }
                 }
+                foreach (Charger c in CurrentRoom.Monsters.Where(x => x is Charger)) {
+                    c.Update(elapsed, p.Position);
+                    if (c.CollisionBox.Intersects(p.CollisionBox) && p.invTmr <= 0) {
+                        p.Health -= 1;
+                        p.invTmr = 1.5f;
+                    }
+                }
                 foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie))
                 {
                     sZ.Update(elapsed, p.Position, CurrentRoom.Props);
@@ -206,6 +214,13 @@ namespace TheWorld
                             if (z.CollisionBox.Intersects(item.CollisionBox))
                             {
                                 z.Position = z.OldPos;
+                            }
+                        }
+                        foreach (Charger c in CurrentRoom.Monsters.Where(x => x is Charger)) {
+                            if (c.CollisionBox.Intersects(item.CollisionBox)) {
+                                c.Position = c.OldPos;
+                                c.charging = false;
+                                c.wait = 0;
                             }
                         }
                         foreach (SpitZombie sZ in CurrentRoom.Monsters.Where(x => x is SpitZombie))
@@ -338,7 +353,7 @@ namespace TheWorld
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Matrix.CreateTranslation(0, World.UIBar, 0));
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Matrix.CreateTranslation(0, World.HUD, 0));
 
             if (menu.menuType == MenuType.InGame)
             {
@@ -350,7 +365,7 @@ namespace TheWorld
                     {
                         if (World.ActiveRooms[i, q] == true)
                         {
-                            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * i, -40 + 10 * q - World.UIBar, 9, 9), Color.White);
+                            spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * i, -40 + 10 * q - World.HUD, 9, 9), Color.White);
                         }
                     }
                 }
@@ -368,9 +383,9 @@ namespace TheWorld
                 p.Draw(spriteBatch);
 
                 p.Weapon.hit.ForEach(x => spriteBatch.Draw(Content.Load<Texture2D>("Note"), x.HitCollisionBox, new Rectangle(0, 0, 52, 56), Color.White));
-                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.LastRoom[0], -40 + 10 * World.LastRoom[1] - World.UIBar, 9, 9), Color.BlueViolet);
-                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.FirstRoom[0], -40 + 10 * World.FirstRoom[1] - World.UIBar, 9, 9), Color.LawnGreen);
-                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * CurrentRoom.XCoordinate, -40 + 10 * CurrentRoom.YCoordinate - World.UIBar, 9, 9), Color.Red);
+                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.LastRoom[0], -40 + 10 * World.LastRoom[1] - World.HUD, 9, 9), Color.BlueViolet);
+                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * World.FirstRoom[0], -40 + 10 * World.FirstRoom[1] - World.HUD, 9, 9), Color.LawnGreen);
+                spriteBatch.Draw(Content.Load<Texture2D>("dot"), new Rectangle(-40 + 10 * CurrentRoom.XCoordinate, -40 + 10 * CurrentRoom.YCoordinate - World.HUD, 9, 9), Color.Red);
 
             }
             else

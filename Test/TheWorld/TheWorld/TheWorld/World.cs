@@ -9,7 +9,7 @@ namespace TheWorld {
     static class World {
         public const int RoomWidth = 1088;
         public const int RoomHeight = 612;
-        public const int UIBar = 136;
+        public const int HUD = 136;
 
 
         public static Room[,] Rooms { get; set; }
@@ -115,7 +115,6 @@ namespace TheWorld {
                 {
 
                     RoomMould thisRoom = new RoomMould(objectTextures, monsterTextures, heartTexture);
-
                     Rooms[i, q] = new Room(graphic[Static.GetNumber(graphic.Count)], thisRoom.ProtectedSpace, thisRoom.Props, thisRoom.Monsters, World.CurrentLevel);
                     Rooms[i, q].XCoordinate = i;
                     Rooms[i, q].YCoordinate = q;

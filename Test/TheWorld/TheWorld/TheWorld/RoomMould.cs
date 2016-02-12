@@ -17,8 +17,8 @@ namespace TheWorld {
             ProtectedSpace = new List<Rectangle>();
             switch (Static.GetNumber(3)) {
                 case 0: {
-                        ProtectedSpace.Add(new Rectangle(0, 272, 1088, 68));
-                        ProtectedSpace.Add(new Rectangle(476, 0, 136, 612));
+                        ProtectedSpace.Add(new Rectangle(0, 204, 1088, 204));
+                        ProtectedSpace.Add(new Rectangle(476, 0, 204, 612));
                         for (int o = 0; o < 20; o++) {
                             Texture2D tempTex = objectTextures[Static.GetNumber(objectTextures.Count)];
                             GameObject temp = new GameObject(tempTex, new Vector2(Static.GetNumber(14) * 68 + 102, Static.GetNumber(8) * 68 + 102));
@@ -47,8 +47,8 @@ namespace TheWorld {
                                         break;
                                     }
                                 case 2: {
-                                        Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 6, 1.5f, 1, 4, 4, 500);
+                                        Charger temp = new Charger(monsterTextures[3], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 4f, 1, 2, 2, 500);
                                         Monsters.Add(temp);
                                         break;
                                     }
@@ -59,8 +59,8 @@ namespace TheWorld {
                         break;
                     }
                 case 1: {
-                        ProtectedSpace.Add(new Rectangle(0, 272, 1088, 68));
-                        ProtectedSpace.Add(new Rectangle(476, 0, 136, 612));
+                        ProtectedSpace.Add(new Rectangle(0, 204, 1088, 204));
+                        ProtectedSpace.Add(new Rectangle(476, 0, 204, 612));
                         for (int o = 0; o < 20; o++) {
                             Texture2D tempTex = objectTextures[Static.GetNumber(objectTextures.Count)];
                             GameObject temp = new GameObject(tempTex, new Vector2(Static.GetNumber(14) * 68 + 102, Static.GetNumber(8) * 68 + 102));
@@ -89,8 +89,8 @@ namespace TheWorld {
                                         break;
                                     }
                                 case 2: {
-                                        Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 6, 1.5f, 1, 4, 4, 500);
+                                        Charger temp = new Charger(monsterTextures[3], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 4f, 1, 2, 2, 500);
                                         Monsters.Add(temp);
                                         break;
                                     }
@@ -101,8 +101,8 @@ namespace TheWorld {
                         break;
                     }
                 case 2: {
-                        ProtectedSpace.Add(new Rectangle(0, 272, 1088, 68));
-                        ProtectedSpace.Add(new Rectangle(476, 0, 136, 612));
+                        ProtectedSpace.Add(new Rectangle(0, 204, 1088, 204));
+                        ProtectedSpace.Add(new Rectangle(476, 0, 204, 612));
                         for (int o = 0; o < 20; o++) {
                             Texture2D tempTex = objectTextures[Static.GetNumber(objectTextures.Count)];
                             GameObject temp = new GameObject(tempTex, new Vector2(Static.GetNumber(14) * 68 + 102, Static.GetNumber(8) * 68 + 102));
@@ -131,8 +131,8 @@ namespace TheWorld {
                                         break;
                                     }
                                 case 2: {
-                                        Zombie temp = new Zombie(monsterTextures[0], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
-                                            , 6, 1.5f, 1, 4, 4, 500);
+                                        Charger temp = new Charger(monsterTextures[3], heartTexture, new Vector2(Static.GetNumber(476, 576), Static.GetNumber(68, 500))
+                                            , 6, 4f, 1, 2,2, 500);
                                         Monsters.Add(temp);
                                         break;
                                     }

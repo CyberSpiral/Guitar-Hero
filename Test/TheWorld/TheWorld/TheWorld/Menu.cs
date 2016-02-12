@@ -42,7 +42,7 @@ namespace TheWorld
             this.creditTexture = creditTexture;
             this.creditTextureMouseHovering = creditTextureMouseHovering;
             this.mainMenu = mainMenu;
-            mainMenuRec = new Rectangle(0, -World.UIBar, World.RoomWidth, World.RoomHeight + World.UIBar);
+            mainMenuRec = new Rectangle(0, -World.HUD, World.RoomWidth, World.RoomHeight + World.HUD);
 
             startButton = new MenuButton(startTexture, startTextureMouseHovering, new Rectangle((World.RoomWidth - 530)/2 + 30, -110, 530, 196));
             exitButton = new MenuButton(exitTexture, exitTextureMouseHovering, new Rectangle(80, 400, 329, 128));
@@ -177,7 +177,7 @@ namespace TheWorld
 
         public void Update(MouseState ms, MouseState msOld)
         {
-            mouseCollisionBox = new Rectangle(ms.X, ms.Y - World.UIBar, 1, 1);
+            mouseCollisionBox = new Rectangle(ms.X, ms.Y - World.HUD, 1, 1);
             if (collisionBox.Intersects(mouseCollisionBox))
             {
                 if (ms.LeftButton == ButtonState.Pressed && msOld.LeftButton == ButtonState.Released)

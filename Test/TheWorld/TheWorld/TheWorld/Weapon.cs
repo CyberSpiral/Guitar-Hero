@@ -9,7 +9,7 @@ namespace TheWorld
 {
     enum WeaponType
     {
-        Drumsticks, Trumpet, ElectricGuitar, Guitar, Triangle, Keyboard
+        Drumsticks, ElectricGuitar, Guitar, Triangle
     }
     class Weapon
     {
@@ -51,8 +51,6 @@ namespace TheWorld
                         totalElapsed -= 2000;
                     }
                     break;
-                case WeaponType.Trumpet:
-                    break;
                 case WeaponType.ElectricGuitar:
                     projectile.ForEach(x => x.Update());
                     totalElapsedAni += elapsed;
@@ -86,8 +84,6 @@ namespace TheWorld
                         }
                         break;
                     }
-                case WeaponType.Keyboard:
-                    break;
                 default:
                     break;
             }
@@ -108,8 +104,6 @@ namespace TheWorld
                             , (new Vector2((float)Math.Cos(MathHelper.ToRadians(90 * i)), (float)Math.Sin(MathHelper.ToRadians(90 * i)))), range));
                     }
                     break;
-                case WeaponType.Trumpet:
-                    break;
                 case WeaponType.ElectricGuitar:
                     projectile.Add(new WeaponProjectile(playerPosition - new Vector2(17) + (rotation * 20), new Vector2(30), weaponTexture, rotation, range));
                     break;
@@ -118,8 +112,6 @@ namespace TheWorld
                     break;
                 case WeaponType.Triangle:
                     hit.Add(new WeaponHit(new Vector2(0), new Vector2(World.RoomWidth, World.RoomHeight), weaponTexture));
-                    break;
-                case WeaponType.Keyboard:
                     break;
                 default:
                     break;
@@ -131,8 +123,6 @@ namespace TheWorld
             switch (weaponType)
             {
                 case WeaponType.Drumsticks:
-                    break;
-                case WeaponType.Trumpet:
                     break;
                 case WeaponType.ElectricGuitar:
                     foreach (var x in projectile)
@@ -151,8 +141,6 @@ namespace TheWorld
                 case WeaponType.Guitar:
                     break;
                 case WeaponType.Triangle:
-                    break;
-                case WeaponType.Keyboard:
                     break;
                 default:
                     break;

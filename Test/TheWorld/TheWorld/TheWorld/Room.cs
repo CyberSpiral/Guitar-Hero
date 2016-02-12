@@ -47,6 +47,9 @@ namespace TheWorld {
             foreach (SpitZombie sZ in Monsters.Where(x => x is SpitZombie)) {
                 sZ.Draw(spriteBatch);
             }
+            foreach (Charger c in Monsters.Where(x => x is Charger)) {
+                c.Draw(spriteBatch);
+            }
         }
 
     }
