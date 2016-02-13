@@ -235,6 +235,8 @@ namespace TheWorld {
                     }
                 }
                 #endregion
+                #region A
+                #endregion
                 CurrentRoom.Animations.ForEach(x => x.Update(elapsed));
                 #region Garbage
                 for (int i = 0; i < CurrentRoom.Animations.Count; i++)
