@@ -25,7 +25,7 @@ namespace TheWorld {
                 if (i % 4 == 0) {
                     spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 20 + i * 5, (int)Position.Y - 50, 5, 20), new Rectangle(0, 0, 7, 30), Color.White);
                 }
-                else if (i % 4 == 1){
+                else if (i % 4 == 1) {
                     spriteBatch.Draw(Heart, new Rectangle((int)Position.X - 20 + i * 5, (int)Position.Y - 50, 5, 20), new Rectangle(7, 0, 8, 30), Color.White);
                 }
                 else if (i % 4 == 2) {
@@ -146,6 +146,40 @@ namespace TheWorld {
         public override void Draw(SpriteBatch spriteBatch) {
             base.Draw(spriteBatch);
             SpitList.ForEach(x => x.Draw(spriteBatch));
+        }
+    }
+
+    class Charger : Monster {
+
+        protected Vector2 direction;
+        public bool charging;
+        public float wait;
+        public Charger(Texture2D texture, Texture2D heartTexture, Vector2 position, int health, float speed, int textureRows, int textureColumns,
+            int totalFrames, int animationSpeed)
+            : base(texture, heartTexture, position, health, textureRows, textureColumns, totalFrames, animationSpeed) {
+            this.speed = speed;
+            Rotation = 0;
+        }
+
+        public new void Update(float elapsed, Vector2 playerPos) {
+            base.Update(elapsed);
+            wait += elapsed;
+            if (charging) {
+                OldPos = Position;
+                Position += direction * speed;
+            }
+            else if(!charging && wait > 2000){
+                direction = playerPos - Position;
+                if (direction != Vector2.Zero)
+                    direction.Normalize();
+                Rotation = (float)Math.Atan2(direction.Y, direction.X);
+                charging = true;
+            }
+            if ((Position.X > World.RoomWidth - 68) || (Position.Y > World.RoomHeight - 68) || (Position.X < 68) || (Position.Y < 68)) {
+                wait = 0;
+                charging = false;
+                Position = OldPos;
+            }
         }
     }
 

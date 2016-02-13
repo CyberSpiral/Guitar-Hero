@@ -9,7 +9,7 @@ namespace TheWorld {
     static class World {
         public const int RoomWidth = 1088;
         public const int RoomHeight = 612;
-        public const int UIBar = 136;
+        public const int HUD = 136;
 
 
         public static Room[,] Rooms { get; set; }
@@ -17,12 +17,13 @@ namespace TheWorld {
         public static int[] CurrentRoomLocationCode { get; set; }
         public static int[] LastRoom { get; set; }
         public static int[] FirstRoom { get; set; }
-        public static int CurrentLevel { get; set; } = 10;
+        public static int CurrentLevel { get; set; } = 1;
         
         public static void GenerateFloor() {
             ActiveRooms = new bool[25, 25];
             CurrentRoomLocationCode = new int[2];
             LastRoom = new int[2];
+            FirstRoom = new int[2];
             for (int i = 0; i < 25; i++) {
                 for (int q = 0; q < 25; q++) {
                     ActiveRooms[i, q] = false;
@@ -104,16 +105,16 @@ namespace TheWorld {
                     }
                 }
             }
-            FirstRoom = CurrentRoomLocationCode;
+            FirstRoom[0] = CurrentRoomLocationCode[0];
+            FirstRoom[1] = CurrentRoomLocationCode[1];
         }
-        public static void GenerateRooms(List<RoomGraphic> graphic, List<Texture2D> objectTextures, List<Texture2D> monsterTextures, Texture2D heartTexture) {
+        public static void GenerateRooms(List<RoomGraphic> graphic, List<Texture2D> objectTextures, List<Texture2D> monsterTextures, Texture2D heartTexture, Texture2D stairway) {
             Rooms = new Room[25, 25];
             for (int i = 0; i < Rooms.GetLength(0); i++) {
                 for (int q = 0; q < Rooms.GetLength(1); q++)
                 {
 
                     RoomMould thisRoom = new RoomMould(objectTextures, monsterTextures, heartTexture);
-
                     Rooms[i, q] = new Room(graphic[Static.GetNumber(graphic.Count)], thisRoom.ProtectedSpace, thisRoom.Props, thisRoom.Monsters, World.CurrentLevel);
                     Rooms[i, q].XCoordinate = i;
                     Rooms[i, q].YCoordinate = q;
@@ -122,6 +123,12 @@ namespace TheWorld {
             }
             Rooms[FirstRoom[0], FirstRoom[1]].Monsters.Clear();
             Rooms[LastRoom[0], LastRoom[1]].Monsters.Clear();
+            Rooms[FirstRoom[0], FirstRoom[1]].Props.Clear();
+            Rooms[LastRoom[0], LastRoom[1]].Props.Clear();
+            Rooms[FirstRoom[0], FirstRoom[1]].Props.Add(new GameObject(stairway, new Vector2((World.RoomWidth - stairway.Width) / 2 + stairway.Width / 2, (World.RoomHeight + stairway.Height) / 2 - stairway.Height / 2 -30)));
+            Rooms[LastRoom[0], LastRoom[1]].Props.Add(new GameObject(stairway, new Vector2((World.RoomWidth - stairway.Width) / 2 + stairway.Width / 2, (World.RoomHeight + stairway.Height) / 2 - stairway.Height / 2 - 30)));
+            Rooms[FirstRoom[0], FirstRoom[1]].Props[0].Rotation += (float)(Math.PI * 0.5f);
+            Rooms[LastRoom[0], LastRoom[1]].Props[0].Rotation += (float)(Math.PI * 0.5f);
         }
     }
 }

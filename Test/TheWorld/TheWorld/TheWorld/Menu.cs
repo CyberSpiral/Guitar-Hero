@@ -10,12 +10,14 @@ namespace TheWorld
 {
     public enum MenuType
     {
-        StartMenu, PauseMenu, InGame, CreditMenu, DeathMenu //add more??
+        StartMenu, PauseMenu, InGame, CreditMenu, DeathMenu, WinMenu //add more??
     }
 
     class Menu
     {
         public MenuType menuType;
+        Texture2D mainMenu;
+        Rectangle mainMenuRec;
 
         MenuButton startButton;
         Texture2D startTexture;
@@ -25,14 +27,13 @@ namespace TheWorld
         Texture2D exitTexture;
         Texture2D exitTextureMouseHovering;
 
-        MenuButton pauseButton;
-
         MenuButton creditButton;
         Texture2D creditTexture;
+        Texture2D credits;
         Texture2D creditTextureMouseHovering;
 
         public Menu(Texture2D startTexture, Texture2D startTextureMouseHovering, Texture2D exitTexture, Texture2D exitTextureMouseHovering, 
-            Texture2D creditTexture, Texture2D creditTextureMouseHovering)
+            Texture2D creditTexture, Texture2D creditTextureMouseHovering, Texture2D mainMenu, Texture2D credits)
         {
             menuType = MenuType.StartMenu;
             this.startTexture = startTexture;
@@ -41,10 +42,13 @@ namespace TheWorld
             this.exitTextureMouseHovering = exitTextureMouseHovering;
             this.creditTexture = creditTexture;
             this.creditTextureMouseHovering = creditTextureMouseHovering;
+            this.mainMenu = mainMenu;
+            this.credits = credits;
+            mainMenuRec = new Rectangle(0, -World.HUD, World.RoomWidth, World.RoomHeight + World.HUD);
 
-            startButton = new MenuButton(startTexture, startTextureMouseHovering, new Rectangle((World.RoomWidth - 530)/2, 80, 530, 196));
-            exitButton = new MenuButton(exitTexture, exitTextureMouseHovering, new Rectangle(World.RoomWidth / 2 + 100, 300, 329, 128));
-            creditButton = new MenuButton(creditTexture, creditTextureMouseHovering, new Rectangle(World.RoomWidth / 2 - 100 - 329, 300, 329, 128));
+            startButton = new MenuButton(startTexture, startTextureMouseHovering, new Rectangle((World.RoomWidth - 530)/2 + 30, -110, 530, 196));
+            exitButton = new MenuButton(exitTexture, exitTextureMouseHovering, new Rectangle(80, 400, 329, 128));
+            creditButton = new MenuButton(creditTexture, creditTextureMouseHovering, new Rectangle(80, 200, 329, 128));
 
         }
 
@@ -52,7 +56,6 @@ namespace TheWorld
         {
             startButton.Update(ms, msOld);
             exitButton.Update(ms, msOld);
-            //pauseButton.Update(ms, msOld);
             creditButton.Update(ms, msOld);
 
             if (menuType == MenuType.StartMenu)
@@ -126,6 +129,7 @@ namespace TheWorld
             if (menuType == MenuType.StartMenu)
             {
                 //exit, start
+                spriteBatch.Draw(mainMenu, mainMenuRec, Color.White);
                 startButton.Draw(spriteBatch);
                 exitButton.Draw(spriteBatch);
                 creditButton.Draw(spriteBatch);
@@ -151,6 +155,8 @@ namespace TheWorld
             else if (menuType == MenuType.CreditMenu)
             {
                 //our names
+
+                spriteBatch.Draw(credits, new Vector2(0), Color.White);
                 exitButton.Draw(spriteBatch);
             }
         }
@@ -175,7 +181,7 @@ namespace TheWorld
 
         public void Update(MouseState ms, MouseState msOld)
         {
-            mouseCollisionBox = new Rectangle(ms.X, ms.Y - World.UIBar, 1, 1);
+            mouseCollisionBox = new Rectangle(ms.X, ms.Y - World.HUD, 1, 1);
             if (collisionBox.Intersects(mouseCollisionBox))
             {
                 if (ms.LeftButton == ButtonState.Pressed && msOld.LeftButton == ButtonState.Released)

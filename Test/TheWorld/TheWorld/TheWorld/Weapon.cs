@@ -5,23 +5,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TheWorld {
-    enum WeaponType {
-        Drumsticks, Trumpet, ElectricGuitar, Guitar, Triangle, Keyboard
+namespace TheWorld
+{
+    enum WeaponType
+    {
+        Drumsticks, ElectricGuitar, Guitar, Triangle
     }
-    class Weapon {
+    class Weapon
+    {
 
         public float damage;
         public float knockback;
         public float range;
         public WeaponType weaponType { get; set; }
-        protected Texture2D weaponTexture;
+        public Texture2D weaponTexture;
 
         public List<WeaponHit> hit;
         public List<WeaponProjectile> projectile;
         protected float totalElapsed;
+        private float totalElapsedAni;
+        private float animationSpeed = 100;
+        private int currentFrame = 0;
+        private int totalFrames = 2;
 
-        public Weapon(float damage, float range, WeaponType weaponType, Texture2D texture) {
+        public Weapon(float damage, float range, WeaponType weaponType, Texture2D texture)
+        {
             hit = new List<WeaponHit>();
             projectile = new List<WeaponProjectile>();
             this.damage = damage;
@@ -30,43 +38,71 @@ namespace TheWorld {
             weaponTexture = texture;
         }
 
-        public virtual void Update(float elapsed) {
-            switch (weaponType) {
+        public void Update(float elapsed)
+        {
+            switch (weaponType)
+            {
                 case WeaponType.Drumsticks:
-                    break;
-                case WeaponType.Trumpet:
+                    totalElapsed += elapsed;
+                    projectile.ForEach(x => x.Update());
+                    if (totalElapsed > 2000)
+                    {
+                        projectile.Clear();
+                        totalElapsed -= 2000;
+                    }
                     break;
                 case WeaponType.ElectricGuitar:
                     projectile.ForEach(x => x.Update());
+                    totalElapsedAni += elapsed;
+                    {
+                        if (totalElapsedAni > animationSpeed)
+                        {
+                            currentFrame++;
+                            if (currentFrame == totalFrames)
+                                currentFrame = 0;
+                            totalElapsedAni = 0;
+                        }
+                    }
                     break;
-                case WeaponType.Guitar: {
+                case WeaponType.Guitar:
+                    {
                         totalElapsed += elapsed;
-                        if (totalElapsed > 1) {
+                        if (totalElapsed > 1)
+                        {
                             hit.Clear();
                             totalElapsed -= 1;
                         }
                         break;
                     }
-                case WeaponType.Triangle: {
+                case WeaponType.Triangle:
+                    {
                         totalElapsed += elapsed;
-                        if (totalElapsed > 1) {
+                        if (totalElapsed > 1)
+                        {
                             hit.Clear();
                             totalElapsed -= 1;
                         }
                         break;
                     }
-                case WeaponType.Keyboard:
-                    break;
                 default:
                     break;
             }
         }
 
-        public virtual void Execute(Vector2 rotation, Vector2 playerPosition) {
-            switch (weaponType) {
+        public void Execute(Vector2 rotation, Vector2 playerPosition)
+        {
+            switch (weaponType)
+            {
                 case WeaponType.Drumsticks:
-                    break;
-                case WeaponType.Trumpet:
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (i % 2 == 0)
+                            projectile.Add(new WeaponProjectile(playerPosition - new Vector2(37 / 3, 56 / 3), new Vector2(10, 40), weaponTexture
+                                , (new Vector2((float)Math.Cos(MathHelper.ToRadians(90 * i)), (float)Math.Sin(MathHelper.ToRadians(90 * i)))), range));
+                        else
+                            projectile.Add(new WeaponProjectile(playerPosition - new Vector2(37 / 3, 56 / 3), new Vector2(40, 10), weaponTexture
+                            , (new Vector2((float)Math.Cos(MathHelper.ToRadians(90 * i)), (float)Math.Sin(MathHelper.ToRadians(90 * i)))), range));
+                    }
                     break;
                 case WeaponType.ElectricGuitar:
                     projectile.Add(new WeaponProjectile(playerPosition - new Vector2(17) + (rotation * 20), new Vector2(30), weaponTexture, rotation, range));
@@ -77,7 +113,34 @@ namespace TheWorld {
                 case WeaponType.Triangle:
                     hit.Add(new WeaponHit(new Vector2(0), new Vector2(World.RoomWidth, World.RoomHeight), weaponTexture));
                     break;
-                case WeaponType.Keyboard:
+                default:
+                    break;
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            switch (weaponType)
+            {
+                case WeaponType.Drumsticks:
+                    break;
+                case WeaponType.ElectricGuitar:
+                    foreach (var x in projectile)
+                    {
+                        int width = x.Texture.Width / 2;
+                        int height = x.Texture.Height / 1;
+                        int row = currentFrame / 2;
+                        int column = currentFrame % 2;
+
+                        Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
+                        Rectangle destinationRectangle = new Rectangle((int)x.Position.X, (int)x.Position.Y, (int)x.Size.X, (int)x.Size.X);
+
+                        spriteBatch.Draw(x.Texture, destinationRectangle, sourceRectangle, Color.White, x.Rotation, new Vector2(0), SpriteEffects.None, 0);
+                    }
+                    break;
+                case WeaponType.Guitar:
+                    break;
+                case WeaponType.Triangle:
                     break;
                 default:
                     break;
@@ -85,50 +148,59 @@ namespace TheWorld {
         }
 
     }
-    class WeaponHit : GameObject {
+    class WeaponHit : GameObject
+    {
         public Vector2 Size { get; set; }
         public Rectangle HitCollisionBox {
             get { return new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y); }
             set { HitCollisionBox = value; }
         }
-        public WeaponHit(Vector2 position, Vector2 size, Texture2D texture) : base(texture, position) {
+        public WeaponHit(Vector2 position, Vector2 size, Texture2D texture) : base(texture, position)
+        {
             Position = position;
             Size = size;
         }
     }
-    class WeaponProjectile : GameObject {
+    class WeaponProjectile : GameObject
+    {
         public Vector2 Size { get; protected set; }
         public Vector2 Direction { get; protected set; }
         public Rectangle HitCollisionBox {
             get { return new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y); }
             set { HitCollisionBox = value; }
         }
-        public WeaponProjectile(Vector2 position, Vector2 size, Texture2D texture, Vector2 direction, float speed) : base(texture, position) {
+        public WeaponProjectile(Vector2 position, Vector2 size, Texture2D texture, Vector2 direction, float speed) : base(texture, position)
+        {
             Size = size;
             Direction = direction;
             this.speed = speed;
-            Rotation = (float)Math.Atan2(direction.X, direction.Y);
+            if (Direction != null)
+                Direction.Normalize();
+            Rotation = (float)Math.Atan2(Direction.X, Direction.Y);
         }
-        public void Update() {
+        public void Update()
+        {
             Position += Direction * speed;
         }
     }
-    class WeaponOnGround : GameObject {
+    class WeaponOnGround : GameObject
+    {
         public Weapon ContainedWeapon { get; protected set; }
         public bool existing;
-        public Texture2D playerTexture;
-        public WeaponOnGround(Texture2D texture, Vector2 position, Weapon containedWeapon,
-            Texture2D playerTexture) : base(texture, position) {
+        public WeaponOnGround(Texture2D texture, Vector2 position, Weapon containedWeapon) : base(texture, position)
+        {
 
             ContainedWeapon = containedWeapon;
             existing = true;
-            this.playerTexture = playerTexture;
         }
 
-        public void Draw(SpriteBatch spriteBatch, SpriteFont spriteFont, Vector2 playerPosition) {
-            if (Vector2.Distance(playerPosition, Position) < 70) {
+        public void Draw(SpriteBatch spriteBatch, SpriteFont spriteFont, Vector2 playerPosition)
+        {
+            if (Vector2.Distance(playerPosition, Position) < 70)
+            {
                 spriteBatch.DrawString(spriteFont, "X", new Vector2(Position.X, Position.Y), Color.White);
             }
+            spriteBatch.Draw(Texture, new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height), Color.White);
         }
     }
 }
