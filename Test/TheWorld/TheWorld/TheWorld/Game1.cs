@@ -45,8 +45,11 @@ namespace TheWorld {
 
         SoundEffect musicMenu;
         SoundEffect musicGame;
+        SoundEffect musicFinal;
 
-        SoundEffectInstance sEI;
+        SoundEffectInstance musicGameInstance;
+        SoundEffectInstance musicMenuInstance;
+        SoundEffectInstance musicFinalInstance;
 
         public Game1()
         {
@@ -112,10 +115,17 @@ namespace TheWorld {
             
             musicGame = Content.Load<SoundEffect>("HarshBckGrndSndTrack");
             musicMenu = Content.Load<SoundEffect>("LightBckGrndSndTrack");
+            musicFinal = Content.Load<SoundEffect>("FinalBckGrndSndTrack");
 
-            sEI = musicGame.CreateInstance();
-            sEI.IsLooped = true;
-            sEI.Play();
+            musicGameInstance = musicGame.CreateInstance();
+            musicMenuInstance = musicMenu.CreateInstance();
+            musicFinalInstance = musicFinal.CreateInstance();
+            musicGameInstance.IsLooped = true;
+            musicMenuInstance.IsLooped = true;
+            musicFinalInstance.IsLooped = true;
+            //musicGameInstance.Play();
+
+
 
             menu = new Menu(Content.Load<Texture2D>("PLAY_button"), Content.Load<Texture2D>("PLAY_flash_button"), Content.Load<Texture2D>("EXIT_button"),
                 Content.Load<Texture2D>("EXIT_flash_button"), Content.Load<Texture2D>("CREDIT_button"), Content.Load<Texture2D>("CREDIT_flash_button"),
@@ -146,6 +156,8 @@ namespace TheWorld {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !(menu.menuType == MenuType.CreditMenu)) {
                 this.Exit();
             }
+            
+
             ms = Mouse.GetState();
             menu.Update(ms, msOld);
 
@@ -168,6 +180,12 @@ namespace TheWorld {
 
             #region game
             if (menu.menuType == MenuType.InGame) {
+                if (musicGameInstance.State == SoundState.Stopped)
+                {
+                    musicMenuInstance.Stop();
+                    musicFinalInstance.Stop();
+                    musicGameInstance.Play();
+                }
 
                 float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
@@ -349,7 +367,7 @@ namespace TheWorld {
                         }
                         if (tmp == 1)
                         {
-                            CurrentRoom.WOP = new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(Static.GetNumber(100)/1000 * World.CurrentLevel + 0.2f + 0.1f * World.CurrentLevel, 3f, WeaponType.ElectricGuitar, note));
+                            CurrentRoom.WOP = new WeaponOnGround(electricGuitarOnGround, weaponOnGroundPosition, new Weapon(Static.GetNumber(100) / 1000 * World.CurrentLevel + 0.2f + 0.1f * World.CurrentLevel, 3f, WeaponType.ElectricGuitar, note));
                         }
                         if (tmp == 2)
                         {
@@ -410,9 +428,24 @@ namespace TheWorld {
                     CurrentRoom.Monsters.Clear();
                 }
             }
-            else
+            else if (menu.menuType == MenuType.WinMenu)
             {
                 
+                if (musicFinalInstance.State == SoundState.Stopped)
+                {
+                    musicGameInstance.Stop();
+                    musicMenuInstance.Stop();
+                    musicFinalInstance.Play();
+                }
+            }
+            else
+            {
+                if (musicMenuInstance.State == SoundState.Stopped)
+                {
+                    musicFinalInstance.Stop();
+                    musicGameInstance.Stop();
+                    musicMenuInstance.Play();
+                }
             }
 #endregion
 
