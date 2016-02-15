@@ -190,9 +190,11 @@ namespace TheWorld {
 
                 float elapsed = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
 
-                p.Update(elapsed, Keyboard.GetState(), oldState, Mouse.GetState(), msOld);
-                if (Mouse.GetState().LeftButton == ButtonState.Pressed && msOld.LeftButton == ButtonState.Released && p.Weapon.weaponType == WeaponType.Drumsticks)
-                    CurrentRoom.Animations.Add(new TempObject(Content.Load<Texture2D>("Rings"), p.Position, 1, 4, 4, 100, 0));
+                if (!p.Dead) {
+                    p.Update(elapsed, Keyboard.GetState(), oldState, Mouse.GetState(), msOld);
+                    if (Mouse.GetState().LeftButton == ButtonState.Pressed && msOld.LeftButton == ButtonState.Released && p.Weapon.weaponType == WeaponType.Drumsticks)
+                        CurrentRoom.Animations.Add(new TempObject(Content.Load<Texture2D>("Rings"), p.Position, 1, 4, 4, 100, 0));
+                }
                 p.Position = p.Position.X < 50 ? p.OldPos : p.Position;
                 p.Position = p.Position.X > World.RoomWidth - 50 ? p.OldPos : p.Position;
                 p.Position = p.Position.Y < 60 ? p.OldPos : p.Position;
@@ -319,6 +321,8 @@ namespace TheWorld {
 
                     }
                 }
+                #endregion
+                #region A
                 #endregion
                 CurrentRoom.Animations.ForEach(x => x.Update(elapsed));
                 #region Garbage
